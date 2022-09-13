@@ -134,6 +134,34 @@ body {
   }
 }
 
+.mainArticle__heading {
+  font-family: 'Lora', serif;
+  color: #ffff;
+  font-weight: 700;
+  font-size: 36px;
+  max-width: 570px;
+}
+
+
+.mainArticle__content-divider {
+  width: 30px;
+  height: 1px;
+  background: #fff;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.mainArticle__content {
+  color: #ffff;
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 570px;
+  display: flex;
+  align-items: center;
+}
+
 .mainArticle__categories {
   list-style: none;
   padding: 0;
