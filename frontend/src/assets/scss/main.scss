@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   padding: 29px 0;
+  position: absolute;
+  width: 100%;
 }
 
 .header__title {
@@ -37,4 +39,23 @@
 
 .header__nav-item-link {
   padding: 12px;
+}
+
+.mainArticle {
+  background: url('@/assets/images/heroImage.jpg') center no-repeat;
+  background-size: cover;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainArticle__inner {
+  display: flex;
+  flex-direction: column;
+  width: 1300px;
+}
+
+.mainArticle__categories {
+  @include reset;
 }
