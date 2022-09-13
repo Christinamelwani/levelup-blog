@@ -1,1 +1,40 @@
 @import "normalize.css";
+
+@import "sass-utils/mixins";
+
+.header {
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  padding: 29px 0;
+}
+
+.header__title {
+  @include reset;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 22px;
+}
+
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1300px;
+}
+
+.header__nav-list {
+  @include reset;
+  display: flex;
+  list-style: none;
+
+  &:last-child {
+    .header__nav-item-link {
+      padding-right: 0;
+    }
+  }
+}
+
+.header__nav-item-link {
+  padding: 12px;
+}
