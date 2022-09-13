@@ -9,11 +9,11 @@
             <RouterLink to="/" class="mainArticle__category-link">Category</RouterLink>
           </li>
         </ul>
-        <h2 class="mainArticle__heading">Lorem ipsum dolor.</h2>
+        <h2 class="mainArticle__heading">Richird Norton photorealistic rendering as real photos</h2>
         <p class="mainArticle__content">
           <time class="mainArticle__content-time">10:00</time>
           <span class="mainArticle__content-divider"></span>
-          <span class="mainArticle__content-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</span>
+          <span class="mainArticle__content-text">Progressively incentivize cooperative systems through technically sound functionalities. The credibly productivate seamless data.</span>
         </p>
       </div>
     </article>
