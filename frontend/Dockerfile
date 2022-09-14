@@ -1,9 +1,12 @@
 FROM node:16.17.0-alpine
 
-WORKDIR /app
+WORKDIR /home/node/app
 
-COPY package*.json ./
+COPY --chown=node:node package*.json .
 RUN npm install
-COPY . .
 
-CMD [ "npm", "run", "dev"]
+COPY --chown=node:node . .
+RUN chown -R node /home/node/app
+
+USER node
+CMD ["npm", "run", "dev"]
