@@ -1,11 +1,103 @@
-//@import "normalize.css";
+@import "normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;700&display=swap');
 
-//.header {
-//  background: rgba(0, 0, 0, 0.2);
-//  display: flex;
-//  justify-content: center;
-//}
-//
-//.header__inner {
-//  width: 1300px;
-//}
+.header {
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+}
+
+.header__inner {
+  width: 1300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__title-link {
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  font-size: 20px;
+  color: #F8F9FA;
+}
+
+.header__nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.header__nav-item-link {
+  padding: 0 12px;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  color: #ffff;
+  letter-spacing: 2px;
+
+  &:hover {
+    border-bottom: 2px solid #D4A373;
+  }
+}
+
+.mainArticle {
+  background: url('@/assets/images/heroImage.jpg') center no-repeat;
+  background-size: cover;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainArticle__inner {
+  width: 1300px;
+}
+
+.mainArticle__heading {
+  font-family: 'Lora', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 46px;
+  color: #FFFFFF;
+  max-width: 530px;
+}
+
+.mainArticle__content {
+  font-family: 'Lora', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffff;
+  max-width: 530px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainArticle__content-divider {
+  width: 30px;
+  height: 2px;
+  display: inline-block;
+  background: #fff;
+  margin: 0 10px;
+}
+
+.mainArticle__categories {
+  list-style: none;
+  padding: 0;
+}
+
+.mainArticle__category-link {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  font-family: 'Roboto', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 12px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+}
