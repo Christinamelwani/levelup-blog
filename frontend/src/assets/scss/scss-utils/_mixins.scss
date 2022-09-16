@@ -5,5 +5,7 @@
 @mixin container($contWidth: $width) {
   width: $contWidth;
   margin: 0 auto;
-  padding: 50px 15px;
+  padding: 0 15px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
