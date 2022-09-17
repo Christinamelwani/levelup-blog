@@ -21,7 +21,9 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_PASSWORD=${DB_PASSWORD}
     volumes:
-      - './backend:/app'
+      - type: bind
+        source: ./backend
+        target: /app
     depends_on:
       - mariadb
   frontend:
