@@ -16,6 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // N+1 problem
         $articles = Article::all();
 
         if (!request()->routeIs('api.*')) {
@@ -48,6 +49,7 @@ class ArticleController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'slug' => ['prohibited'],
+            'user_id' => ['required'],
         ]);
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);

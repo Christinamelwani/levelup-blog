@@ -9,10 +9,18 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'slug'];
+    protected $fillable = ['title', 'content', 'slug', 'user_id'];
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+
+    public function author()
+    {
+        // this is a relationship towards User model, but we name it differently
+        // therefore we must use explicitly state key
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

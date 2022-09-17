@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Utils\StringUtils;
@@ -25,6 +26,9 @@ class ArticleFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'content' => $this->faker->realText(),
+            'user_id' => User::factory(),
+            // laravel knows to fetch id, so above is the same as
+            // 'user_id' => User::factory()->create()->id,
         ];
     }
 }
