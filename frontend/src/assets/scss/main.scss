@@ -1,4 +1,122 @@
 @import "normalize.css";
-
 @import "sass-utils/mixins";
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+.header{
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    width: 100%;
+};
+
+.header__inner{
+    display: flex;
+    align-items: center;
+    padding: 14px 50px;
+    font-weight: 700;
+    justify-content: space-between;
+    color: white;
+    line-height: 22.4px;
+};
+
+.header__title{
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.header__title-link 
+{
+    text-decoration: none;
+    color: white;
+};
+
+.header__nav-list {
+    @include reset;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    gap: 10px
+}
+
+.header__nav-item-link{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+
+  &:hover {
+    border-bottom: 2px solid #D4A373
+  }
+
+  &.router-link-active {
+    border-bottom: 2px solid #D4A373
+  }
+
+};
+
+.blogSlider{
+    background: url(../assets/images/heroImage.jpg) center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    justify-content: center;
+    gap: 80px;
+    align-items: center;
+    color: white;
+  };
+
+.blogSlider__inner{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 40px
+}
+
+.blogSlider__category{
+    width: fit-content;
+    height: fit-content;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 8px;
+    line-height: 12px;
+    border-radius: 1em;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+}
+.blogSlider__header{
+    background: rgba(0, 0, 0, 0.01);
+    font-size:42px;
+    line-height: 46.08px;
+    font-weight: 700;
+    font-family: Lora;
+    max-width: 60%;
+}
+
+.blogSlider__text{
+    background: rgba(0, 0, 0, 0.01);
+    max-width: 60%;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: flex-start;
+}
+  
+.blogSlider__text-subtext{
+    font-family: Lora;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.blogSlider__text-line{
+    margin-top: 10px;
+}
+
+.blogSlider__pagination{
+    background: rgba(0, 0, 0, 0.01);
+    display: flex;
+    width: 88%;
+    gap: 5px;
+}
