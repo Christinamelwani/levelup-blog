@@ -66,7 +66,7 @@
           View All
         </h3>
       </div>
-      <div @click="$router.push('/article')" class="blogCards__content">
+      <div @click="$router.push('/article/1')" class="blogCards__content">
         <div class="blogCards__content__card" v-for="index in 8">
           <img class="blogCards__content__card__img" src="../assets/images/BlogImage.png" />
           <div class="blogCards__content__card__wrapper">
