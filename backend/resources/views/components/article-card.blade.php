@@ -5,8 +5,8 @@
 </h1>
 
 Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp> by
-<a href="{{ route('api.users.show', ['user' => $article->author]) }}">
-    {{ $article->author->name }}
+<a href="{{ route('api.users.show', ['user' => $article->user]) }}">
+    {{ $article->user->name }}
 </a>
 
 <p>{{ $article->content }}</p>

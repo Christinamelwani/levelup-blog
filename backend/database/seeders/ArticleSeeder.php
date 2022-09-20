@@ -26,7 +26,7 @@ class ArticleSeeder extends Seeder
             'title' => 'manually created',
             'content' => 'manual content',
             'slug' => 'manual slug',
-            'user_id' => User::factory()->createOne()->id,
+            'user_id' => User::factory(1)->createOne()->id,
         ]);
 
         $article->save();
