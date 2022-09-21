@@ -6,9 +6,16 @@
                 color: gray;
             }
 
-            .first-title {
-                color: green;
+            .first{
+                background-color:rgb(200, 193, 193);
+                font-size: large;
             }
+
+            .first h1 a{
+                font-size: 1em;
+                color: green;
+            };
+
         </style>
     </x-slot:head>
 
@@ -16,9 +23,11 @@
         <x-article-card
             :article="$article"
             href="{{ route('articles.show', ['article' => $article]) }}"
-            class="{{ $loop->first ? 'first-title' : 'title' }}">
-
-            Something else passed in default slot
+            class="{{$loop->first ? 'first' : 'title' }}"
+            type="index">
         </x-article-card>
     @endforeach
+    <button onclick="window.scrollTo(0,0)">
+        Back to the top
+    </button>
 </x-layout>

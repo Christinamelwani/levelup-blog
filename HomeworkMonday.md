@@ -11,6 +11,7 @@ You are tasked with making the following changes to the blog presented in the le
 7. add a "Back to top" button at the bottom of the front page
 
 From these tasks you should gain the following experience:
+
 1. changing Eloquent models
 2. how to use optional fields in an API
 3. importance of making backwards-compatible changes

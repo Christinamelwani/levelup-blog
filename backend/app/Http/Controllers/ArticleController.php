@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::orderByRaw('CHAR_LENGTH(title)')->simplePaginate(5);
 
         if (!request()->routeIs('api.*')) {
             return view('index', ['articles' => $articles]);
@@ -52,6 +52,9 @@ class ArticleController extends Controller
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
 
+
+        $validatedArticle['summary'] = $request['summary'] ?
+            $request['summary'] : explode('.', $validatedArticle['content'])[0] .= '.';
         $article = new Article($validatedArticle);
         try {
             $article->save();

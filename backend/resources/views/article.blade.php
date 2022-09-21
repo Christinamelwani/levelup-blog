@@ -1,3 +1,3 @@
 <x-layout>
-    <x-article-card :article="$article"></x-article-card>
+    <x-article-card type="article" :article="$article"></x-article-card>
 </x-layout>

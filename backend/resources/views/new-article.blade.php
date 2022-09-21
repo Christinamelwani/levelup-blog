@@ -18,6 +18,16 @@
 
         <br>
 
+        
+        <label>Summary</label>
+        <input
+            for="summary"
+            name="summary"
+            placeholder="summary goes here"
+            value="{{ request()->old('summary') }}">
+        <br>
+
+
         {!! Form::submit('create') !!}
     </form>
 

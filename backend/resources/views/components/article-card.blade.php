@@ -1,11 +1,17 @@
-<h1>
-    <a {{ $attributes->merge(['class' => '']) }}>
-        {{ $article->title }}
-    </a>
-</h1>
+    <div {{ $attributes->merge(['class' => '']) }}>
+    <h1>
+        <a {{ $attributes->merge(['class' => '']) }}>
+            {{ $article->title }}
+        </a>
+    </h1>
 
-Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp>
+    Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp>
 
-<p>{{ $article->content }}</p>
+    @if($type == "index")
+          <p>{{$article -> summary}}</p>
+    @else
+          <p>{{$article -> content}}</p>
+    @endif
+    {{ $slot }}
 
-{{ $slot }}
+    </div>
