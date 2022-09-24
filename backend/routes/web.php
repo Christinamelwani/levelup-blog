@@ -19,3 +19,4 @@ Route::get('/greet', fn () => 'hello world');
 Route::get('/', [ArticleController::class, 'index'])->name('home');
 
 Route::resource('articles', ArticleController::class);
+Route::resource('comments', CommentController::class);

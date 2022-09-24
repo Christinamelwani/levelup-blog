@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
@@ -33,6 +34,8 @@ Route::name('api.')->group(function () {
         'create',
         'edit',
     ]);
+
+    Route::resource('comments', CommentController::class);
 
 
     Route::get('/users/{user:slug}', function (User $user) {

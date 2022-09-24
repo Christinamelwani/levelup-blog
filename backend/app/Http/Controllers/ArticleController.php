@@ -17,7 +17,7 @@ class ArticleController extends Controller
     public function index()
     {
         // N+1 problem
-        $articles = Article::all()->load(['user']);
+        $articles = Article::all()->load(['user', 'comment']);
 
         if (!request()->routeIs('api.*')) {
             return view('index', ['articles' => $articles]);
