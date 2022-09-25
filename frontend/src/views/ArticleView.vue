@@ -1,27 +1,11 @@
-<script setup></script>
+<script setup>
+import Slider from "../components/Slider.vue";
+import HighlightedArticleCard from "../components/HighlightedArticleCard.vue";
+import Byline from "../components/Byline.vue";</script>
 
 <template>
     <main>
-        <section class="blogHeader">
-            <div class="blogHeader__inner">
-                <div class="blogSlider__category">
-                    Fashion
-                </div>
-                <div class="blogSlider__header">
-                    Richird Norton photorealistic rendering as real photos
-                </div>
-                <div class="blogSlider__text">
-                    <div class="blogSlider__text-subtext">
-                        Progressively incentivize cooperative systems through technically sound functionalities. The
-                        credibly
-                        productivate seamless data.
-                    </div>
-                </div>
-                <div class="blogHeader__byline">
-                    By Jennifer Lawrence
-                </div>
-            </div>
-        </section>
+        <Slider />
         <section class="articleBody">
             <div class="articleBody__content">
                 <div class="articleBody__col1">
@@ -93,89 +77,7 @@
                     <svg width="860" height="1" viewBox="0 0 860 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <line y1="0.75" x2="860" y2="0.75" stroke="#C4C4C4" stroke-width="0.5" />
                     </svg>
-                    <div class="articleBody__byline">
-                        <div class="blogCards__content__card__profile">
-                            <img class="blogCards__content__card__profiles-img" src="../assets/images/Ellipse4.png" />
-                            <div class="blogCards__content__card__profile-text">
-                                <h3 class="blogCards__content__card__profile-header">
-                                    By Jennifer Lawrence
-                                </h3>
-                                <h4 class="blogCards__content__card__profile-subheader">
-                                    Thinker and designer
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="blogCards__content__card__socialMediaIcons">
-                            <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <mask id="mask0_55_2108" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                                    width="20" height="20">
-                                    <rect width="20" height="20" fill="url(#pattern0)" />
-                                </mask>
-                                <g mask="url(#mask0_55_2108)">
-                                    <rect width="20" height="20" fill="#495057" />
-                                </g>
-                                <defs>
-                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_55_2108" transform="scale(0.0333333)" />
-                                    </pattern>
-                                    <image id="image0_55_2108" width="30" height="30"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVRIie3WsU5UQRTG8R+GYGGxBRCirgSCGJ6CysaowHsYl2ehg4AWlnQghMS3sLLbmGhsrFwqAsta3CUMm3vnnt0FY8GXTHJnzpz7nzkzc2a41z/SxBB957GO11hAs9/+E99xhAP8uK3BPcUOLtCrKV3s9wc2ljZwGgAOlg7WRoVuKmYwLDSdfWtY6MaY0BQennlTLLyfsYppPMQcvpX06+BJBPwhAP2CByW+Xyv679ZB58V278sK/yrwhevjV6r3AWgPjcTnI84DPu9y4JMgOE08Z0Gf4xQ0uE7Pc6NK1Eu+p4I+SzljbjdH9Dvjf5p2LNuZo6qBmYz9Mgf+NQZ4ucZ+49+TA8Y2XlQ4puGeqGjPqZ1WBmd87O50lDM+E0sgqSJH6VxNAoG9OwBv10EpLv7OLYL/4HEEDK/kQx4Fd/E2Cr1SS/WdHAF3Fbl/JK0pD/sKHinSZVV434wKvdIstsRuoC4+CazpMM/bpuvn7aKbz9u2Igcc9uv3+n/0F/3XIhNXKv3KAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                            <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <mask id="mask0_55_2108" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                                    width="20" height="20">
-                                    <rect width="20" height="20" fill="url(#pattern0)" />
-                                </mask>
-                                <g mask="url(#mask0_55_2108)">
-                                    <rect width="20" height="20" fill="#495057" />
-                                </g>
-                                <defs>
-                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_55_2108" transform="scale(0.0333333)" />
-                                    </pattern>
-                                    <image id="image0_55_2108" width="30" height="30"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVRIie3WsU5UQRTG8R+GYGGxBRCirgSCGJ6CysaowHsYl2ehg4AWlnQghMS3sLLbmGhsrFwqAsta3CUMm3vnnt0FY8GXTHJnzpz7nzkzc2a41z/SxBB957GO11hAs9/+E99xhAP8uK3BPcUOLtCrKV3s9wc2ljZwGgAOlg7WRoVuKmYwLDSdfWtY6MaY0BQennlTLLyfsYppPMQcvpX06+BJBPwhAP2CByW+Xyv679ZB58V278sK/yrwhevjV6r3AWgPjcTnI84DPu9y4JMgOE08Z0Gf4xQ0uE7Pc6NK1Eu+p4I+SzljbjdH9Dvjf5p2LNuZo6qBmYz9Mgf+NQZ4ucZ+49+TA8Y2XlQ4puGeqGjPqZ1WBmd87O50lDM+E0sgqSJH6VxNAoG9OwBv10EpLv7OLYL/4HEEDK/kQx4Fd/E2Cr1SS/WdHAF3Fbl/JK0pD/sKHinSZVV434wKvdIstsRuoC4+CazpMM/bpuvn7aKbz9u2Igcc9uv3+n/0F/3XIhNXKv3KAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                            <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <mask id="mask0_55_2108" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                                    width="20" height="20">
-                                    <rect width="20" height="20" fill="url(#pattern0)" />
-                                </mask>
-                                <g mask="url(#mask0_55_2108)">
-                                    <rect width="20" height="20" fill="#495057" />
-                                </g>
-                                <defs>
-                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_55_2108" transform="scale(0.0333333)" />
-                                    </pattern>
-                                    <image id="image0_55_2108" width="30" height="30"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVRIie3WsU5UQRTG8R+GYGGxBRCirgSCGJ6CysaowHsYl2ehg4AWlnQghMS3sLLbmGhsrFwqAsta3CUMm3vnnt0FY8GXTHJnzpz7nzkzc2a41z/SxBB957GO11hAs9/+E99xhAP8uK3BPcUOLtCrKV3s9wc2ljZwGgAOlg7WRoVuKmYwLDSdfWtY6MaY0BQennlTLLyfsYppPMQcvpX06+BJBPwhAP2CByW+Xyv679ZB58V278sK/yrwhevjV6r3AWgPjcTnI84DPu9y4JMgOE08Z0Gf4xQ0uE7Pc6NK1Eu+p4I+SzljbjdH9Dvjf5p2LNuZo6qBmYz9Mgf+NQZ4ucZ+49+TA8Y2XlQ4puGeqGjPqZ1WBmd87O50lDM+E0sgqSJH6VxNAoG9OwBv10EpLv7OLYL/4HEEDK/kQx4Fd/E2Cr1SS/WdHAF3Fbl/JK0pD/sKHinSZVV434wKvdIstsRuoC4+CazpMM/bpuvn7aKbz9u2Igcc9uv3+n/0F/3XIhNXKv3KAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                            <svg width="30" height="30" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <mask id="mask0_55_2108" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                                    width="20" height="20">
-                                    <rect width="20" height="20" fill="url(#pattern0)" />
-                                </mask>
-                                <g mask="url(#mask0_55_2108)">
-                                    <rect width="20" height="20" fill="#495057" />
-                                </g>
-                                <defs>
-                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                                        <use xlink:href="#image0_55_2108" transform="scale(0.0333333)" />
-                                    </pattern>
-                                    <image id="image0_55_2108" width="30" height="30"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABgElEQVRIie3WsU5UQRTG8R+GYGGxBRCirgSCGJ6CysaowHsYl2ehg4AWlnQghMS3sLLbmGhsrFwqAsta3CUMm3vnnt0FY8GXTHJnzpz7nzkzc2a41z/SxBB957GO11hAs9/+E99xhAP8uK3BPcUOLtCrKV3s9wc2ljZwGgAOlg7WRoVuKmYwLDSdfWtY6MaY0BQennlTLLyfsYppPMQcvpX06+BJBPwhAP2CByW+Xyv679ZB58V278sK/yrwhevjV6r3AWgPjcTnI84DPu9y4JMgOE08Z0Gf4xQ0uE7Pc6NK1Eu+p4I+SzljbjdH9Dvjf5p2LNuZo6qBmYz9Mgf+NQZ4ucZ+49+TA8Y2XlQ4puGeqGjPqZ1WBmd87O50lDM+E0sgqSJH6VxNAoG9OwBv10EpLv7OLYL/4HEEDK/kQx4Fd/E2Cr1SS/WdHAF3Fbl/JK0pD/sKHinSZVV434wKvdIstsRuoC4+CazpMM/bpuvn7aKbz9u2Igcc9uv3+n/0F/3XIhNXKv3KAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                        </div>
-                    </div>
+                    <Byline />
                 </div>
             </div>
         </section>
@@ -185,27 +87,7 @@
             </h1>
             <div class="editorsPick__content">
                 <div class="editorsPick__content__card" v-for="index in 3">
-                    <img class="editorsPick__content__card-img" src="../assets/images/BlogImage2.png" />
-                    <div class="editorsPick__content__card__category">
-                        <p class="editorsPick__content__card__category-text">
-                            Fashion
-                        </p>
-                    </div>
-                    <div class="editorsPick__content__card__container">
-                        <div class="editorsPick__content__card__container-wrapper">
-                            <date class="editorsPick__content__card__container-date">
-                                08.08.2021
-                            </date>
-                            <h3 class="editorsPick__content__card__container-title">
-                                Richird Norton photorealistic rendering as real photos
-                            </h3>
-                            <p class="editorsPick__content__card__container-text">
-                                Progressively incentivize cooperative systems through technically sound functionalities.
-                                The credibly
-                                productivate seamless data.
-                            </p>
-                        </div>
-                    </div>
+                    <HighlightedArticleCard />
                 </div>
             </div>
         </section>
