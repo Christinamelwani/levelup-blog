@@ -12,3 +12,18 @@ Posted: <x-timestamp :timestamp="$article->created_at"></x-timestamp> by
 <p>{{ $article->content }}</p>
 
 {{ $slot }}
+
+@if (!$article->comments->isEmpty())
+    <p>Comments:</p>
+
+    <ul>
+        <li>
+            @foreach ($article->comments as $comment)
+                <x-comment-card
+                    :comment="$comment" />
+            @endforeach
+        </li>
+    </ul>
+@else
+    No comments.
+@endif

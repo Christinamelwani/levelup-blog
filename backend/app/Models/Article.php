@@ -27,4 +27,9 @@ class Article extends Model
         // therefore we must use explicitly state key
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

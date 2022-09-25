@@ -15,7 +15,9 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        Article::factory(2)->create();
+        Article::factory(2)
+            ->hasComments(1)
+            ->create();
 
         // we could omit specifying slug for example by employing ArticleObserver
         // but we will get to that

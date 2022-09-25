@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         // seeder is a place in which to create the objects
         $this->call([
             ArticleSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }

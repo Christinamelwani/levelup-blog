@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
@@ -59,4 +60,6 @@ Route::name('api.')->group(function () {
     Route::get('/{author:slug}/articles', function (User $author) {
         return $author->articles;
     })->name('author.articles');
+
+    Route::apiResource('comments', CommentController::class);
 });
