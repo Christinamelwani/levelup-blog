@@ -23,7 +23,7 @@
                 Branding
             </li>
         </ul>
-        <h3 class="categorySelector__item">
+        <h3 class="categorySelector__item categorySelector__item-viewAll">
             View All
         </h3>
     </div>

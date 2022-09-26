@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    overflow: auto;
 }
 
 .categorySelector__list {
@@ -21,8 +21,13 @@
     font-size: 16px;
     line-height: 25px;
     cursor: pointer;  
+    white-space: nowrap;
 }
 
 .categorySelector__item-active {
     color: #D4A373;
+}
+
+.categorySelector__item-viewAll {
+    margin-left: 15px;
 }

@@ -4,8 +4,12 @@
     color: #495057;
     padding: 1rem 3rem;
     justify-content: space-between;
-    min-height: 230vh;
     overflow: hidden;
+    gap: 1.5rem;
+    @include for-phone-only{
+        padding: 0;
+        margin: auto;
+    }
 }
 
 .blogCards__header {
@@ -20,8 +24,17 @@
 .blogCards__content {
     display: grid;
     grid-template-columns: repeat(4, auto);
-    row-gap: 20px;
-    column-gap: 10px;
+    row-gap: 2rem;
+    column-gap: 1rem;
+    @include for-large-screen-only{
+        grid-template-columns: repeat(5, auto);
+    }
+    @include for-tablet-down{
+        grid-template-columns: repeat(2, auto);
+    }
+    @include for-phone-only{
+        grid-template-columns: repeat(1, auto);
+    }
 }
 
 .editorsPick {

@@ -1,5 +1,31 @@
-.articleBody__byline {
+.byline {
+    padding: 1rem 0;
     display: flex;
+    font-size: 14px;
     align-items: center;
-    justify-content: space-between;
+    gap:1rem
 }
+
+.byline__img {
+    width: 50px;
+    height: 50px;
+}
+
+.byline__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.byline__header {
+    @include reset();
+    font-weight: 700;
+}
+
+.byline__subheader {
+    @include reset();
+    font-weight: 400;
+    color: #6C757D;
+}
+
+

@@ -3,13 +3,13 @@
 </script>
 
 <template>
-    <div class="blogCards__content__card__profile">
-        <img class="blogCards__content__card__profiles-img" src="../assets/images/Ellipse4.png" />
-        <div class="blogCards__content__card__profile-text">
-            <h3 class="blogCards__content__card__profile-header">
+    <div class="byline">
+        <img class="byline__img" src="../assets/images/Ellipse4.png" />
+        <div class="byline__wrapper">
+            <h3 class="byline__header">
                 By Jennifer Lawrence
             </h3>
-            <h4 class="blogCards__content__card__profile-subheader">
+            <h4 class="byline__subheader">
                 Thinker and designer
             </h4>
         </div>
