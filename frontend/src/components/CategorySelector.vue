@@ -23,7 +23,11 @@
                 Branding
             </li>
         </ul>
+<<<<<<< HEAD
         <h3 class="categorySelector__item categorySelector__item-viewAll">
+=======
+        <h3 class="categorySelector__item">
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
             View All
         </h3>
     </div>

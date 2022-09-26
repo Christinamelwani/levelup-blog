@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .articleCard {
+=======
+.blogCards__content__card {
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
     border-radius: 5px;
     min-width: 0px;
     max-width: 300px;
@@ -6,6 +10,7 @@
     flex-direction: column;
     background: white;
     justify-content: space-between;
+<<<<<<< HEAD
     font-family: Lora;
     cursor: pointer;
     @include for-phone-only{
@@ -38,3 +43,52 @@
 .articleCard__header {
     font-size: 1.2em;
 }
+=======
+    gap: 4px;
+    font-family: Lora;
+    cursor: pointer;
+}
+
+.blogCards__content__card__img {
+    height: 100%;
+    min-width: 0px;
+}
+
+.blogCards__content__card__date {
+    font-size: 15px;
+}
+
+.blogCards__content__card__wrapper {
+    padding: 20px 20px;
+}
+
+.blogCards__content__card__profile {
+    padding: 10px 0 10px;
+    gap: 15px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.blogCards__content__card__profile-text {
+    all: unset;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.blogCards__content__card__profile-header {
+    all: unset;
+    font-weight: 700;
+}
+
+.blogCards__content__card__profile-subheader {
+    all: unset;
+    font-weight: 400;
+    color: #6C757D;
+}
+
+
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)

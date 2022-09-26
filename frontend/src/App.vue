@@ -76,5 +76,13 @@ import Footer from './components/Footer.vue';
 </template>
 
 <style lang="scss">
+<<<<<<< HEAD
 @import 'assets/scss/style';
+=======
+<<<<<<< HEAD
+@import 'assets/scss/main.scss';
+=======
+@import 'assets/scss/style';
+>>>>>>> 29ceee2 (Made header and slider responsive, still figuring out the rest)
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 </style>

@@ -1,4 +1,5 @@
 .footer__main {
+<<<<<<< HEAD
     min-height: 50vh;
     background-color: #212529;
     font-family: 'Lora';
@@ -13,28 +14,51 @@
     @include for-phone-only{
         flex-direction: column;
     }
+=======
+    height: 300px;
+    background-color: #212529;
+    font-family: Lora;
+    color: #FFFFFF;
+    padding: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }
 
 .footer__col {
     display: flex;
     width: fit-content;
+<<<<<<< HEAD
     padding: 3rem 0 0 0;
     width: 30%;
     height: 100%;
     justify-content: space-between;
     gap: 1rem;
+=======
+    justify-content: space-between;
+    min-height: 300px;
+    padding: 60px 0 0 0;
+    width: 30%;
+    gap: 100px
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }
 
 .footer__list {
     width: fit-content;
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
+=======
+    justify-content: space-between;
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
     height: 100%;
 }
 
 .footer__list__header {
     all: unset;
     font-family: 'Lora';
+<<<<<<< HEAD
     font-weight: 700;
     font-style: normal;
     font-size: 1.2em;
@@ -42,6 +66,14 @@
 
 .footer__list__text {
     font-size: 0.8em;
+=======
+    font-style: normal;
+    font-size: 18px;
+}
+
+.footer__list__text {
+    font-size: 12px;
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
     cursor: pointer;
 }
 
@@ -55,9 +87,16 @@
 
 .footer__bottom-text {
     cursor: pointer;
+<<<<<<< HEAD
     font-family: 'Lora';
     font-weight: 700;
     font-size: 0.8em;
+=======
+    font-family: Lora;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+>>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
     line-height: 18px;
     color: #E5E5E5;
     display: flex;
