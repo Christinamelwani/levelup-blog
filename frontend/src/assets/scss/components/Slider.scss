@@ -1,7 +1,7 @@
 .slider {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
     min-height: 100vh;
     @include for-tablet-down{
         min-height: 50vh;
@@ -14,19 +14,29 @@
 
 .slider-home{
     background: url(@/assets/images/heroImage.jpg) no-repeat;
+    padding: 15% 5% 0%;
     background-size:cover;
+    justify-content: flex-start;
 }
+
+.slider-article{
+    background: url(@/assets/images/BlogImage3.png) no-repeat;
+    background-size:cover;
+    justify-content: center;
+}
+
 
 .slider__inner {
     display: flex;
+    box-sizing: border-box;  
     flex-direction: column;
-    padding: 10% 5%;
-    height: 100%;
+    justify-content: center;
+    max-width: 60%;
     gap: 1em;
     color: white;
-    object-fit: contain;
+    padding: 5% 1%;
     @include for-phone-only{
-        padding: 1%;
+        max-width: 100%;
     }
 }
 
@@ -35,31 +45,18 @@
     font-size: 3em;
     font-weight: 700;
     font-family: Lora;
-    max-width: 60%;
-    @include for-tablet-down {
-        max-width: 80%;  
-    }
-    @include for-phone-only {
-        max-width: 100%;  
-    }
 }
 
 .slider__text {
     background: rgba(0, 0, 0, 0.01);
-    max-width: 50%;
     display: flex;
     font-family: Lora;
     font-weight: 400;
     font-size: 1em;
     flex-direction: row;
+    text-align: center;
     gap: 4px;
     align-items: flex-start;
-    @include for-tablet-down {
-        max-width: 80%;  
-    }
-    @include for-phone-only {
-        max-width: 100%;  
-    }
 }
 
 .slider__subtext {
@@ -78,4 +75,9 @@
     display: flex;
     gap: 5px;
     justify-self: flex-end;
+}
+
+.slider__byline{
+    text-align: center;
+    font-weight: 700;
 }

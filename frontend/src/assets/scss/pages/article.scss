@@ -1,30 +1,3 @@
-.blogHeader {
-    background: url(../assets/images/BlogImage3.png) center no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 80px;
-    align-items: center;
-    color: white;
-}
-
-
-.blogHeader__inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 18px;
-    text-align: center;
-}
-
-.blogHeader__byline {
-    font-weight: 700;
-}
-
 .relatedPosts__header {
     font-family: Lora;
     font-style: normal;
@@ -33,56 +6,53 @@
     color: #495057;
 }
 
-.articleBody {
-    padding: 70px 80px;
-    display: flex;
-    flex-direction: column;
+.article {
+    padding: 3rem;
     background-color: white;
 }
 
-.articleBody__content {
-    justify-content: start;
+.article__body {
+    justify-content: space-evenly;
     display: flex;
 }
 
 
-.articleBody__col1 {
-    flex: 0.6;
+.article__aside {
     display: flex;
     align-items: flex-start;
+    gap: 8px;
 }
 
 ;
 
-.articleBody__col1__wrapper {
-    width: fit-content;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
+// .articleBody__col1__wrapper {
+//     width: fit-content;
+//     display: flex;
+//     gap: 8px;
+//     align-items: center;
+// }
 
 
-.articleBody__col1-item {
+.article__date {
     font-size: 13px;
     font-weight: 700;
     font-family: Lora;
 }
 
-.articleBody__col2 {
-    flex: 0.5;
+.article__wrapper {
     gap: 25px;
     display: flex;
     flex-direction: column;
 }
 
-.articleBody__col2__text {
+.article__text {
     all: unset;
     font-family: Lora;
     font-weight: 400;
     color: #495057;
 }
 
-.articleBody__col2__quote {
+.article__quote {
     all: unset;
     color: #D4A373;
     font-family: Lora;
@@ -90,14 +60,16 @@
     font-size: 36px;
 }
 
-.articleBody__categories {
+.article__categories {
     display: flex;
     padding: 20px 0;
     gap: 10px
 }
 
-
-.blogCards__content__card__socialMediaIcons {
-    display: flex;
-    cursor: pointer;
+.article__line{
+    margin-top: 10px;
 }
+// .blogCards__content__card__socialMediaIcons {
+//     display: flex;
+//     cursor: pointer;
+// }
