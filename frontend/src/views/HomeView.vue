@@ -21,7 +21,7 @@ import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
         Editor's Pick
       </h1>
       <div class="editorsPick__content">
-        <HighlightedArticleCard />
+        <HighlightedArticleCard v-for="index in 3" />
       </div>
     </section>
   </main>

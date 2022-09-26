@@ -1,88 +1,53 @@
-.editorsPick__content__card {
-    all: unset;
+.highlightedArticle {
     position: relative;
-    min-width: 0;
-    min-height: 0;
     cursor: pointer;
 }
 
-.editorsPick__content__card-img {
-    all: unset;
-    height: 100%;
-    min-width: 0px;
-    max-width: 370px;
+.highlightedArticle__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
 }
 
-.editorsPick__content__card__container {
-    background: #343a400c;
+.highlightedArticle__wrapper {
     position: absolute;
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
+    top:0;
+    padding: 0 1rem;
     color: white;
-}
-
-.editorsPick__content__card__category {
-    all: unset;
-    position: absolute;
-    top: 10px;
-    left: 72%;
-    color: white;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    padding: 0 10px;
-}
-
-
-.editorsPick__content__card__category-text {
-    padding: 0;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 12px;
-    text-transform: uppercase;
-}
-
-
-.editorsPick__content__card__container-wrapper {
     display: flex;
-    height: 100%;
     flex-direction: column;
-    padding: 20px 20px;
-    gap: 20px;
+    justify-content: center;
+    height: 100%;
 }
 
-.editorsPick__content__card__container-title {
-    all: unset;
-    font-family: 'Lora';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 25px;
-    color: #FFFFFF;
-}
-
-.editorsPick__content__card__container-date {
-
-    font-family: Lora;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
+.highlightedArticle__inner {
+    background: #0000000c;
     display: flex;
-
+    height: 40%;
+    margin-top: 15%;
+    padding: 2rem 1rem;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.editorsPick__content__card__container-text {
-    all: unset;
+.highlightedArticle__title {
+    @include reset;
     font-family: 'Lora';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
+    font-weight: 700;
+    font-size: 1.3em;
+}
+
+.highlightedArticle__date {
+    @include reset;
+    font-family: 'Lora';
+    color: #E5E5E5;
+    font-size: 0.8em;
+}
+
+.highlightedArticle__text {
+    @include reset;
+    color: #E5E5E5;
+    font-size: 0.8em;
+    font-family: 'Lora';
 }

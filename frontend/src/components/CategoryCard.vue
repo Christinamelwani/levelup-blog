@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="">
+    <div class="categoryCard">
         <p class="">
             Fashion
         </p>
