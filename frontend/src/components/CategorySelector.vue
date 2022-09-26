@@ -2,28 +2,28 @@
 </script>
 
 <template>
-    <div class="blogCards__filter">
-        <ul class="blogCards__filter__list">
-            <li class="blogCards__filter__list-item-active">
+    <div class="categorySelector">
+        <ul class="categorySelector__list">
+            <li class="categorySelector__item-active categorySelector__item">
                 All
             </li>
-            <li class="blogCards__filter__list-item">
+            <li class="categorySelector__item">
                 Adventure
             </li>
-            <li class="blogCards__filter__list-item">
+            <li class="categorySelector__item">
                 Travel
             </li>
-            <li class="blogCards__filter__list-item">
+            <li class="categorySelector__item">
                 Fashion
             </li>
-            <li class="blogCards__filter__list-item">
+            <li class="categorySelector__item">
                 Technology
             </li>
-            <li class="blogCards__filter__list-item">
+            <li class="categorySelector__item">
                 Branding
             </li>
         </ul>
-        <h3 class="blogCards__filter__viewAll">
+        <h3 class="categorySelector__item">
             View All
         </h3>
     </div>

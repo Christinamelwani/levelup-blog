@@ -6,8 +6,8 @@ import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
 </script>
 <template>
   <main>
-    <Slider />
-    <section class="blogCards">
+    <Slider class="slider-home" />
+    <section class=" blogCards">
       <div class="blogCards__header">
         Popular topics
       </div>

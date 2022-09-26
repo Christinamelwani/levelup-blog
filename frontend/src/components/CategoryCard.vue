@@ -2,8 +2,8 @@
 </script>
 
 <template>
-    <div class="editorsPick__content__card__category">
-        <p class="editorsPick__content__card__category-text">
+    <div class="">
+        <p class="">
             Fashion
         </p>
     </div>

@@ -1,0 +1,81 @@
+.slider {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100vh;
+    @include for-tablet-down{
+        min-height: 50vh;
+    }
+    @include for-phone-only{
+        justify-content: center;
+        padding: 20% 0;
+    }
+}
+
+.slider-home{
+    background: url(@/assets/images/heroImage.jpg) no-repeat;
+    background-size:cover;
+}
+
+.slider__inner {
+    display: flex;
+    flex-direction: column;
+    padding: 10% 5%;
+    height: 100%;
+    gap: 1em;
+    color: white;
+    object-fit: contain;
+    @include for-phone-only{
+        padding: 1%;
+    }
+}
+
+.slider__header {
+    background: rgba(0, 0, 0, 0.01);
+    font-size: 3em;
+    font-weight: 700;
+    font-family: Lora;
+    max-width: 60%;
+    @include for-tablet-down {
+        max-width: 80%;  
+    }
+    @include for-phone-only {
+        max-width: 100%;  
+    }
+}
+
+.slider__text {
+    background: rgba(0, 0, 0, 0.01);
+    max-width: 50%;
+    display: flex;
+    font-family: Lora;
+    font-weight: 400;
+    font-size: 1em;
+    flex-direction: row;
+    gap: 4px;
+    align-items: flex-start;
+    @include for-tablet-down {
+        max-width: 80%;  
+    }
+    @include for-phone-only {
+        max-width: 100%;  
+    }
+}
+
+.slider__subtext {
+    font-family: Lora;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.slider__line {
+    margin-top: 10px;
+}
+
+.slider__pagination {
+    background: rgba(0, 0, 0, 0.01);
+    display: flex;
+    gap: 5px;
+    justify-self: flex-end;
+}

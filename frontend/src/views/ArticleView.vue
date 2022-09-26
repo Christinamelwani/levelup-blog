@@ -93,7 +93,3 @@ import Byline from "../components/Byline.vue";</script>
         </section>
     </main>
 </template>
-
-<style lang="scss">
-@import '../assets/scss/main';
-</style>

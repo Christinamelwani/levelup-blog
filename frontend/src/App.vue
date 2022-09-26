@@ -68,5 +68,5 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style lang="scss">
-@import 'assets/scss/main';
+@import 'assets/scss/style';
 </style>

@@ -1,0 +1,28 @@
+.categorySelector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.categorySelector__list {
+    all: unset;
+    gap: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categorySelector__item{
+    all: unset;
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 25px;
+    cursor: pointer;  
+}
+
+.categorySelector__item-active {
+    color: #D4A373;
+}

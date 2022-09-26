@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap');
+@import "normalize.css";
+@import "sass-utils/mixins";
+
+
+@import 'base/general';
+
+@import 'layout/header';
+@import 'layout/footer';
+
+@import 'pages/home';
+@import 'pages/article';
+
+@import 'components/Slider.scss';
+@import 'components/ArticleCard.scss';
+@import 'components/Byline.scss';
+@import 'components/CategoryCard.scss';
+@import 'components/CategorySelector.scss';
+@import 'components/HighlightedArticleCard.scss';
+
+
