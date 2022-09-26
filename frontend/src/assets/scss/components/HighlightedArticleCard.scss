@@ -19,16 +19,18 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    @include for-phone-only{
+        padding: 1rem;
+    }
 }
 
 .highlightedArticle__inner {
     background: #0000000c;
     display: flex;
-    height: 40%;
+    gap: 0.8rem;
     margin-top: 15%;
     padding: 2rem 1rem;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .highlightedArticle__title {
