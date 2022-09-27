@@ -576,3 +576,37 @@ import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
   </div>
 >>>>>>> e8d1606 (Static website tweaks)
 </template>
+
+<script>
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
+
+// this must be performed once per session
+axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
+    console.log(response);
+
+    // to login, you do this
+    axios.post(
+      'http://localhost:8000/api/login',
+      {
+        email: 'test@example.com',
+        password: 'password',
+      }
+    ).then(user => {
+      console.log(user)
+
+      // afterwards you are logged in
+      axios.get('http://localhost:8000/api/user').then(response => {
+        console.log(response)
+
+        // get the articles for this user
+        axios.get('http://localhost:8000/api/test-user/articles').then(response => {
+          console.log(response)
+        })
+      })
+    })
+});
+</script>

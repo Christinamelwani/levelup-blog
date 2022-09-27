@@ -6,8 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// user must be authenticated to access this
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -58,8 +62,45 @@ Route::name('api.')->group(function () {
     })->name('users.store');
 
     Route::get('/{author:slug}/articles', function (User $author) {
+        if (!auth()->user()) {
+            return 'not user';
+        }
+
+        if (!request()->user()?->is($author)) {
+            return 'not user';
+        }
+
         return $author->articles;
     })->name('author.articles');
 
     Route::apiResource('comments', CommentController::class);
+
+    Route::post('/token', function (Request $request) {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', Password::min(8)]
+        ]);
+
+        $user = User::where('email', $validated['email'])->firstOrFail();
+
+        return $user->createToken('auth_token')->plainTextToken;
+    });
+
+    Route::get('/success', fn () => 'done');
+
+    Route::post('/login', function (Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/api/success');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    });
 });

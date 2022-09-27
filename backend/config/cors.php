@@ -29,6 +29,7 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    // allow browsers to display response when the client is authenticated
+    'supports_credentials' => true,
 
 ];

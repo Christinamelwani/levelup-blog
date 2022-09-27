@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ->set('name', 'Test User')
             ->set('slug', 'test-user')
             ->set('email', 'test@example.com')
+            ->set('password', Hash::make('password'))
             ->hasArticles(3) // special magic method
             ->create();
 
