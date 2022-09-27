@@ -1,0 +1,41 @@
+.byline{
+    display: flex;
+    justify-content: space-between;
+    border-top: solid #C4C4C4 1px;
+    align-items: center;
+    @include for-phone-only{
+        flex-direction: column;
+    }
+}
+.byline__inner {
+    padding: 1rem 0;
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    gap:1rem;
+}
+
+.byline__img {
+    width: 50px;
+    height: 50px;
+}
+
+.byline__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.byline__header {
+    @include reset();
+    font-family: 'Lora';
+    font-weight: 700;
+}
+
+.byline__subheader {
+    @include reset();
+    font-weight: 400;
+    color: #6C757D;
+}
+
+
