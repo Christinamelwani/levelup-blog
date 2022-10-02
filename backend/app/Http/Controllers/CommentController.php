@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Exists;
 
 class CommentController extends Controller
 {

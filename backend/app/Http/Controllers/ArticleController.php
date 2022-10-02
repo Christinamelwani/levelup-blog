@@ -19,10 +19,6 @@ class ArticleController extends Controller
         // N+1 problem
         $articles = Article::all()->load(['user', 'comments', 'comments.author']);
 
-        if (!request()->routeIs('api.*')) {
-            return view('index', ['articles' => $articles]);
-        }
-
         return $articles;
     }
 
@@ -55,22 +51,6 @@ class ArticleController extends Controller
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
 
         $article = new Article($validatedArticle);
-        try {
-            $article->save();
-        } catch (\Exception $e) {
-            if (!request()->routeIs('api.*')) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['msg' => $e->getMessage()]);
-            }
-
-            throw $e;
-        }
-
-        if (!request()->routeIs('api.*')) {
-            return redirect(route('articles.show', ['article' => $article]));
-        }
 
         return $article;
     }
@@ -83,10 +63,6 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        if (!request()->routeIs('api.*')) {
-            return view('article', ['article' => $article]);
-        }
-
         return $article;
     }
 
