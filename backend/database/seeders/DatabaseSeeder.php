@@ -28,6 +28,14 @@ class DatabaseSeeder extends Seeder
             ->hasArticles(3) // special magic method
             ->create();
 
+        User::factory(1)
+            ->set('name', 'other User')
+            ->set('slug', 'other-user')
+            ->set('email', 'other@example.com')
+            ->set('password', Hash::make('password'))
+            ->hasArticles(3) // special magic method
+            ->create();
+
         // create two more users without posts
         (new UserFactory(2))
             ->set('name', 'user without posts')
