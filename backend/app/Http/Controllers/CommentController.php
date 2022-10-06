@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Comment::class, options: ['except' => 'index']);
+        $this->authorizeResource(Comment::class, options: ['except' => ['index', 'show']]);
     }
 
     /**

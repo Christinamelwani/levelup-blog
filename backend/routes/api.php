@@ -21,8 +21,9 @@ use Illuminate\Validation\Rules\Password;
 |
 */
 
+$unauthenticatedRoutes = ['index', 'show'];
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes) {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
@@ -35,13 +36,13 @@ Route::middleware('auth:sanctum')->group(function () {
         return $author->articles;
     })->name('author.articles');
 
-    Route::apiResource('comments', CommentController::class)->except(['index']);
 
-    Route::resource('articles', ArticleController::class)->except([
-        'create',
-        'edit',
-    ]);
+    Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
+    Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
 });
+
+Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
+Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
 
 Route::post('/users', function (StoreUserRequest $request) {
     $validated = $request->validate([
@@ -62,8 +63,6 @@ Route::post('/users', function (StoreUserRequest $request) {
 Route::get('/users/{user:slug}', function (User $user) {
     return $user;
 })->name('users.show');
-
-Route::get('/comments', [CommentController::class, 'index']);
 
 Route::post('/authenticate', function (Request $request) {
     $credentials = $request->validate([

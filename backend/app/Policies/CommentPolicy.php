@@ -30,7 +30,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        //
+        return $user->id === $comment->author->id;
     }
 
     /**
@@ -65,7 +65,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        //
+        return $user->id === $comment->author->id;
     }
 
     /**
@@ -77,7 +77,7 @@ class CommentPolicy
      */
     public function restore(User $user, Comment $comment)
     {
-        //
+        return $user->id === $comment->author->id;
     }
 
     /**
@@ -89,6 +89,6 @@ class CommentPolicy
      */
     public function forceDelete(User $user, Comment $comment)
     {
-        //
+        return $user->id === $comment->author->id;
     }
 }
