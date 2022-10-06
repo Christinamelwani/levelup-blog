@@ -1,5 +1,10 @@
-<script setup>
-
+<script>
+import Modal from './Modal.vue';
+export default {
+    components: {
+        Modal
+    },
+}
 </script>
 
 <template>
@@ -18,6 +23,9 @@
                     </li>
                     <li class="header__nav-item">
                         <RouterLink class="header__nav-item-link" to="/articles">Articles</RouterLink>
+                    </li>
+                    <li class="header__nav-item" @click="$emit('collapse-modal')">
+                        <a class="header__nav-item-link">Login</a>
                     </li>
                 </ul>
             </nav>
