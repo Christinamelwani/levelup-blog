@@ -1,32 +1,15 @@
-<<<<<<< HEAD
 .highlightedArticle {
     position: relative;
     cursor: pointer;
 }
 
 .highlightedArticle__img {
-=======
-.editorsPick__content__card {
-    all: unset;
-    position: relative;
-    min-width: 0;
-    min-height: 0;
-    cursor: pointer;
-}
-
-.editorsPick__content__card-img {
-    all: unset;
-    height: 100%;
-    min-width: 0px;
-    max-width: 370px;
->>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
 }
 
-<<<<<<< HEAD
 .highlightedArticle__wrapper {
     position: absolute;
     top:0;
@@ -69,74 +52,4 @@
     color: #E5E5E5;
     font-size: 0.8em;
     font-family: 'Lora';
-=======
-.editorsPick__content__card__container {
-    background: #343a400c;
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
-    color: white;
-}
-
-.editorsPick__content__card__category {
-    all: unset;
-    position: absolute;
-    top: 10px;
-    left: 72%;
-    color: white;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    padding: 0 10px;
-}
-
-
-.editorsPick__content__card__category-text {
-    padding: 0;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 12px;
-    text-transform: uppercase;
-}
-
-
-.editorsPick__content__card__container-wrapper {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    padding: 20px 20px;
-    gap: 20px;
-}
-
-.editorsPick__content__card__container-title {
-    all: unset;
-    font-family: 'Lora';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 25px;
-    color: #FFFFFF;
-}
-
-.editorsPick__content__card__container-date {
-
-    font-family: Lora;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 15px;
-    display: flex;
-
-}
-
-.editorsPick__content__card__container-text {
-    all: unset;
-    font-family: 'Lora';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
->>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }

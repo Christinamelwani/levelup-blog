@@ -12,7 +12,6 @@
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 .categoryCard {
     @include reset;
     line-height: 0;
@@ -33,17 +32,4 @@
 
 .categoryCard-highlightedArticle{
     align-self: flex-end;
-=======
-.categoryCard-slider {
-    all:unset;
-    line-height: 0;
-    padding: 0.1% 1%;
-    text-transform: uppercase;
-    width: fit-content;
-    font-family: roboto;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
->>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }

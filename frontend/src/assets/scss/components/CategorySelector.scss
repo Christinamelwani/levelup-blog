@@ -2,11 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-<<<<<<< HEAD
     overflow: auto;
-=======
-    width: 100%;
->>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }
 
 .categorySelector__list {
@@ -25,19 +21,13 @@
     font-size: 16px;
     line-height: 25px;
     cursor: pointer;  
-<<<<<<< HEAD
     white-space: nowrap;
-=======
->>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }
 
 .categorySelector__item-active {
     color: #D4A373;
-<<<<<<< HEAD
 }
 
 .categorySelector__item-viewAll {
     margin-left: 15px;
-=======
->>>>>>> e4b09d5 (Made header and slider responsive, still figuring out the rest)
 }
