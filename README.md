@@ -4,6 +4,8 @@ Welcome to the level up blog project.
 If you are first time here visit
 <a href="https://www.notion.so/How-to-setup-Docker-e095fa4f176d4435919ef1c82f80e03e">This link</a> to learn how to setup this project.
 
+Alternatively, you can use `make init` to perform repo initialization with default settings (only needs to be done once)
+
 If you are already know how to setup this project here is useful commands:
 
 ---
