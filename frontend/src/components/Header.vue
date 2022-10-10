@@ -4,6 +4,18 @@ export default {
     components: {
         Modal
     },
+    props: ["loggedIn"],
+    methods: {
+        logout() {
+            localStorage.removeItem("access_token")
+            this.$emit("logged-out")
+        }
+    },
+    watch: {
+        loggedIn(newVal, oldVal) {
+            console.log(newVal)
+        }
+    }
 }
 </script>
 
@@ -19,13 +31,16 @@ export default {
                         <RouterLink class="header__nav-item-link" to="/">Home</RouterLink>
                     </li>
                     <li class="header__nav-item">
-                        <RouterLink class="header__nav-item-link" to="/about">About</RouterLink>
+                        <a class="header__nav-item-link">About</a>
                     </li>
                     <li class="header__nav-item">
-                        <RouterLink class="header__nav-item-link" to="/articles">Articles</RouterLink>
+                        <a class="header__nav-item-link">Articles</a>
                     </li>
-                    <li class="header__nav-item" @click="$emit('collapse-modal')">
+                    <li v-if="!loggedIn" class="header__nav-item" @click="$emit('collapse-modal')">
                         <a class="header__nav-item-link">Login</a>
+                    </li>
+                    <li v-if="loggedIn" class="header__nav-item" @click="logout()">
+                        <a class="header__nav-item-link">Logout</a>
                     </li>
                 </ul>
             </nav>

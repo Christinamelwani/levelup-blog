@@ -27,6 +27,25 @@
     }
 }
 
+.modal_message{
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: inherit;
+}
+
+.modal_message-error{
+    background-color: red;
+    color:white
+}
+
+.modal_message-success{
+    background-color: green;
+    color:white
+}
 .modal_header{
     display: flex;
     flex-direction: row;

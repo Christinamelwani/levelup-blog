@@ -1,13 +1,16 @@
-<script setup>
+<script>
 import Byline from './Byline.vue';
-
+export default {
+    props: ["article"],
+    components: { Byline }
+}
 </script>
 
 <template>
     <div class="articleCard">
         <img class="articleCard__img" src="../assets/images/BlogImage.png" />
         <div class="articleCard__wrapper">
-            <date class="articleCard__date">08.08.2021</date>
+            <p class="articleCard__date">08.08.2021</p>
             <h3 class="articleCard__header">Dream destinations to visit this year in Paris</h3>
             <p class="articleCard__text">Progressively incentivize cooperative systems through technically
                 sound functionalities. The credibly productivate seamless data.</p>

@@ -9,9 +9,9 @@ import CategoryCard from './CategoryCard.vue';
         <div class="highlightedArticle__wrapper">
             <CategoryCard class="categoryCard-highlightedArticle" />
             <div class="highlightedArticle__inner">
-                <date class="highlightedArticle__date">
+                <p class="highlightedArticle__date">
                     08.08.2021
-                </date>
+                </p>
                 <h3 class="highlightedArticle__title">
                     Richird Norton photorealistic rendering as real photos
                 </h3>
