@@ -1,23 +1,29 @@
 <script>
 import axios from 'axios'
+import ArticleCard from '../components/ArticleCard.vue'
 export default {
     data() {
         return {
-            userData: {}
-        }
+            userData: {},
+            articles: []
+        };
     },
     async created() {
         try {
-            const token = localStorage.getItem("access_token")
+            const token = localStorage.getItem("access_token");
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
-            }
-            const response = await axios.get('http://localhost:8000/api/user', config)
+            };
+            const response = await axios.get("http://localhost:8000/api/user", config);
             this.userData = response.data;
-        } catch (err) {
-            console.log(err)
+            const articlesResponse = await axios.get(`http://localhost:8000/api/users/${this.userData.slug}/articles`, config);
+            this.articles = articlesResponse.data;
         }
-    }
+        catch (err) {
+            console.log(err);
+        }
+    },
+    components: { ArticleCard }
 }
 </script>
 <template>
@@ -31,6 +37,15 @@ export default {
         <p class="profile_email">
             {{userData.email}}
         </p>
+    </div>
+    <div class="profile_articles">
+        <h1>Your articles:</h1>
+        <div v-if="articles.length === 0">
+            <h2>No articles yet!</h2>
+        </div>
+        <div v-else class="blogCards__content">
+            <ArticleCard v-for="article in articles" :article="article" />
+        </div>
     </div>
 
 </template>

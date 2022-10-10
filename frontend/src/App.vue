@@ -16,6 +16,7 @@ export default {
     },
     login() {
       this.loggedIn = true
+      console.log(this.loggedIn)
       this.collapseModal = false;
     },
     logout() {
@@ -29,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <Header @logged-out="logout" @collapse-modal="toggleCollapseModal" :loggedIn="loggedIn"> </Header>
+  <Header @logged-out="logout" @collapse-modal="toggleCollapseModal" :parentLoggedIn="loggedIn"> </Header>
   <Modal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="collapseModal" />
   <RouterView />
   <Footer> </Footer>

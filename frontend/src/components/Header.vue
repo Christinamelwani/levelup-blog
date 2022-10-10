@@ -1,19 +1,33 @@
 <script>
 import Modal from './Modal.vue';
 export default {
+    data() {
+        return {
+            loggedIn: false
+        }
+    },
     components: {
         Modal
     },
-    props: ["loggedIn"],
+    props: ["parentLoggedIn"],
     methods: {
         logout() {
             localStorage.removeItem("access_token")
+            this.loggedIn = false;
             this.$emit("logged-out")
         }
     },
     watch: {
-        loggedIn(newVal, oldVal) {
-            console.log(newVal)
+        parentLoggedIn(newValue) {
+            console.log(newValue)
+            this.loggedIn = newValue;
+            console.log(this.loggedIn)
+        }
+    },
+    created() {
+        const token = localStorage.getItem("access_token")
+        if (token) {
+            this.loggedIn = true
         }
     }
 }
