@@ -6,12 +6,21 @@ import Modal from './components/Modal.vue';
 export default {
   data() {
     return {
-      collapseModal: false
+      collapseModal: false,
+      loggedIn: false,
     }
   },
   methods: {
     toggleCollapseModal() {
       this.collapseModal = !this.collapseModal
+    },
+    login() {
+      this.loggedIn = true
+      this.collapseModal = false;
+    },
+    logout() {
+      this.loggedIn = false;
+      this.$router.push('/')
     }
   },
   components: { Header, Footer, Modal }
@@ -20,8 +29,8 @@ export default {
 </script>
 
 <template>
-  <Header @collapse-modal="toggleCollapseModal"> </Header>
-  <Modal @collapse-modal="toggleCollapseModal" v-if="collapseModal" />
+  <Header @logged-out="logout" @collapse-modal="toggleCollapseModal" :loggedIn="loggedIn"> </Header>
+  <Modal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="collapseModal" />
   <RouterView />
   <Footer> </Footer>
 </template>

@@ -1,16 +1,78 @@
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
-            mode: "Log in"
+            mode: "Log in",
+            email: "",
+            password: "",
+            name: "",
+            nickname: "",
+            status: "",
+            errorMessage: ""
         }
-    }
+    },
+    methods: {
+        toggleMode() {
+            if (this.mode === 'Log in') {
+                this.mode = 'Register'
+            } else {
+                this.mode = 'Log in'
+            }
+            this.email = ""
+            this.password = ""
+        },
+        loginOrRegister() {
+            if (this.mode === 'Register') {
+                this.register()
+            }
+            if (this.mode === 'Log in') {
+                this.login()
+            }
+        },
+        async login() {
+            try {
+                const response = await axios.post('http://localhost:8000/api/authenticate', { email: this.email, password: this.password })
+                localStorage.setItem('access_token', response.data);
+                this.status = 'done';
+                this.$emit("logged-in")
+                this.$router.push({ name: 'profile' })
+            } catch (err) {
+                this.status = 'error'
+                this.errorMessage = "Something went wrong!"
+                if (err.message === 'Request failed with status code 422') {
+                    this.errorMessage = "Please enter a valid email and a password that's at least 8 characters long."
+                }
+                if (err.message === 'Request failed with status code 403') {
+                    this.errorMessage = "Username or password incorrect."
+                }
+                console.log(err)
+            }
+        },
+        async register() {
+            try {
+                if (this.password.length < 8) {
+                    throw { errorMessage: "Password must at least be 8 characters long." }
+                }
+                const response = await axios.post('http://localhost:8000/api/users', { email: this.email, password: this.password, name: this.name, slug: this.nickname })
+                this.mode = 'Log in'
+            } catch (err) {
+                this.status = 'error'
+                this.errorMessage = "Something went wrong!"
+            }
+        }
+    },
 }
 </script>
 
 <template>
     <div class="modal">
         <div class="modal_inner">
+            <div v-if="status === 'done' || status === 'error'" class="modal_message"
+                :class="{'modal_message-error': status === 'error', 'modal_message-success': status === 'done'}">
+                <p v-if="status === 'error'"> {{errorMessage}}</p>
+                <p v-if="status === 'done'">Successfully logged in!</p>
+            </div>
             <div class="modal_header">
                 <h1 class="modal_title">{{mode}}</h1>
                 <svg @click="$emit('collapse-modal')" class=" modal_icon" xmlns="http://www.w3.org/2000/svg"
@@ -23,14 +85,20 @@ export default {
             </div>
             <div class="modal_content">
                 <form class="modal_form">
-                    <input placeholder="E-mail" type="text" class="modal_input" />
-                    <input type="text" placeholder="Password" class="modal_input" />
-                    <a class="modal_link">Forgot your password?</a>
-                    <input type="submit" class="modal_submit" value="Login" />
+                    <input v-if="mode === 'Register'" v-model='name' placeholder="Name" type="text"
+                        class="modal_input" />
+                    <input v-if="mode === 'Register'" v-model='nickname' type="text" placeholder="Nickname"
+                        class="modal_input" />
+                    <input v-model='email' placeholder="E-mail" type="email" class="modal_input" />
+                    <input v-model='password' type="password" placeholder="Password" class="modal_input" />
+                    <input @click.prevent="loginOrRegister" type="submit" class="modal_submit" :value="mode" />
                 </form>
             </div>
             <div class="modal_footer">
-                <a class="modal_link">Don't have an account yet? Sign up</a>
+                <a v-if="mode === 'Log in'" @click.prevent="toggleMode" class="modal_link">Don't have an account
+                    yet? Sign up</a>
+                <a v-if="mode === 'Register'" @click.prevent="toggleMode" class="modal_link">Already have an
+                    account? Log In</a>
             </div>
         </div>
     </div>
