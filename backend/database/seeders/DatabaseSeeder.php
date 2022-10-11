@@ -36,6 +36,14 @@ class DatabaseSeeder extends Seeder
             ->hasArticles(3) // special magic method
             ->create();
 
+        User::factory(1)
+            ->set('name', 'admin')
+            ->set('slug', 'admin')
+            ->set('email', 'admin@gmail.com')
+            ->set('password', Hash::make('password'))
+            ->create();
+
+
         // create two more users without posts
         (new UserFactory(2))
             ->set('name', 'user without posts')
