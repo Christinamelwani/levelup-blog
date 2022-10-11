@@ -9,6 +9,11 @@ use App\Utils\StringUtils;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, options: ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -13,7 +13,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return request()->user_id == auth()->user()->id;
     }
 
     /**
