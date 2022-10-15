@@ -6,13 +6,14 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Models\User;
+use App\Utils\StringUtils;
 
 class UserArticleController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Article::class, options: ['except' => ['index', 'show']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Article::class, options: ['except' => ['index', 'show']]);
+    // }
 
     /**
      * Display a listing of the resource.
@@ -29,9 +30,21 @@ class UserArticleController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticleRequest $request)
+    public function store(StoreArticleRequest $request, User $user)
     {
-       dd($request);
+        $validatedArticle = $request->validate([
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+            'slug' => ['prohibited'],
+        ]);
+
+        $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+
+        $validatedArticle['user_id'] = $user;
+
+        $article = new Article($validatedArticle);
+
+        return $article;
     }
 
     /**
