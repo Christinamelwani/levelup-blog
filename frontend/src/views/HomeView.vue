@@ -3,7 +3,7 @@ import Slider from '@/components/Slider.vue';
 import CategorySelector from '@/components/CategorySelector.vue';
 import ArticleCard from '@/components/ArticleCard.vue';
 import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue"
-import axios from "axios";
+import Article from "@/services/Article.js"
 export default {
   components: {
     Slider,
@@ -18,8 +18,7 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get(`http://localhost:8000/api/articles`);
-      this.articles = response.data;
+      this.articles = await Article.all();
     }
     catch (err) {
       console.log(err);

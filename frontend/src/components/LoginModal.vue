@@ -1,12 +1,15 @@
 <script>
-import axios from 'axios';
 import BaseModal from './BaseModal.vue';
+import Auth from "@/services/Auth";
+
 export default {
     components: { BaseModal },
     data() {
         return {
-            email: "",
-            password: "",
+            credentials: {
+                email: "",
+                password: ""
+            },
             status: "",
             errorMessage: ""
         };
@@ -14,14 +17,15 @@ export default {
     methods: {
         async login() {
             try {
-                const response = await axios.post("http://localhost:8000/api/authenticate", { email: this.email, password: this.password });
-                localStorage.setItem("access_token", response.data);
+                const accessToken = await Auth.login(this.credentials)
+                localStorage.setItem("access_token", accessToken);
                 this.status = "done";
                 this.$emit("logged-in");
                 this.$router.push({ name: "profile" });
             }
             catch (err) {
                 this.status = "error";
+                console.log(err)
                 this.errorMessage = "Something went wrong!";
                 if (err.message === "Request failed with status code 422") {
                     this.errorMessage = "Please enter a valid email and a password that's at least 8 characters long.";
@@ -44,9 +48,9 @@ export default {
         </div>
         <div class="modal_content">
             <form class="modal_form">
-                <input v-model='email' placeholder="E-mail" type="email" class="modal_input" />
-                <input v-model='password' type="password" placeholder="Password" class="modal_input" />
-                <input @click.prevent="login" type="submit" class="modal_submit" :value="mode" />
+                <input v-model='credentials.email' placeholder="E-mail" type="email" class="modal_input" />
+                <input v-model='credentials.password' type="password" placeholder="Password" class="modal_input" />
+                <input @click.prevent="login" type="submit" class="modal_submit" value="Login" />
             </form>
         </div>
         <div class="modal_footer">

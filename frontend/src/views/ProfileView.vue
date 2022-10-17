@@ -1,6 +1,7 @@
 <script>
-import axios from 'axios'
-import ArticleCard from '../components/ArticleCard.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
+import Auth from "@/services/Auth.js"
+import Article from "@/services/Article.js"
 export default {
     components: { ArticleCard },
     data() {
@@ -11,14 +12,8 @@ export default {
     },
     async created() {
         try {
-            const token = localStorage.getItem("access_token");
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            const response = await axios.get("http://localhost:8000/api/user", config);
-            this.userData = response.data;
-            const articlesResponse = await axios.get(`http://localhost:8000/api/users/${this.userData.slug}/articles`, config);
-            this.articles = articlesResponse.data;
+            this.userData = await Auth.me()
+            this.articles = await Article.bySlug(this.userData.slug)
         }
         catch (err) {
             console.log(err);

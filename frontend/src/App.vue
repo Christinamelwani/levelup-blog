@@ -33,8 +33,8 @@ export default {
 <template>
   <Header @logged-out="logout" @collapse-login="collapseModal('Log In')" @collapse-register="collapseModal('Register')"
     :parentLoggedIn="loggedIn"> </Header>
-  <LoginModal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="modalType === 'Log In'" />
-  <RegisterModal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="modalType === 'Register'" />
+  <LoginModal @logged-in="login" v-if="modalType === 'Log In'" />
+  <RegisterModal @logged-in="login" v-if="modalType === 'Register'" />
   <RouterView />
   <Footer> </Footer>
 </template>

@@ -1,14 +1,16 @@
 <script>
-import axios from 'axios';
 import BaseModal from './BaseModal.vue';
+import Auth from "@/services/Auth.js"
 export default {
     components: { BaseModal },
     data() {
         return {
-            email: "",
-            password: "",
-            name: "",
-            nickname: "",
+            userData: {
+                email: "",
+                password: "",
+                name: "",
+                slug: "",
+            },
             status: "",
             errorMessage: ""
         };
@@ -16,10 +18,10 @@ export default {
     methods: {
         async register() {
             try {
-                if (this.password.length < 8) {
+                if (this.userData.password.length < 8) {
                     throw { errorMessage: "Password must at least be 8 characters long." };
                 }
-                const response = await axios.post("http://localhost:8000/api/users", { email: this.email, password: this.password, name: this.name, slug: this.nickname });
+                const response = await Auth.register(this.userData);
             }
             catch (err) {
                 this.status = "error";
@@ -39,11 +41,11 @@ export default {
         </div>
         <div class="modal_content">
             <form class="modal_form">
-                <input v-model='name' placeholder="Name" type="text" class="modal_input" />
-                <input v-model='nickname' type="text" placeholder="Nickname" class="modal_input" />
-                <input v-model='email' placeholder="E-mail" type="email" class="modal_input" />
-                <input v-model='password' type="password" placeholder="Password" class="modal_input" />
-                <input @click.prevent="loginOrRegister" type="submit" class="modal_submit" :value="mode" />
+                <input v-model='userData.name' placeholder="Name" type="text" class="modal_input" />
+                <input v-model='userData.slug' type="text" placeholder="Nickname" class="modal_input" />
+                <input v-model='userData.email' placeholder="E-mail" type="email" class="modal_input" />
+                <input v-model='userData.password' type="password" placeholder="Password" class="modal_input" />
+                <input @click.prevent="register" type="submit" class="modal_submit" value="Register" />
             </form>
         </div>
         <div class="modal_footer">
