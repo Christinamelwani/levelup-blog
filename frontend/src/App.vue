@@ -1,8 +1,8 @@
 <script>
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
-import LoginModal from './components/LoginModal.vue';
-import RegisterModal from './components/RegisterModal.vue';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
+import LoginModal from '@/components/LoginModal.vue';
+import RegisterModal from '@/components/RegisterModal.vue';
 
 export default {
   data() {

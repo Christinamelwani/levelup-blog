@@ -1,8 +1,31 @@
-<script setup>
-import Slider from '../components/Slider.vue';
-import CategorySelector from '../components/CategorySelector.vue';
-import ArticleCard from '../components/ArticleCard.vue';
-import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
+<script >
+import Slider from '@/components/Slider.vue';
+import CategorySelector from '@/components/CategorySelector.vue';
+import ArticleCard from '@/components/ArticleCard.vue';
+import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue"
+import axios from "axios";
+export default {
+  data() {
+    return {
+      articles: []
+    };
+  },
+  async created() {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/articles`);
+      this.articles = response.data;
+    }
+    catch (err) {
+      console.log(err);
+    }
+  },
+  components: {
+    Slider,
+    CategorySelector,
+    ArticleCard,
+    HighlightedArticleCard
+  }
+}
 </script>
 <template>
   <main>
@@ -13,7 +36,8 @@ import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
       </div>
       <CategorySelector />
       <div class="blogCards__content">
-        <ArticleCard v-for="index in 8" @click="$router.push(`/article/${index}`)" />
+        <ArticleCard v-for="article in articles.slice(0,8)" :article="article"
+          @click="$router.push(`/article/${index}`)" />
       </div>
     </section>
     <section class="editorsPick">

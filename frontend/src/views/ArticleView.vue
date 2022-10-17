@@ -1,7 +1,25 @@
-<script setup>
-import Slider from "../components/Slider.vue";
-import HighlightedArticleCard from "../components/HighlightedArticleCard.vue";
-import Byline from "../components/Byline.vue";
+<script>
+import Slider from "@/components/Slider.vue";
+import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue";
+import Byline from "@/components/Byline.vue";
+import axios from "axios";
+export default {
+    data() {
+        return {
+            articles: []
+        };
+    },
+    async created() {
+        try {
+            const responses = await axios.get(`http://localhost:8000/api/articles`);
+            this.articles = responses.data;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    },
+    components: { Slider, HighlightedArticleCard, Byline }
+}
 </script>
 
 <template>
