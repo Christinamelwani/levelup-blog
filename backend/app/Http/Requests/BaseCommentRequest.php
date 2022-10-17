@@ -14,6 +14,13 @@ class BaseCommentRequest extends FormRequest
      */
     public function authorize()
     {
+        // Temporary way to bypass authorization
+        $path_info = request()->pathInfo;
+        $path = explode( "/", $path_info);
+        if($path[2] == 'articles' || $path[2] == 'users'){
+            return true;
+        }
+
         if(auth()->user()->name === 'admin'){
             return true;
         }
@@ -28,8 +35,8 @@ class BaseCommentRequest extends FormRequest
     public function rules()
     {
         return [
+            'article_id' => ['required', 'exists:users,id'],
             'content' => ['required', 'string'],
-            'article_id' => ['required', Rule::exists('articles', 'id')],
             'user_id' => ['required', 'exists:users,id'],
         ];
     }

@@ -10,11 +10,6 @@ use App\Utils\StringUtils;
 
 class UserArticleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Article::class, options: ['except' => ['index', 'show']]);
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +35,7 @@ class UserArticleController extends Controller
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
 
-        $validatedArticle['user_id'] = $user;
+        $validatedArticle['user_id'] = $user->id;
 
         $article = new Article($validatedArticle);
 
@@ -65,7 +60,7 @@ class UserArticleController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticleRequest $request, Article $comment)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
        // We don't need this yet?
     }

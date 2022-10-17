@@ -9,10 +9,10 @@ use App\Models\User;
 
 class UserCommentController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Comment::class, options: ['except' => ['index', 'show']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Comment::class, options: ['except' => ['index', 'show']]);
+    // }
 
     /**
      * Display a listing of the resource.
@@ -29,9 +29,13 @@ class UserCommentController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(StoreCommentRequest $request, User $user)
     {
-       // We don't need this yet?
+        $comment = new Comment($request->validated());
+        $comment['user_id'] = $user->id;
+        $comment->save();
+
+        return $comment;
     }
 
     /**
