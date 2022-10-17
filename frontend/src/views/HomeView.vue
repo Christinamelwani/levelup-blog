@@ -30,14 +30,14 @@ export default {
 <template>
   <main>
     <Slider class="slider-home" />
-    <section class=" blogCards">
+    <section class="blogCards">
       <div class="blogCards__header">
         Popular topics
       </div>
       <CategorySelector />
       <div class="blogCards__content">
-        <ArticleCard v-for="article in articles.slice(0,8)" :article="article"
-          @click="$router.push(`/article/${index}`)" />
+        <ArticleCard v-for="article in articles.slice(0,8)" key="article.id" :article="article"
+          @click="$router.push(`/article/${article.id}`)" />
       </div>
     </section>
     <section class="editorsPick">
