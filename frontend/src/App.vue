@@ -5,6 +5,7 @@ import LoginModal from '@/components/LoginModal.vue';
 import RegisterModal from '@/components/RegisterModal.vue';
 
 export default {
+  components: { Header, Footer, LoginModal, RegisterModal },
   data() {
     return {
       modalType: "",
@@ -25,7 +26,6 @@ export default {
       this.$router.push('/')
     }
   },
-  components: { Header, Footer, LoginModal, RegisterModal }
 }
 
 </script>

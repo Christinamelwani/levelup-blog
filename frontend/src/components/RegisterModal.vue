@@ -2,6 +2,7 @@
 import axios from 'axios';
 import BaseModal from './BaseModal.vue';
 export default {
+    components: { BaseModal },
     data() {
         return {
             email: "",
@@ -26,7 +27,6 @@ export default {
             }
         }
     },
-    components: { BaseModal }
 }
 </script>
 

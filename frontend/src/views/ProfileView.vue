@@ -2,6 +2,7 @@
 import axios from 'axios'
 import ArticleCard from '../components/ArticleCard.vue'
 export default {
+    components: { ArticleCard },
     data() {
         return {
             userData: {},
@@ -23,7 +24,6 @@ export default {
             console.log(err);
         }
     },
-    components: { ArticleCard }
 }
 </script>
 <template>

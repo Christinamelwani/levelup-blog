@@ -1,25 +1,25 @@
 <script>
 import LoginModal from './LoginModal.vue';
 export default {
+    components: {
+        LoginModal
+    },
     data() {
         return {
             loggedIn: false
         }
     },
-    components: {
-        LoginModal
-    },
     props: ["parentLoggedIn"],
+    watch: {
+        parentLoggedIn(newValue) {
+            this.loggedIn = newValue;
+        }
+    },
     methods: {
         logout() {
             localStorage.removeItem("access_token")
             this.loggedIn = false;
             this.$emit("logged-out")
-        }
-    },
-    watch: {
-        parentLoggedIn(newValue) {
-            this.loggedIn = newValue;
         }
     },
     created() {

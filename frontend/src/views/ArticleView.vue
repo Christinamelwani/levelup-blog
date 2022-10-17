@@ -4,6 +4,7 @@ import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue";
 import Byline from "@/components/Byline.vue";
 import axios from "axios";
 export default {
+    components: { Slider, HighlightedArticleCard, Byline },
     data() {
         return {
             articles: []
@@ -18,7 +19,6 @@ export default {
             console.log(err);
         }
     },
-    components: { Slider, HighlightedArticleCard, Byline }
 }
 </script>
 

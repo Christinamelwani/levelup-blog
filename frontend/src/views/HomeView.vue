@@ -5,6 +5,12 @@ import ArticleCard from '@/components/ArticleCard.vue';
 import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue"
 import axios from "axios";
 export default {
+  components: {
+    Slider,
+    CategorySelector,
+    ArticleCard,
+    HighlightedArticleCard
+  },
   data() {
     return {
       articles: []
@@ -19,12 +25,6 @@ export default {
       console.log(err);
     }
   },
-  components: {
-    Slider,
-    CategorySelector,
-    ArticleCard,
-    HighlightedArticleCard
-  }
 }
 </script>
 <template>

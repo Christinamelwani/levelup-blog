@@ -1,35 +1,35 @@
 .articleBody__categories__card {
-    color: #6C757D;
-    border: 1px solid #E5E5E5;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font: Lora;
-    text-transform: uppercase;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-weight: 700;
-    cursor: pointer;
+  color: #6c757d;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font: Lora;
+  text-transform: uppercase;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .categoryCard {
-    @include reset;
-    line-height: 0;
-    padding: 0.1% 1.5%;
-    text-transform: uppercase;
-    width: fit-content;
-    font-family: 'roboto';
-    background: rgba(255, 255, 255, 0.2);
-    font-size: 0.8em;
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
+  @include reset;
+  line-height: 0;
+  padding: 0.1% 1.5%;
+  text-transform: uppercase;
+  width: fit-content;
+  font-family: 'roboto';
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.8em;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.categoryCard-article{
-    align-self: center
+.categoryCard-article {
+  align-self: center;
 }
 
-.categoryCard-highlightedArticle{
-    align-self: flex-end;
+.categoryCard-highlightedArticle {
+  align-self: flex-end;
 }
