@@ -1,5 +1,5 @@
 <script>
-import CategoryCard from './CategoryCard.vue';
+import CategoryCard from '@/components/CategoryCard.vue';
 export default {
     components: { CategoryCard },
     props: {

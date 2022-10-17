@@ -1,5 +1,5 @@
 <script>
-import LoginModal from './LoginModal.vue';
+import LoginModal from '@/components/LoginModal.vue';
 export default {
     components: {
         LoginModal
@@ -23,8 +23,8 @@ export default {
         }
     },
     created() {
-        const token = localStorage.getItem("access_token")
-        if (token) {
+        const accessToken = localStorage.getItem("access_token")
+        if (accessToken) {
             this.loggedIn = true
         }
     }

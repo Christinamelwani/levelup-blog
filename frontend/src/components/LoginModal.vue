@@ -25,7 +25,6 @@ export default {
             }
             catch (err) {
                 this.status = "error";
-                console.log(err)
                 this.errorMessage = "Something went wrong!";
                 if (err.message === "Request failed with status code 422") {
                     this.errorMessage = "Please enter a valid email and a password that's at least 8 characters long.";
