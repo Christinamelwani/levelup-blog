@@ -101,7 +101,7 @@ export default {
                 Related Posts
             </h1>
             <div class="editorsPick__content">
-                <HighlightedArticleCard v-for="index in 3" />
+                <HighlightedArticleCard v-for="article in articles.slice(0,3)" :key="article.id" :article="article" />
             </div>
         </section>
     </main>

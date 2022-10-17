@@ -36,8 +36,7 @@ export default {
       </div>
       <CategorySelector />
       <div class="blogCards__content">
-        <ArticleCard v-for="article in articles.slice(0,8)" key="article.id" :article="article"
-          @click="$router.push(`/article/${article.id}`)" />
+        <ArticleCard v-for="article in articles.slice(0,8)" :key="article.id" :article="article" />
       </div>
     </section>
     <section class="editorsPick">
@@ -45,7 +44,7 @@ export default {
         Editor's Pick
       </h1>
       <div class="editorsPick__content">
-        <HighlightedArticleCard v-for="index in 3" />
+        <HighlightedArticleCard v-for="article in articles.slice(0,3)" :key="article.id" :article="article" />
       </div>
     </section>
   </main>

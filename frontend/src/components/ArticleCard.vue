@@ -10,25 +10,33 @@ export default {
     },
     computed: {
         truncatedContent() {
-            const truncatedArticle = this.article.content.slice(0, 200);
-            if (truncatedArticle !== this.article) {
+            const truncatedArticleContent = this.article.content.slice(0, 200);
+            if (truncatedArticleContent !== this.article.content) {
                 return `${this.article.content.slice(0, 200)}...`
             }
-            console.log(this.article.title)
-            return `${this.article.content.slice(0, 200)}`
+            return truncatedArticleContent
         },
         truncatedTitle() {
-            return `${this.article.title.slice(0, 20)}`
+            const truncatedArticleTitle = this.article.title.slice(0, 40);
+            if (truncatedArticleTitle !== this.article.title) {
+                return `${this.article.title.slice(0, 40)}...`
+            }
+            return truncatedArticleTitle
         },
         dateCreated() {
             return new Date(this.article.created_at).toLocaleDateString('de-DE')
         }
     },
+    methods: {
+        goToArticle() {
+            this.$router.push({ name: 'article', params: { id: this.article.id } })
+        }
+    }
 }
 </script>
 
 <template>
-    <div class="articleCard">
+    <div @click="goToArticle" class="articleCard">
         <img class="articleCard__img" src="@/assets/images/BlogImage.png" />
         <div class="articleCard__wrapper">
             <p class="articleCard__date">{{dateCreated}}</p>
