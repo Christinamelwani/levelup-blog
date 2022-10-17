@@ -1,5 +1,5 @@
 <script>
-import Modal from './Modal.vue';
+import LoginModal from './LoginModal.vue';
 export default {
     data() {
         return {
@@ -7,7 +7,7 @@ export default {
         }
     },
     components: {
-        Modal
+        LoginModal
     },
     props: ["parentLoggedIn"],
     methods: {
@@ -19,9 +19,7 @@ export default {
     },
     watch: {
         parentLoggedIn(newValue) {
-            console.log(newValue)
             this.loggedIn = newValue;
-            console.log(this.loggedIn)
         }
     },
     created() {
@@ -50,8 +48,11 @@ export default {
                     <li class="header__nav-item">
                         <a class="header__nav-item-link">Articles</a>
                     </li>
-                    <li v-if="!loggedIn" class="header__nav-item" @click="$emit('collapse-modal')">
+                    <li v-if="!loggedIn" class="header__nav-item" @click="$emit('collapse-login')">
                         <a class="header__nav-item-link">Login</a>
+                    </li>
+                    <li v-if="!loggedIn" class="header__nav-item" @click="$emit('collapse-register')">
+                        <a class="header__nav-item-link">Register</a>
                     </li>
                     <li v-if="loggedIn" class="header__nav-item" @click="logout()">
                         <a class="header__nav-item-link">Logout</a>

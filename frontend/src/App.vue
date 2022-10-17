@@ -1,18 +1,19 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import Modal from './components/Modal.vue';
+import LoginModal from './components/LoginModal.vue';
+import RegisterModal from './components/RegisterModal.vue';
+
 export default {
   data() {
     return {
-      collapseModal: false,
+      modalType: "",
       loggedIn: false,
     }
   },
   methods: {
-    toggleCollapseModal() {
-      this.collapseModal = !this.collapseModal
+    collapseModal(type) {
+      this.modalType = type;
     },
     login() {
       this.loggedIn = true
@@ -24,14 +25,16 @@ export default {
       this.$router.push('/')
     }
   },
-  components: { Header, Footer, Modal }
+  components: { Header, Footer, LoginModal, RegisterModal }
 }
 
 </script>
 
 <template>
-  <Header @logged-out="logout" @collapse-modal="toggleCollapseModal" :parentLoggedIn="loggedIn"> </Header>
-  <Modal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="collapseModal" />
+  <Header @logged-out="logout" @collapse-login="collapseModal('Log In')" @collapse-register="collapseModal('Register')"
+    :parentLoggedIn="loggedIn"> </Header>
+  <LoginModal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="modalType === 'Log In'" />
+  <RegisterModal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="modalType === 'Register'" />
   <RouterView />
   <Footer> </Footer>
 </template>
