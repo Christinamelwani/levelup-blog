@@ -13,12 +13,6 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        // Temporary way to bypass authorization
-        $path_info = request()->pathInfo;
-        $path = explode( "/", $path_info);
-        if($path[2] == 'users'){
-            return true;
-        }
         if(auth()->user()->name == 'admin'){
             return true;
         }

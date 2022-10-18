@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleCommentRequest;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateArticleRequest;
@@ -10,10 +11,10 @@ use App\Models\Comment;
 
 class ArticleCommentController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Comment::class, options: ['except' => ['index', 'show']]);
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class, options: ['except' => ['index', 'show']]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -30,10 +31,11 @@ class ArticleCommentController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request, Article $article)
+    public function store(StoreArticleCommentRequest $request, Article $article)
     {
         $comment = new Comment($request->validated());
         $comment['article_id'] = $article->id;
+        $comment['user_id'] = $request->user()->id;
         $comment->save();
 
         return $comment;

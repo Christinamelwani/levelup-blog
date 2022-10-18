@@ -34,16 +34,17 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 
     Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
+    Route::resource('users.articles', UserArticleController::class)->shallow()->except($unauthenticatedRoutes);;
+    Route::resource('users.comments', UserCommentController::class)->shallow()->except($unauthenticatedRoutes);;
+    Route::resource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);;
 });
 
 Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
-
 Route::apiResource('users', UserController::class);
-
-Route::resource('users.articles', UserArticleController::class)->shallow();
-Route::resource('users.comments', UserCommentController::class)->shallow();
-Route::resource('articles.comments', ArticleCommentController::class)->shallow();
+Route::resource('users.articles', UserArticleController::class)->shallow()->only($unauthenticatedRoutes);;
+Route::resource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);;
+Route::resource('articles.comments', ArticleCommentController::class)->shallow()->only($unauthenticatedRoutes);;
 
 Route::post('/authenticate', function (Request $request) {
     $credentials = $request->validate([
