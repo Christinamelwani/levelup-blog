@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\StoreUserArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\User;
 use App\Utils\StringUtils;
 
-class ArticleController extends Controller
+class UserArticleController extends Controller
 {
     public function __construct()
     {
@@ -19,41 +21,27 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        // N+1 problem
-        $articles = Article::with(['user', 'comments', 'comments.author'])->paginate(5);
-
-        return $articles;
+        return Article::with('author')->where('user_id', $user->id)->paginate(5);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('new-article');
-    }
-
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreArticleRequest  $request
+     * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticleRequest $request)
+    public function store(StoreUserArticleRequest $request, User $user)
     {
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'slug' => ['prohibited'],
-            'user_id' => ['required'],
         ]);
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+
+        $validatedArticle['user_id'] = $user->id;
 
         $article = new Article($validatedArticle);
 
@@ -63,7 +51,7 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
@@ -74,27 +62,23 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateArticleRequest  $request
-     * @param  \App\Models\Article  $article
+     * @param  \App\Http\Requests\UpdateCommentRequest  $request
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        $validatedArticle = $request->validate([
-            'content' => ['required'],
-        ]);
-
-        $article->update($validatedArticle);
+       // We don't need this yet?
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
     public function destroy(Article $article)
     {
-        $article->delete();
+        return $article->delete();
     }
 }
