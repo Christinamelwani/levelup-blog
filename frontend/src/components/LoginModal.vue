@@ -37,9 +37,6 @@ export default {
             }
         },
     },
-    created() {
-        this.status = "Loading"
-    }
 }
 </script>
 
