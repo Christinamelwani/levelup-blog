@@ -1,32 +1,16 @@
 <script>
-import LoginModal from '@/components/LoginModal.vue';
+import { mapWritableState, mapState, mapActions } from 'pinia'
+import { useModalStore } from '@/stores/Modal.js'
+import { useAuthStore } from '@/stores/Auth.js'
+
 export default {
-    components: {
-        LoginModal
-    },
-    data() {
-        return {
-            loggedIn: false
-        }
-    },
-    props: ["parentLoggedIn"],
-    watch: {
-        parentLoggedIn(newValue) {
-            this.loggedIn = newValue;
-        }
+    computed: {
+        ...mapWritableState(useModalStore, ["activeModal"]),
+        ...mapState(useAuthStore, ["isLoggedIn", "isGuest"])
     },
     methods: {
-        logout() {
-            localStorage.removeItem("access_token")
-            this.loggedIn = false;
-            this.$emit("logged-out")
-        }
-    },
-    created() {
-        const accessToken = localStorage.getItem("access_token")
-        if (accessToken) {
-            this.loggedIn = true
-        }
+        ...mapActions(useModalStore, ["openModal"]),
+        ...mapActions(useAuthStore, ["logout"])
     }
 }
 </script>
@@ -48,14 +32,22 @@ export default {
                     <li class="header__nav-item">
                         <a class="header__nav-item-link">Articles</a>
                     </li>
-                    <li v-if="!loggedIn" class="header__nav-item" @click="$emit('collapse-login')">
-                        <a class="header__nav-item-link">Login</a>
-                    </li>
-                    <li v-if="!loggedIn" class="header__nav-item" @click="$emit('collapse-register')">
-                        <a class="header__nav-item-link">Register</a>
-                    </li>
-                    <li v-if="loggedIn" class="header__nav-item" @click="logout()">
-                        <a class="header__nav-item-link">Logout</a>
+                    <li class="blank_slate">
+                        <ul class="header__nav-group" v-if="isGuest">
+                            <li class="header__nav-item" @click="openModal('Log In')">
+                                <a class="header__nav-item-link"
+                                    :class="{'header__nav-item-link--active': activeModal === 'Log In' }">Login</a>
+                            </li>
+                            <li class="header__nav-item" @click="openModal('Register')">
+                                <a class="header__nav-item-link"
+                                    :class="{'header__nav-item-link--active': activeModal === 'Register'}">Register</a>
+                            </li>
+                        </ul>
+                        <ul class="header__nav-group" v-if="isLoggedIn">
+                            <li class="header__nav-item" @click="logout">
+                                <a class="header__nav-item-link">Logout</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>

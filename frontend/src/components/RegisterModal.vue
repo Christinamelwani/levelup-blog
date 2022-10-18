@@ -1,4 +1,6 @@
 <script>
+import { mapWritableState, mapActions } from 'pinia'
+import { useModalStore } from '@/stores/Modal.js'
 import BaseModal from './BaseModal.vue';
 import Auth from "@/services/Auth.js"
 import customInput from "@/components/Input.vue"
@@ -18,16 +20,23 @@ export default {
             errorMessage: ""
         };
     },
+    computed: {
+        ...mapWritableState(useModalStore, ["activeModal"]),
+    },
     methods: {
+        ...mapActions(useModalStore, ["openModal", "closeModal"]),
+
         async register() {
+            this.status = "Loading"
             try {
-                if (this.userData.password.length < 8) {
-                    throw { errorMessage: "Password must at least be 8 characters long." };
-                }
                 const response = await Auth.register(this.userData);
+                localStorage.setItem("access_token", response.token);
+                this.$router.push({ name: "Profile" });
+                this.closeModal()
+                this.status = "Success";
             }
             catch (err) {
-                this.status = "error";
+                this.status = "Error";
                 this.errorMessage = "Something went wrong!";
             }
         }
@@ -51,7 +60,7 @@ export default {
             </form>
         </div>
         <div class="modal_footer">
-            <a class="modal_link">Already have an
+            <a @click="openModal('Log In')" class="modal_link">Already have an
                 account? Log In</a>
         </div>
     </BaseModal>

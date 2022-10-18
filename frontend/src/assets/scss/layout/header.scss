@@ -54,3 +54,15 @@
     border-bottom: 2px solid #d4a373;
   }
 }
+
+.header__nav-item-link--active {
+  border-bottom: 2px solid #d4a373;
+}
+
+.header__nav-group {
+  @include reset;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  gap: 10px;
+}

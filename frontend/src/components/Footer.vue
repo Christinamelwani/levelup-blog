@@ -1,5 +1,17 @@
 <script>
+import { mapActions, mapState, mapWritableState } from 'pinia'
+import { useModalStore } from '@/stores/Modal.js'
+import { useAuthStore } from '@/stores/Auth.js'
 
+export default {
+    computed: {
+        ...mapWritableState(useModalStore, ["activeModal"]),
+        ...mapState(useAuthStore, ["isGuest"])
+    },
+    methods: {
+        ...mapActions(useModalStore, ["openModal"])
+    }
+}
 </script>
 
 <template>
@@ -13,11 +25,12 @@
                 </div>
                 <div class="footer__list">
                     <h3 class="footer__list__header">Explore</h3>
+                    <p class="footer__list__text" v-if="isGuest" @click="openModal('Log In')">Login</p>
+                    <p class="footer__list__text" v-if="isGuest" @click="openModal('Register')">Register</p>
                     <p class="footer__list__text">About</p>
                     <p class="footer__list__text">Partners</p>
                     <p class="footer__list__text">Job Opportunities</p>
                     <p class="footer__list__text">Advertise</p>
-                    <p class="footer__list__text">Membership</p>
                 </div>
             </div>
             <div class="footer__col">

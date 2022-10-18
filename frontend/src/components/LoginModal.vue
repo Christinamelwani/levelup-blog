@@ -1,6 +1,8 @@
 <script>
+import { mapWritableState, mapActions } from 'pinia'
+import { useModalStore } from '@/stores/Modal.js'
+import Auth from "@/services/Auth.js"
 import BaseModal from './BaseModal.vue';
-import Auth from "@/services/Auth.js";
 import customInput from "@/components/Input.vue"
 import customButton from '@/components/Btn.vue'
 
@@ -13,26 +15,29 @@ export default {
                 password: ""
             },
             status: "",
-            errorMessage: ""
+            error: ""
         };
     },
+    computed: {
+        ...mapWritableState(useModalStore, ["activeModal"]),
+    },
     methods: {
+        ...mapActions(useModalStore, ["openModal", "closeModal"]),
+
         async login() {
+            this.status = "Loading"
             try {
-                const accessToken = await Auth.login(this.credentials)
+                const accessToken = await Auth.login(this.credentials);
                 localStorage.setItem("access_token", accessToken);
-                this.status = "done";
-                this.$emit("logged-in");
-                this.$router.push({ name: "profile" });
+                this.$router.push({ name: "Profile" });
+                this.closeModal()
+                this.status = "Success";
             }
             catch (err) {
-                this.status = "error";
-                this.errorMessage = "Something went wrong!";
-                if (err.message === "Request failed with status code 422") {
-                    this.errorMessage = "Please enter a valid email and a password that's at least 8 characters long.";
-                }
-                if (err.message === "Request failed with status code 403") {
-                    this.errorMessage = "Username or password incorrect.";
+                console.log(err)
+                this.status = "Error";
+                if (err.response?.status === 403) {
+                    this.error = "Invalid Credentials"
                 }
             }
         },
@@ -52,7 +57,7 @@ export default {
             </form>
         </div>
         <div class="modal_footer">
-            <a class="modal_link">Don't have an account
+            <a class="modal_link" @click="openModal('Register')">Don't have an account
                 yet? Sign up</a>
         </div>
     </BaseModal>

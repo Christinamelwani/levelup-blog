@@ -21,7 +21,7 @@ export default {
   methods: {
     goToArticle() {
       this.$router.push({
-        name: 'article',
+        name: 'Article',
         params: { slug: this.article.slug }
       })
     }

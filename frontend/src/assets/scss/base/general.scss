@@ -16,3 +16,7 @@ body {
   border: solid #9671db55 2px;
   background-color: #7b45e05d;
 }
+
+.blank__slate {
+  @include reset;
+}

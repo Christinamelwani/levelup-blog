@@ -6,8 +6,10 @@ export default {
     return response.data
   },
   async register(userData) {
-    const response = await Http.post('/users', userData)
-    return response.data
+    const registerResponse = await Http.post('/users', userData)
+    const loginResponse = await Http.post('/authenticate', userData)
+    const token = loginResponse.data
+    return { ...registerResponse.data, token }
   },
   async me() {
     const response = await Http.get('/user')

@@ -1,40 +1,17 @@
 <script>
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-import LoginModal from '@/components/LoginModal.vue';
-import RegisterModal from '@/components/RegisterModal.vue';
+import ModalView from './components/ModalView.vue';
 
 export default {
-  components: { Header, Footer, LoginModal, RegisterModal },
-  data() {
-    return {
-      modalType: "",
-      loggedIn: false,
-    }
-  },
-  methods: {
-    collapseModal(type) {
-      this.modalType = type;
-    },
-    login() {
-      this.loggedIn = true
-      console.log(this.loggedIn)
-      this.collapseModal = false;
-    },
-    logout() {
-      this.loggedIn = false;
-      this.$router.push('/')
-    }
-  },
+  components: { Header, Footer, ModalView },
 }
 
 </script>
 
 <template>
-  <Header @logged-out="logout" @collapse-login="collapseModal('Log In')" @collapse-register="collapseModal('Register')"
-    :parentLoggedIn="loggedIn"> </Header>
-  <LoginModal @logged-in="login" v-if="modalType === 'Log In'" />
-  <RegisterModal @logged-in="login" v-if="modalType === 'Register'" />
+  <Header> </Header>
+  <ModalView />
   <RouterView />
   <Footer> </Footer>
 </template>

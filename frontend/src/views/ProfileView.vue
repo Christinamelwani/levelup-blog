@@ -1,18 +1,21 @@
 <script>
 import ArticleCard from '@/components/ArticleCard.vue'
-import Auth from "@/services/Auth.js"
+import { mapState } from 'pinia'
+import { useAuthStore } from '@/stores/Auth.js'
 import Article from "@/services/Article.js"
+
 export default {
     components: { ArticleCard },
     data() {
         return {
-            userData: {},
             articles: []
         };
     },
+    computed: {
+        ...mapState(useAuthStore, ["userData"]),
+    },
     async created() {
         try {
-            this.userData = await Auth.me()
             this.articles = await Article.bySlug(this.userData.slug)
         }
         catch (err) {

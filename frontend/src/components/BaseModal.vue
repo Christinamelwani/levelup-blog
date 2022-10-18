@@ -1,4 +1,7 @@
 <script>
+import { mapActions } from 'pinia'
+import { useModalStore } from '@/stores/Modal.js'
+
 export default {
     props: {
         title: {
@@ -7,9 +10,7 @@ export default {
         }
     },
     methods: {
-        closeModal() {
-            $emit('collapse-modal')
-        }
+        ...mapActions(useModalStore, ["closeModal"])
     },
 }
 </script>
