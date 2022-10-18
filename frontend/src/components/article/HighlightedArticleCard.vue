@@ -1,6 +1,6 @@
 <script>
-import CategoryCard from '@/components/CategoryCard.vue';
-import ArticleCardMixin from '../mixins/ArticleCardMixin';
+import CategoryCard from '@/components/article/CategoryCard.vue';
+import ArticleCardMixin from '@/mixins/ArticleCardMixin';
 export default {
     components: { CategoryCard },
     mixins: [ArticleCardMixin],

@@ -5,7 +5,7 @@
 <template>
     <div class="byline">
         <div class="byline__inner">
-            <img class="byline__img" src="../assets/images/Ellipse4.png" />
+            <img class="byline__img" src="@/assets/images/Ellipse4.png" />
             <div class="byline__wrapper">
                 <h3 class="byline__header">
                     By Jennifer Lawrence

@@ -1,5 +1,5 @@
 <script>
-import ArticleCard from '@/components/ArticleCard.vue'
+import ArticleCard from '@/components/article/ArticleCard.vue'
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
 import Article from "@/services/Article.js"

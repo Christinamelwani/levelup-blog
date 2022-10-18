@@ -2,9 +2,9 @@
 import { mapWritableState, mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
 import Auth from "@/services/Auth.js"
-import BaseModal from './BaseModal.vue';
-import customInput from "@/components/Input.vue"
-import customButton from '@/components/Btn.vue'
+import BaseModal from '@/components/general/BaseModal.vue'
+import customInput from "@/components/general/Input.vue"
+import customButton from '@/components/general/Btn.vue'
 
 export default {
     components: { BaseModal, customInput, customButton },

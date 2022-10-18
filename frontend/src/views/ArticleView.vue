@@ -1,9 +1,9 @@
 <script>
-import Slider from "@/components/Slider.vue";
-import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue";
-import Byline from "@/components/Byline.vue";
+import Slider from "@/components/article/Slider.vue";
+import HighlightedArticleCard from "@/components/article/HighlightedArticleCard.vue";
+import Byline from "@/components/general/Byline.vue";
 import Article from "@/services/Article";
-import ArticleCardMixin from "../mixins/ArticleCardMixin";
+import ArticleCardMixin from "@/mixins/ArticleCardMixin";
 
 export default {
     components: { Slider, HighlightedArticleCard, Byline },

@@ -1,8 +1,8 @@
 <script>
 import { mapState } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
-import LoginModal from './LoginModal.vue';
-import RegisterModal from './RegisterModal.vue';
+import LoginModal from '@/components/auth/LoginModal.vue';
+import RegisterModal from '@/components/auth/RegisterModal.vue';
 
 export default {
     components: { LoginModal, RegisterModal },

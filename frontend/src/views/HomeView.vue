@@ -1,9 +1,10 @@
 <script >
-import Slider from '@/components/Slider.vue';
-import CategorySelector from '@/components/CategorySelector.vue';
-import ArticleCard from '@/components/ArticleCard.vue';
-import HighlightedArticleCard from "@/components/HighlightedArticleCard.vue"
-import Article from "@/services/Article.js"
+import Slider from "@/components/article/Slider.vue";
+import HighlightedArticleCard from "@/components/article/HighlightedArticleCard.vue";
+import Article from "@/services/Article";
+import CategorySelector from '@/components/article/CategorySelector.vue';
+import ArticleCard from "@/components/article/ArticleCard.vue";
+
 export default {
   components: {
     Slider,

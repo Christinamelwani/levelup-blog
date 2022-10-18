@@ -1,7 +1,7 @@
 <script>
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
-import ModalView from './components/ModalView.vue';
+import Header from '@/components/general/Header.vue';
+import Footer from '@/components/general/Footer.vue';
+import ModalView from '@/components/general/ModalView.vue';
 
 export default {
   components: { Header, Footer, ModalView },
