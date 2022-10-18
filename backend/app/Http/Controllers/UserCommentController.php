@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\StoreUserCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
+use App\Models\User;
 
-class CommentController extends Controller
+class UserCommentController extends Controller
 {
     public function __construct()
     {
@@ -18,20 +20,20 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return Comment::with('author')->paginate(5);
+        return Comment::with('author')->where('user_id', $user->id)->paginate(5);
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(StoreUserCommentRequest $request, User $user)
     {
         $comment = new Comment($request->validated());
+        $comment['user_id'] = $user->id;
         $comment->save();
 
         return $comment;
@@ -57,7 +59,7 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        return $comment->update($request->validated());
+       // We don't need this yet?
     }
 
     /**

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleCommentRequest;
+use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Article;
 use App\Models\Comment;
 
-class CommentController extends Controller
+class ArticleCommentController extends Controller
 {
     public function __construct()
     {
@@ -18,20 +21,21 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Article $article)
     {
-        return Comment::with('author')->paginate(5);
+        return Comment::with('article')->where('article_id', $article->id)->paginate(5);
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(StoreArticleCommentRequest $request, Article $article)
     {
         $comment = new Comment($request->validated());
+        $comment['article_id'] = $article->id;
+        $comment['user_id'] = $request->user()->id;
         $comment->save();
 
         return $comment;
@@ -43,9 +47,9 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Article $article)
     {
-        return $comment;
+        return $article;
     }
 
     /**
@@ -55,9 +59,9 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateArticleRequest $request, Article $comment)
     {
-        return $comment->update($request->validated());
+       // We don't need this yet?
     }
 
     /**
@@ -66,8 +70,8 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Article $article)
     {
-        return $comment->delete();
+        return $article->delete();
     }
 }

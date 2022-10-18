@@ -13,7 +13,10 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if(auth()->user()->name == 'admin'){
+            return true;
+        }
+        return request()->user_id == auth()->user()->id ;
     }
 
     /**
