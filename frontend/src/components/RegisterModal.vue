@@ -1,6 +1,7 @@
 <script>
 import { mapWritableState, mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
+import { useErrorStore } from '@/stores/Errors.js'
 import BaseModal from './BaseModal.vue';
 import Auth from "@/services/Auth.js"
 import customInput from "@/components/Input.vue"
@@ -22,11 +23,32 @@ export default {
     },
     computed: {
         ...mapWritableState(useModalStore, ["activeModal"]),
+        userDataComputed() {
+            return Object.assign({}, this.userData);
+        },
+    },
+    watch: {
+        userDataComputed: {
+            handler(newValue, oldValue) {
+                if (!oldValue) {
+                    return;
+                }
+
+                Object.keys(newValue).forEach(key => {
+                    if (newValue[key] !== oldValue[key]) {
+                        this.deleteError(key)
+                    }
+                })
+            },
+            deep: true,
+        }
     },
     methods: {
         ...mapActions(useModalStore, ["openModal", "closeModal"]),
+        ...mapActions(useErrorStore, ["deleteError", "clearErrors", "setErrors"]),
 
         async register() {
+            this.clearErrors()
             this.status = "Loading"
             try {
                 const response = await Auth.register(this.userData);
@@ -37,7 +59,9 @@ export default {
             }
             catch (err) {
                 this.status = "Error";
-                this.errorMessage = "Something went wrong!";
+                if (err.response?.status == 422) {
+                    this.setErrors(err.response.data.errors)
+                }
             }
         }
     },
@@ -49,13 +73,13 @@ export default {
         <div class="modal_content" @submit.prevent="register">
             <form class="modal_form">
                 <customInput v-model="userData.name" name="name" label="Name" type="text" placeholder="Example Smith"
-                    :required="true" />
-                <customInput v-model="userData.slug" name="Nickname" label="Nickname" type="text" placeholder="Exys"
-                    :required="true" />
+                    :required="false" />
+                <customInput v-model="userData.slug" name="slug" label="Nickname" type="text" placeholder="Exys"
+                    :required="false" />
                 <customInput v-model="userData.email" name="email" label="Email" type="email"
-                    placeholder="example@mail.com" :required="true" />
+                    placeholder="example@mail.com" :required="false" />
                 <customInput v-model="userData.password" name="password" label="Password" type="password"
-                    placeholder="We8@0123ndj" :required="true" />
+                    placeholder="We8@0123ndj" :required="false" />
                 <customButton type="submit" :isLoading="status === 'Loading'">Register</customButton>
             </form>
         </div>

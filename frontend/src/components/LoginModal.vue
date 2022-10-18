@@ -34,10 +34,13 @@ export default {
                 this.status = "Success";
             }
             catch (err) {
-                console.log(err)
                 this.status = "Error";
+                this.error = "An unknown error occured!"
+                if (err.response?.status === 422) {
+                    this.error = "Password needs to be at least 8 letters long!"
+                }
                 if (err.response?.status === 403) {
-                    this.error = "Invalid Credentials"
+                    this.error = "Invalid username or password!"
                 }
             }
         },
@@ -47,6 +50,9 @@ export default {
 
 <template>
     <BaseModal title="Log In">
+        <div v-if="error" class="modal_message modal_message-error">
+            {{error}}
+        </div>
         <div class="modal_content">
             <form class="modal_form" @submit.prevent="login">
                 <customInput v-model="credentials.email" name="email" label="Email" type="email"

@@ -1,4 +1,7 @@
 <script>
+import { mapState } from 'pinia'
+import { useErrorStore } from '@/stores/Errors.js'
+
 export default {
     props: {
         modelValue: {
@@ -27,6 +30,7 @@ export default {
         },
     },
     computed: {
+        ...mapState(useErrorStore, ["errors"]),
         inputValue: {
             get() {
                 return this.modelValue
@@ -41,8 +45,10 @@ export default {
 <template>
     <div class="modal__inputWrapper">
         <label class="modal__inputLabel" :for="name">{{ label }}</label>
-        <input class="modal__input" v-model="inputValue" :type="type" :id="name" :placeholder="placeholder" :name="name"
-            :required="required">
-        <p class="modal__inputError" v-if="error">{{ error }}</p>
+        <div class="modal__inputInner">
+            <input class="modal__input" v-model="inputValue" :type="type" :id="name" :placeholder="placeholder"
+                :name="name" :class="{ 'modal__input--hasError': errors[name] }" :required="required">
+            <p class="modal_message modal_message-error" v-if="errors[name]">{{ errors[name][0] }}</p>
+        </div>
     </div>
 </template>
