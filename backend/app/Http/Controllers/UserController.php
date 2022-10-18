@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(User::class, options: ['except' => ['index', 'show']]);
-    // }
-
     /**
      * Display a listing of the resource.
      *
