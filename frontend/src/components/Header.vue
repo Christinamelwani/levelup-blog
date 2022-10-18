@@ -32,7 +32,7 @@ export default {
                     <li class="header__nav-item">
                         <a class="header__nav-item-link">Articles</a>
                     </li>
-                    <li class="blank_slate">
+                    <li>
                         <ul class="header__nav-group" v-if="isGuest">
                             <li class="header__nav-item" @click="openModal('Log In')">
                                 <a class="header__nav-item-link"
@@ -44,6 +44,9 @@ export default {
                             </li>
                         </ul>
                         <ul class="header__nav-group" v-if="isLoggedIn">
+                            <li class="header__nav-item">
+                                <RouterLink class="header__nav-item-link" :to="{name: 'Profile'}">Profile</RouterLink>
+                            </li>
                             <li class="header__nav-item" @click="logout">
                                 <a class="header__nav-item-link">Logout</a>
                             </li>
