@@ -28,7 +28,7 @@ export default {
 </script>
 <template>
   <main>
-    <Slider class="slider-home" />
+    <Slider class="slider-home" :article="articles[0]" />
     <section class="blogCards">
       <div class="blogCards__header">
         Popular topics

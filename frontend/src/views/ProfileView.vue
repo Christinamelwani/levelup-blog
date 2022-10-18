@@ -16,7 +16,7 @@ export default {
     },
     async created() {
         try {
-            this.articles = await Article.bySlug(this.userData.slug)
+            this.articles = await Article.byUserSlug(this.userData.slug)
         }
         catch (err) {
             console.log(err);

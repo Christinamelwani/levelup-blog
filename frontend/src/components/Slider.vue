@@ -1,6 +1,16 @@
-<script setup>
+<script>
 import CategoryCard from './CategoryCard.vue';
-
+import ArticleCardMixin from "../mixins/ArticleCardMixin";
+export default {
+    components: { CategoryCard },
+    mixins: [ArticleCardMixin],
+    props: {
+        article: {
+            type: Object,
+            required: true
+        }
+    },
+}
 </script>
 
 <template>
@@ -8,20 +18,18 @@ import CategoryCard from './CategoryCard.vue';
         <div class="slider__inner">
             <CategoryCard :class="`categoryCard-${$route.name}`" />
             <div class="slider__header">
-                Richird Norton photorealistic rendering as real photos
+                {{article.title}}
             </div>
             <div class="slider__text">
                 <div v-if="$route.name === 'home'" class=" slider__subtext">
-                    08.08.2021
+                    {{createdDate}}
                 </div>
                 <svg v-if="$route.name === 'home'" class=" slider__line" width="30" height="1" viewBox="0 0 30 1"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="1.7418e-10" y1="0.5" x2="30" y2="0.5" stroke="#E5E5E5" />
                 </svg>
                 <div class="slider__subtext">
-                    Progressively incentivize cooperative systems through technically sound functionalities. The
-                    credibly
-                    productivate seamless data.
+                    {{truncatedContent}}
                 </div>
             </div>
             <div v-if="$route.name === 'home'" class="slider__pagination">

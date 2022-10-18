@@ -29,6 +29,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
+  window.scrollTo(0, 0)
   const authStore = useAuthStore()
   const modalStore = useModalStore()
 

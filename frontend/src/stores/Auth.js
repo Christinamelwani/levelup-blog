@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useRouter } from 'vue-router'
+import router from '@/router'
 
 export const useAuthStore = defineStore('auth', {
   state: () => {
@@ -20,10 +20,9 @@ export const useAuthStore = defineStore('auth', {
       this.userData = user
     },
     logout() {
-      const router = useRouter()
+      router.replace({ name: 'Home' })
       this.userData = {}
       localStorage.removeItem('access_token')
-      router.push({ name: 'Home' })
     }
   }
 })

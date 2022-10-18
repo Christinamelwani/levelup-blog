@@ -27,8 +27,15 @@
   display: flex;
   flex-shrink: 0;
   align-items: flex-start;
-  gap: 8px;
   position: sticky;
+  height: fit-content;
+}
+
+.aside__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
   height: fit-content;
 }
 
