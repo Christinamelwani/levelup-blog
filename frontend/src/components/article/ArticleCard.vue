@@ -1,6 +1,7 @@
 <script>
 import Byline from '@/components/general/Byline.vue';
 import ArticleCardMixin from '@/mixins/ArticleCardMixin';
+
 export default {
     components: { Byline },
     mixins: [ArticleCardMixin],

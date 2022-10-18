@@ -6,7 +6,6 @@ import ModalView from '@/components/general/ModalView.vue';
 export default {
   components: { Header, Footer, ModalView },
 }
-
 </script>
 
 <template>

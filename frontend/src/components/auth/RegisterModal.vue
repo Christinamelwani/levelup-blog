@@ -1,11 +1,11 @@
 <script>
-import { mapWritableState, mapActions } from 'pinia'
+import { mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
 import { useErrorStore } from '@/stores/Errors.js'
+import Auth from "@/services/Auth.js"
 import BaseModal from '@/components/general/BaseModal.vue'
 import customInput from "@/components/general/Input.vue"
 import customButton from '@/components/general/Btn.vue'
-import Auth from "@/services/Auth.js"
 
 export default {
     components: { BaseModal, customInput, customButton },
@@ -22,7 +22,6 @@ export default {
         };
     },
     computed: {
-        ...mapWritableState(useModalStore, ["activeModal"]),
         userDataComputed() {
             return Object.assign({}, this.userData);
         },
@@ -44,8 +43,8 @@ export default {
         }
     },
     methods: {
+        ...mapActions(useErrorStore, ["setErrors", "deleteError", "clearErrors"]),
         ...mapActions(useModalStore, ["openModal", "closeModal"]),
-        ...mapActions(useErrorStore, ["deleteError", "clearErrors", "setErrors"]),
 
         async register() {
             this.clearErrors()

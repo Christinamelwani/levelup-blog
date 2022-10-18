@@ -1,5 +1,5 @@
 <script>
-import { mapWritableState, mapActions } from 'pinia'
+import { mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
 import Auth from "@/services/Auth.js"
 import BaseModal from '@/components/general/BaseModal.vue'
@@ -17,9 +17,6 @@ export default {
             status: "",
             error: ""
         };
-    },
-    computed: {
-        ...mapWritableState(useModalStore, ["activeModal"]),
     },
     methods: {
         ...mapActions(useModalStore, ["openModal", "closeModal"]),

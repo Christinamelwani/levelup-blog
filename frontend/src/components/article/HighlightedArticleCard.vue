@@ -1,6 +1,7 @@
 <script>
 import CategoryCard from '@/components/article/CategoryCard.vue';
 import ArticleCardMixin from '@/mixins/ArticleCardMixin';
+
 export default {
     components: { CategoryCard },
     mixins: [ArticleCardMixin],
@@ -17,7 +18,7 @@ export default {
     <div @click="goToArticle" class="highlightedArticle">
         <img class="highlightedArticle__img" src="@/assets/images/BlogImage2.png" />
         <div class="highlightedArticle__wrapper">
-            <CategoryCard class="categoryCard-highlightedArticle" />
+            <CategoryCard class="categoryCard--highlighted" />
             <div class="highlightedArticle__inner">
                 <p class="highlightedArticle__date">
                     {{dateCreated}}

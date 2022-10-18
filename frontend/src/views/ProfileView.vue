@@ -13,6 +13,9 @@ export default {
     },
     computed: {
         ...mapState(useAuthStore, ["userData"]),
+        noArticlesForThisUser() {
+            return this.articles.length === 0
+        }
     },
     async created() {
         try {
@@ -38,10 +41,10 @@ export default {
     </div>
     <div class="profile_articles">
         <h1>Your articles:</h1>
-        <div v-if="articles.length === 0">
+        <div v-if="noArticlesForThisUser">
             <h2>No articles yet!</h2>
         </div>
-        <div v-else class="blogCards__content">
+        <div v-if="articles.length" class="blogCards__content">
             <ArticleCard v-for="article in articles" :article="article" />
         </div>
     </div>

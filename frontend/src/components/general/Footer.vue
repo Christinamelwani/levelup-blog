@@ -5,7 +5,6 @@ import { useAuthStore } from '@/stores/Auth.js'
 
 export default {
     computed: {
-        ...mapWritableState(useModalStore, ["activeModal"]),
         ...mapState(useAuthStore, ["isGuest"])
     },
     methods: {

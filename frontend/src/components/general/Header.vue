@@ -1,11 +1,11 @@
 <script>
-import { mapWritableState, mapState, mapActions } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
 import { useAuthStore } from '@/stores/Auth.js'
 
 export default {
     computed: {
-        ...mapWritableState(useModalStore, ["activeModal"]),
+        ...mapState(useModalStore, ["activeModal"]),
         ...mapState(useAuthStore, ["isLoggedIn", "isGuest"])
     },
     methods: {
