@@ -1,9 +1,11 @@
 <script>
 import BaseModal from './BaseModal.vue';
-import Auth from "@/services/Auth";
+import Auth from "@/services/Auth.js";
+import customInput from "@/components/Input.vue"
+import customButton from '@/components/Btn.vue'
 
 export default {
-    components: { BaseModal },
+    components: { BaseModal, customInput, customButton },
     data() {
         return {
             credentials: {
@@ -35,21 +37,21 @@ export default {
             }
         },
     },
+    created() {
+        this.status = "Loading"
+    }
 }
 </script>
 
 <template>
     <BaseModal title="Log In">
-        <div class="modal_message" v-if="status === 'done' || status === 'error'"
-            :class="{'modal_message-error': status === 'error', 'modal_message-success': status === 'done'}">
-            <p v-if="status === 'error'"> {{errorMessage}}</p>
-            <p v-if="status === 'done'">Successfully logged in!</p>
-        </div>
         <div class="modal_content">
-            <form class="modal_form">
-                <input v-model='credentials.email' placeholder="E-mail" type="email" class="modal_input" />
-                <input v-model='credentials.password' type="password" placeholder="Password" class="modal_input" />
-                <input @click.prevent="login" type="submit" class="modal_submit" value="Login" />
+            <form class="modal_form" @submit.prevent="login">
+                <customInput v-model="credentials.email" name="email" label="Email" type="email"
+                    placeholder="example@mail.com" :required="true" />
+                <customInput v-model="credentials.password" name="password" label="Password" type="password"
+                    placeholder="Cartoon-Duck-14-Coffee-Glvs" :required="true" />
+                <customButton type="submit" :isLoading="status === 'Loading'">Login</customButton>
             </form>
         </div>
         <div class="modal_footer">

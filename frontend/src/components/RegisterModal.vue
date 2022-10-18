@@ -1,8 +1,11 @@
 <script>
 import BaseModal from './BaseModal.vue';
 import Auth from "@/services/Auth.js"
+import customInput from "@/components/Input.vue"
+import customButton from '@/components/Btn.vue'
+
 export default {
-    components: { BaseModal },
+    components: { BaseModal, customInput, customButton },
     data() {
         return {
             userData: {
@@ -34,18 +37,17 @@ export default {
 
 <template>
     <BaseModal title="Register">
-        <div v-if="status === 'done' || status === 'error'" class="modal_message"
-            :class="{'modal_message-error': status === 'error', 'modal_message-success': status === 'done'}">
-            <p v-if="status === 'error'"> {{errorMessage}}</p>
-            <p v-if="status === 'done'">Successfully logged in!</p>
-        </div>
-        <div class="modal_content">
+        <div class="modal_content" @submit.prevent="register">
             <form class="modal_form">
-                <input v-model='userData.name' placeholder="Name" type="text" class="modal_input" />
-                <input v-model='userData.slug' type="text" placeholder="Nickname" class="modal_input" />
-                <input v-model='userData.email' placeholder="E-mail" type="email" class="modal_input" />
-                <input v-model='userData.password' type="password" placeholder="Password" class="modal_input" />
-                <input @click.prevent="register" type="submit" class="modal_submit" value="Register" />
+                <customInput v-model="userData.name" name="name" label="Name" type="text" placeholder="Example Smith"
+                    :required="true" />
+                <customInput v-model="userData.slug" name="Nickname" label="Nickname" type="text" placeholder="Exys"
+                    :required="true" />
+                <customInput v-model="userData.email" name="email" label="Email" type="email"
+                    placeholder="example@mail.com" :required="true" />
+                <customInput v-model="userData.password" name="password" label="Password" type="password"
+                    placeholder="We8@0123ndj" :required="true" />
+                <customButton type="submit" :isLoading="status === 'Loading'">Register</customButton>
             </form>
         </div>
         <div class="modal_footer">

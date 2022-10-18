@@ -2,3 +2,17 @@ body {
   background-color: #e5e5e5;
   overflow-x: hidden;
 }
+
+.btn {
+  padding: 1rem 0rem;
+  border-radius: 1rem;
+  border: solid #9671db 2px;
+  cursor: pointer;
+  color: white;
+  background-color: #7c45e0;
+}
+
+.btn--loading {
+  border: solid #9671db55 2px;
+  background-color: #7b45e05d;
+}

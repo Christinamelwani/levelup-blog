@@ -73,14 +73,26 @@
 .modal_form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .modal_icon {
   cursor: pointer;
 }
+.modal__inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-.modal_input {
+.modal__inputLabel {
+  @include reset;
+  font-weight: bolder;
+  font-size: 1em;
+  font-family: Roboto;
+}
+
+.modal__input {
   border-radius: 1rem;
   border: none;
   color: #493e5a;
@@ -116,13 +128,4 @@
   @include for-phone-only {
     padding: 1rem;
   }
-}
-
-.modal_submit {
-  padding: 1rem 0rem;
-  border-radius: 1rem;
-  border: solid #9671db 2px;
-  cursor: pointer;
-  color: white;
-  background-color: #7c45e0;
 }
