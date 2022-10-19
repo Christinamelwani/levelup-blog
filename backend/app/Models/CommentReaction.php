@@ -22,5 +22,7 @@ class CommentReaction extends Model
         return $this->belongsTo(Reaction::class);
     }
 
+    protected $fillable = ['user_id', 'comment_id', 'reaction_id'];
+
     use HasFactory;
 }

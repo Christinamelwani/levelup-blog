@@ -22,5 +22,7 @@ class ArticleReaction extends Model
         return $this->belongsTo(Reaction::class);
     }
 
+    protected $fillable = ['user_id', 'article_id', 'reaction_id'];
+
     use HasFactory;
 }
