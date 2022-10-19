@@ -1,55 +1,55 @@
 .highlightedArticle {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 
 .highlightedArticle__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .highlightedArticle__wrapper {
-    position: absolute;
-    top:0;
-    padding: 0 1rem;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    @include for-phone-only{
-        padding: 1rem;
-    }
+  position: absolute;
+  top: 0;
+  padding: 0 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  @include for-phone-only {
+    padding: 1rem;
+  }
 }
 
 .highlightedArticle__inner {
-    background: #0000000c;
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 15%;
-    padding: 2rem 1rem;
-    flex-direction: column;
+  background: #0000000c;
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 15%;
+  padding: 2rem 1rem;
+  flex-direction: column;
 }
 
 .highlightedArticle__title {
-    @include reset;
-    font-family: 'Lora';
-    font-weight: 700;
-    font-size: 1.3em;
+  @include reset;
+  font-family: 'Lora';
+  font-weight: 700;
+  font-size: 1.3em;
 }
 
 .highlightedArticle__date {
-    @include reset;
-    font-family: 'Lora';
-    color: #E5E5E5;
-    font-size: 0.8em;
+  @include reset;
+  font-family: 'Lora';
+  color: #e5e5e5;
+  font-size: 0.8em;
 }
 
 .highlightedArticle__text {
-    @include reset;
-    color: #E5E5E5;
-    font-size: 0.8em;
-    font-family: 'Lora';
+  @include reset;
+  color: #e5e5e5;
+  font-size: 0.8em;
+  font-family: 'Lora';
 }

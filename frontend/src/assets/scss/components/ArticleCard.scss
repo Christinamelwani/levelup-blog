@@ -1,40 +1,46 @@
 .articleCard {
-    border-radius: 5px;
-    min-width: 0px;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    justify-content: space-between;
-    font-family: Lora;
-    cursor: pointer;
-    @include for-phone-only{
-        padding: 0;
-        margin: auto;
-    }
+  border-radius: 5px;
+  min-width: 0px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  justify-content: start;
+  font-family: Lora;
+  cursor: pointer;
+  @include for-phone-only {
+    padding: 0;
+    margin: auto;
+  }
 }
 
 .articleCard__img {
-    height: 100%;
+  width: 100%;
 }
 
 .articleCard__date {
-    font-size: 0.9em;
-    color: #6C757D;
+  font-size: 0.9em;
+  color: #6c757d;
 }
 
 .articleCard__wrapper {
-    padding: 20px 20px;
+  padding: 20px 20px 5px;
 }
 
-
 .articleCard__text {
-    @include reset();
-    font-family: Lora;
-    font-size: 0.9em;
-    color: #6C757D;
+  @include reset();
+  font-family: Lora;
+  font-size: 0.9em;
+  color: #6c757d;
 }
 
 .articleCard__header {
-    font-size: 1.2em;
+  font-size: 1.2em;
+}
+
+.articleCard__byline {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }

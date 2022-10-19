@@ -1,19 +1,42 @@
-<script setup>
-import Slider from '../components/Slider.vue';
-import CategorySelector from '../components/CategorySelector.vue';
-import ArticleCard from '../components/ArticleCard.vue';
-import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
+<script >
+import Slider from "@/components/article/Slider.vue";
+import HighlightedArticleCard from "@/components/article/HighlightedArticleCard.vue";
+import Article from "@/services/Article";
+import CategorySelector from '@/components/article/CategorySelector.vue';
+import ArticleCard from "@/components/article/ArticleCard.vue";
+
+export default {
+  components: {
+    Slider,
+    CategorySelector,
+    ArticleCard,
+    HighlightedArticleCard
+  },
+  data() {
+    return {
+      articles: []
+    };
+  },
+  async created() {
+    try {
+      this.articles = await Article.all();
+    }
+    catch (err) {
+      console.log(err);
+    }
+  },
+}
 </script>
 <template>
   <main>
-    <Slider class="slider-home" />
-    <section class=" blogCards">
+    <Slider v-if="articles" class="slider-home" :article="articles[0]" />
+    <section class="blogCards">
       <div class="blogCards__header">
         Popular topics
       </div>
       <CategorySelector />
       <div class="blogCards__content">
-        <ArticleCard v-for="index in 8" @click="$router.push(`/article/${index}`)" />
+        <ArticleCard v-for="article in articles.slice(0,8)" :key="article.id" :article="article" />
       </div>
     </section>
     <section class="editorsPick">
@@ -21,7 +44,7 @@ import HighlightedArticleCard from "../components/HighlightedArticleCard.vue"
         Editor's Pick
       </h1>
       <div class="editorsPick__content">
-        <HighlightedArticleCard v-for="index in 3" />
+        <HighlightedArticleCard v-for="article in articles.slice(0,3)" :key="article.id" :article="article" />
       </div>
     </section>
   </main>
