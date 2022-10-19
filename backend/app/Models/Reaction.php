@@ -22,5 +22,7 @@ class Reaction extends Model
         return $this->belongsTo(Comment::class);
     }
 
+    protected $fillable = ['type', 'img_url'];
+
     use HasFactory;
 }

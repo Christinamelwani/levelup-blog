@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->text('type')->unique;
+            $table->text('type')->unique();
             $table->text('img_url');
             $table->timestamps();
         });

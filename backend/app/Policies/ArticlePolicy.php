@@ -40,7 +40,7 @@ class ArticlePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Article $article)
+    public function create(User $user)
     {
         return true;
     }

@@ -72,6 +72,10 @@ Route::post('/authenticate', function (Request $request) {
     return $user->createToken('auth_token')->plainTextToken;
 });
 
+Route::post('/login', function (Request $request) {
+    return 'You must be logged in to access this route.';
+});
+
 // Add a category to an article
 Route::post('/articles/{article}/categories', function (Article $article, StoreArticleCategoryRequest $request) {
     $article_category = new ArticleCategory([

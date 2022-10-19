@@ -32,7 +32,10 @@ class ReactionController extends Controller
      */
     public function store(StoreReactionRequest $request)
     {
-        $request->save();
+        $reaction = new Reaction([ 'type' => $request->type,
+        'img_url' => $request->img_url]);
+        $reaction->save();
+        return $reaction;
     }
 
     /**
