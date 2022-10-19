@@ -1,29 +1,30 @@
 <script>
-import axios from 'axios'
-import ArticleCard from '../components/ArticleCard.vue'
+import ArticleCard from '@/components/article/ArticleCard.vue'
+import { mapState } from 'pinia'
+import { useAuthStore } from '@/stores/Auth.js'
+import Article from "@/services/Article.js"
+
 export default {
+    components: { ArticleCard },
     data() {
         return {
-            userData: {},
             articles: []
         };
     },
+    computed: {
+        ...mapState(useAuthStore, ["userData"]),
+        noArticlesForThisUser() {
+            return this.articles.length === 0
+        }
+    },
     async created() {
         try {
-            const token = localStorage.getItem("access_token");
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            const response = await axios.get("http://localhost:8000/api/user", config);
-            this.userData = response.data;
-            const articlesResponse = await axios.get(`http://localhost:8000/api/users/${this.userData.slug}/articles`, config);
-            this.articles = articlesResponse.data;
+            this.articles = await Article.byUserSlug(this.userData.slug)
         }
         catch (err) {
             console.log(err);
         }
     },
-    components: { ArticleCard }
 }
 </script>
 <template>
@@ -40,10 +41,10 @@ export default {
     </div>
     <div class="profile_articles">
         <h1>Your articles:</h1>
-        <div v-if="articles.length === 0">
+        <div v-if="noArticlesForThisUser">
             <h2>No articles yet!</h2>
         </div>
-        <div v-else class="blogCards__content">
+        <div v-if="articles.length" class="blogCards__content">
             <ArticleCard v-for="article in articles" :article="article" />
         </div>
     </div>

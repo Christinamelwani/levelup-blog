@@ -1,37 +1,16 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
-import Modal from './components/Modal.vue';
-export default {
-  data() {
-    return {
-      collapseModal: false,
-      loggedIn: false,
-    }
-  },
-  methods: {
-    toggleCollapseModal() {
-      this.collapseModal = !this.collapseModal
-    },
-    login() {
-      this.loggedIn = true
-      console.log(this.loggedIn)
-      this.collapseModal = false;
-    },
-    logout() {
-      this.loggedIn = false;
-      this.$router.push('/')
-    }
-  },
-  components: { Header, Footer, Modal }
-}
+import Header from '@/components/general/Header.vue';
+import Footer from '@/components/general/Footer.vue';
+import ModalView from '@/components/general/ModalView.vue';
 
+export default {
+  components: { Header, Footer, ModalView },
+}
 </script>
 
 <template>
-  <Header @logged-out="logout" @collapse-modal="toggleCollapseModal" :parentLoggedIn="loggedIn"> </Header>
-  <Modal @logged-in="login" @collapse-modal="toggleCollapseModal" v-if="collapseModal" />
+  <Header> </Header>
+  <ModalView />
   <RouterView />
   <Footer> </Footer>
 </template>

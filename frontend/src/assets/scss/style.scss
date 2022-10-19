@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap');
-@import "normalize.css";
-@import "sass-utils/mixins";
-
+@import 'normalize.css';
+@import 'sass-utils/mixins';
 
 @import 'base/general';
 
@@ -19,4 +18,3 @@
 @import 'components/CategorySelector.scss';
 @import 'components/HighlightedArticleCard.scss';
 @import 'components/Modal.scss';
-

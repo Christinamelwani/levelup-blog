@@ -42,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 });
 
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
-Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
+Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
 
 Route::post('/users', function (StoreUserRequest $request) {
     $validated = $request->validate([
