@@ -22,7 +22,7 @@ class ArticleController extends Controller
     public function index()
     {
         // N+1 problem
-        $articles = Article::with(['user', 'comments', 'comments.author'])->paginate(5);
+        $articles = Article::with(['user', 'comments', 'comments.author'])->paginate(8);
 
         return $articles;
     }
