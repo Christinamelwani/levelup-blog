@@ -37,4 +37,15 @@ class Article extends Model
     {
         return $this->belongsToMany(Category::class, 'article_categories');
     }
+
+    public function reactions()
+    {
+        return $this->belongsToMany(Reaction::class, 'article_reactions');
+    }
+
+
+    public function articleReactions()
+    {
+        return $this->hasMany(ArticleReaction::class);
+    }
 }

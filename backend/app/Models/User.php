@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function commentReactions()
+    {
+        return $this->belongsToMany(Reaction::class, 'comment_reactions');
+    }
+
+    public function articleReactions()
+    {
+        return $this->belongsToMany(Reaction::class, 'article_reactions');
+    }
 }

@@ -23,7 +23,7 @@ class ArticleCommentController extends Controller
      */
     public function index(Article $article)
     {
-        return Comment::with('article')->where('article_id', $article->id)->paginate(5);
+        return Comment::with('reactions')->where('article_id', $article->id)->paginate(5);
     }
     /**
      * Store a newly created resource in storage.

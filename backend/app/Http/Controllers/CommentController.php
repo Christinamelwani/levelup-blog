@@ -20,7 +20,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Comment::with('author')->paginate(5);
+        return Comment::with('author', 'commentReactions.reaction','commentReactions.user')->paginate(5);
     }
 
     /**
