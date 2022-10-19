@@ -1,16 +1,19 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
 use App\Http\Controllers\UserController;
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\StoreArticleCategoryRequest;
+use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules\Password;
 
@@ -34,6 +37,8 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 
     Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
+    Route::apiResource('categories', CategoryController::class)->except($unauthenticatedRoutes);
+
     Route::resource('users.articles', UserArticleController::class)->shallow()->except($unauthenticatedRoutes);;
     Route::resource('users.comments', UserCommentController::class)->shallow()->except($unauthenticatedRoutes);;
     Route::resource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);;
@@ -41,7 +46,9 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 
 Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
+Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
 Route::apiResource('users', UserController::class);
+
 Route::resource('users.articles', UserArticleController::class)->shallow()->only($unauthenticatedRoutes);;
 Route::resource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);;
 Route::resource('articles.comments', ArticleCommentController::class)->shallow()->only($unauthenticatedRoutes);;
@@ -60,3 +67,11 @@ Route::post('/authenticate', function (Request $request) {
 
     return $user->createToken('auth_token')->plainTextToken;
 });
+
+// Add a category to an article
+Route::post('/articles/{article}/categories', function (Article $article, StoreArticleCategoryRequest $request) {
+    $article_category = new ArticleCategory([
+        'category_id' => $request->category_id,
+        'article_id' => $article->id]);
+    return  $article_category;
+})->middleware('auth:sanctum');
