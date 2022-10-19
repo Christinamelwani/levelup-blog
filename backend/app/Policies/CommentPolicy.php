@@ -53,6 +53,9 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
+        if($user->name === 'admin'){
+            return true;
+        }
         return $user->id === $comment->author->id;
     }
 
@@ -65,6 +68,9 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
+        if($user->name === 'admin'){
+            return true;
+        }
         return $user->id === $comment->author->id;
     }
 
@@ -77,6 +83,9 @@ class CommentPolicy
      */
     public function restore(User $user, Comment $comment)
     {
+        if($user->name === 'admin'){
+            return true;
+        }
         return $user->id === $comment->author->id;
     }
 
@@ -89,6 +98,9 @@ class CommentPolicy
      */
     public function forceDelete(User $user, Comment $comment)
     {
+        if($user->name === 'admin'){
+            return true;
+        }
         return $user->id === $comment->author->id;
     }
 }
