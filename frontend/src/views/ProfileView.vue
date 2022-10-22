@@ -2,51 +2,45 @@
 import ArticleCard from '@/components/article/ArticleCard.vue'
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
-import Article from "@/services/Article.js"
+import Article from '@/services/Article.js'
 
 export default {
-    components: { ArticleCard },
-    data() {
-        return {
-            articles: []
-        };
-    },
-    computed: {
-        ...mapState(useAuthStore, ["userData"]),
-        noArticlesForThisUser() {
-            return this.articles.length === 0
-        }
-    },
-    async created() {
-        try {
-            this.articles = await Article.byUserSlug(this.userData.slug)
-        }
-        catch (err) {
-            console.log(err);
-        }
-    },
+  components: { ArticleCard },
+  data() {
+    return {
+      articles: []
+    }
+  },
+  computed: {
+    ...mapState(useAuthStore, ['userData']),
+    noArticlesForThisUser() {
+      return this.articles.length === 0
+    }
+  },
+  async created() {
+    try {
+      this.articles = await Article.byUserSlug(this.userData.slug)
+    } catch (err) {
+      handleError(err)
+    }
+  }
 }
 </script>
 <template>
-    <div class="profile_header">
-        <h1 class="profile_name">
-            Hello {{userData.name}}!
-        </h1>
-        <h3 class="profile_nickname">
-            AKA {{userData.slug}}
-        </h3>
-        <p class="profile_email">
-            {{userData.email}}
-        </p>
+  <div class="profile_header">
+    <h1 class="profile_name">Hello {{ userData.name }}!</h1>
+    <h3 class="profile_nickname">AKA {{ userData.slug }}</h3>
+    <p class="profile_email">
+      {{ userData.email }}
+    </p>
+  </div>
+  <div class="profile_articles">
+    <h1>Your articles:</h1>
+    <div v-if="noArticlesForThisUser">
+      <h2>No articles yet!</h2>
     </div>
-    <div class="profile_articles">
-        <h1>Your articles:</h1>
-        <div v-if="noArticlesForThisUser">
-            <h2>No articles yet!</h2>
-        </div>
-        <div v-if="articles.length" class="blogCards__content">
-            <ArticleCard v-for="article in articles" :article="article" />
-        </div>
+    <div v-if="articles.length" class="blogCards__content">
+      <ArticleCard v-for="article in articles" :article="article" />
     </div>
-
+  </div>
 </template>

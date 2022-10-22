@@ -36,7 +36,7 @@ router.beforeEach(async (to) => {
   if (localStorage.getItem('access_token') !== null && authStore.isGuest) {
     try {
       authStore.setUser(await Auth.me())
-    } catch (error) {
+    } catch {
       authStore.logout()
     }
   }
