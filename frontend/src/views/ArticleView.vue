@@ -17,6 +17,9 @@ export default {
     computed: {
         articleSlug() {
             return this.$route.params.slug
+        },
+        doneLoading() {
+            return this.article.title && this.articles.length
         }
     },
     watch: {
@@ -38,8 +41,8 @@ export default {
 </script>
 
 <template>
-    <main>
-        <Slider class="slider-article" :article="article" />
+    <main v-if="doneLoading">
+        <Slider class="slider-article" :article="article" :extendedContent="false" alignContent="center" />
         <section class="article">
             <div class="article__body">
                 <div class="article__aside">
@@ -71,7 +74,7 @@ export default {
                             Design
                         </div>
                     </div>
-                    <Byline />
+                    <Byline :withSocialMedia="true" />
                 </div>
             </div>
         </section>

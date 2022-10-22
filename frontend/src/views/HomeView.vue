@@ -17,6 +17,11 @@ export default {
       articles: []
     };
   },
+  computed: {
+    doneLoading() {
+      return this.articles.length
+    }
+  },
   async created() {
     try {
       this.articles = await Article.all();
@@ -28,8 +33,8 @@ export default {
 }
 </script>
 <template>
-  <main>
-    <Slider v-if="articles" class="slider-home" :article="articles[0]" />
+  <main v-if="doneLoading">
+    <Slider class="slider-home" :article="articles[0]" :extendedContent="true" alignContent="left" />
     <section class="blogCards">
       <div class="blogCards__header">
         Popular topics

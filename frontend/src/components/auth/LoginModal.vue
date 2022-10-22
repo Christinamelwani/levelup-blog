@@ -2,66 +2,62 @@
 import { mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
 import Auth from "@/services/Auth.js"
-import BaseModal from '@/components/general/BaseModal.vue'
-import customInput from "@/components/general/Input.vue"
-import customButton from '@/components/general/Btn.vue'
+import Modal from '@/components/general/Modal.vue'
+import Input from "@/components/general/Input.vue"
+import Btn from '@/components/general/Btn.vue'
 
 export default {
-    components: { BaseModal, customInput, customButton },
+    components: { Modal, Input, Btn },
     data() {
         return {
             credentials: {
                 email: "",
                 password: ""
             },
-            status: "",
-            error: ""
+            isLoading: false,
+            invalidCredentials: false
         };
     },
     methods: {
         ...mapActions(useModalStore, ["openModal", "closeModal"]),
 
         async login() {
-            this.status = "Loading"
+            this.isLoading = true
             try {
                 const accessToken = await Auth.login(this.credentials);
                 localStorage.setItem("access_token", accessToken);
                 this.$router.push({ name: "Profile" });
                 this.closeModal()
-                this.status = "Success";
             }
             catch (err) {
-                this.status = "Error";
-                this.error = "An unknown error occured!"
-                if (err.response?.status === 422) {
-                    this.error = "Password needs to be at least 8 letters long!"
-                }
+                this.error = true
                 if (err.response?.status === 403) {
-                    this.error = "Invalid username or password!"
+                    this.invalidCredentials = true;
                 }
             }
+            this.isLoading = false
         },
     },
 }
 </script>
 
 <template>
-    <BaseModal title="Log In">
-        <div v-if="error" class="modal_message modal_message-error">
-            {{error}}
+    <Modal title="Log In">
+        <div v-if="invalidCredentials" class="modal_message modal_message-error">
+            Invalid Credentials!
         </div>
         <div class="modal_content">
             <form class="modal_form" @submit.prevent="login">
-                <customInput v-model="credentials.email" name="email" label="Email" type="email"
+                <Input v-model="credentials.email" name="email" label="Email" type="email"
                     placeholder="example@mail.com" :required="true" />
-                <customInput v-model="credentials.password" name="password" label="Password" type="password"
+                <Input v-model="credentials.password" name="password" label="Password" type="password"
                     placeholder="Cartoon-Duck-14-Coffee-Glvs" :required="true" />
-                <customButton type="submit" :isLoading="status === 'Loading'">Login</customButton>
+                <Btn type="submit" :isLoading="isLoading">Login</Btn>
             </form>
         </div>
         <div class="modal_footer">
             <a class="modal_link" @click="openModal('Register')">Don't have an account
                 yet? Sign up</a>
         </div>
-    </BaseModal>
+    </Modal>
 </template>

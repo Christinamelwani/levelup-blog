@@ -26,8 +26,12 @@
   cursor: pointer;
 }
 
-.categoryCard--article {
+.categoryCard--center {
   align-self: center;
+}
+
+.categoryCard--left {
+  align-self: flex-start;
 }
 
 .categoryCard--highlighted {

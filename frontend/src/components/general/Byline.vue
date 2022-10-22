@@ -1,5 +1,18 @@
 <script>
-
+export default {
+    props: {
+        withImage: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        withSocialMedia: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    }
+}
 </script>
 
 <template>
@@ -15,7 +28,7 @@
                 </h4>
             </div>
         </div>
-        <div v-if="$route.name==='Article'">
+        <div v-if="withSocialMedia">
             <img v-for="index in 4" src="@/assets/images/socialMediaIcon.svg" />
         </div>
     </div>
