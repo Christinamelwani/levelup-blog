@@ -16,7 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::paginate(5);
+        return Response([
+            "status" => 200,
+            "users" => User::paginate(5),
+        ], 200);
     }
 
     /**
@@ -39,7 +42,10 @@ class UserController extends Controller
         $user = new User($validated);
         $user->save();
 
-        return $user;
+        return Response([
+            "status" => 201,
+            "user" => $user,
+        ], 201);
     }
 
     /**
@@ -50,7 +56,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return Response([
+            "status" => 200,
+            "user" => $user,
+        ], 200);
     }
 
     /**
@@ -62,7 +71,11 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        return $user->update($request->validated());
+        $user->update($request->validated());
+        return Response([
+            "status" => 200,
+            "user" => $user,
+        ], 200);
     }
 
     /**
@@ -73,6 +86,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        return $user->delete();
+        $user->delete();
+        return Response([
+            "status" => 200,
+        ], 200);
     }
 }

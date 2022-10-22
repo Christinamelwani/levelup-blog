@@ -18,7 +18,7 @@ class ArticleReactionPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticleReactionPolicy
      */
     public function view(User $user, ArticleReaction $articleReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class ArticleReactionPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ArticleReactionPolicy
      */
     public function update(User $user, ArticleReaction $articleReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class ArticleReactionPolicy
      */
     public function delete(User $user, ArticleReaction $articleReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class ArticleReactionPolicy
      */
     public function forceDelete(User $user, ArticleReaction $articleReaction)
     {
-        //
+        return true;
     }
 }

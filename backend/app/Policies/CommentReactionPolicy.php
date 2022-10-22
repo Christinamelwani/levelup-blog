@@ -18,7 +18,7 @@ class CommentReactionPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class CommentReactionPolicy
      */
     public function view(User $user, CommentReaction $commentReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class CommentReactionPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class CommentReactionPolicy
      */
     public function update(User $user, CommentReaction $commentReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class CommentReactionPolicy
      */
     public function delete(User $user, CommentReaction $commentReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class CommentReactionPolicy
      */
     public function restore(User $user, CommentReaction $commentReaction)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class CommentReactionPolicy
      */
     public function forceDelete(User $user, CommentReaction $commentReaction)
     {
-        //
+        return true;
     }
 }

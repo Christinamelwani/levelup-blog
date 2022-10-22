@@ -6,6 +6,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Utils\StringUtils;
+use GuzzleHttp\Psr7\Response;
 
 class ArticleController extends Controller
 {
@@ -24,19 +25,11 @@ class ArticleController extends Controller
         // N+1 problem
         $articles = Article::with(['user', 'categories', 'comments', 'comments.author', 'articleReactions.reaction', 'articleReactions.user'])->paginate(8);
 
-        return $articles;
+        return Response([
+            "status" => 200,
+            "articles" => $articles,
+        ], 200);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('new-article');
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -57,7 +50,12 @@ class ArticleController extends Controller
 
         $article = new Article($validatedArticle);
 
-        return $article;
+        $article->save();
+
+        return Response([
+            "status" => 201,
+            "article" => $article,
+        ], 201);
     }
 
     /**
@@ -69,7 +67,10 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $article->load(['user', 'categories', 'comments', 'comments.author', 'articleReactions.reaction', 'articleReactions.user']);
-        return $article;
+        return Response([
+            "status" => 200,
+            "article" => $article,
+        ], 200);
     }
 
     /**
@@ -82,10 +83,15 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $validatedArticle = $request->validate([
+            'title' => ['required'],
             'content' => ['required'],
         ]);
 
         $article->update($validatedArticle);
+        return Response([
+            "status" => 200,
+            "article" => $article,
+        ], 200);
     }
 
     /**
@@ -97,5 +103,8 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
+        return Response([
+            "status" => 200,
+        ], 200);
     }
 }

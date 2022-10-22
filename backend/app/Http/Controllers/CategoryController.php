@@ -21,7 +21,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::paginate(10);
+        return Response([
+            "status" => 200,
+            "categories" => Category::paginate(10),
+        ], 200);
     }
 
     /**
@@ -40,8 +43,10 @@ class CategoryController extends Controller
     {
         $category = new Category($request->validated());
         $category->save();
-        return $category;
-
+        return Response([
+            "status" => 201,
+            "category" => $category,
+        ], 201);
     }
 
     /**
@@ -53,7 +58,10 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $category->load('articles');
-        return $category;
+        return Response([
+            "status" => 200,
+            "category" => $category,
+        ], 200);
     }
 
     /**
@@ -73,7 +81,10 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
-        return $category;
+        return Response([
+            "status" => 200,
+            "category" => $category,
+        ], 200);
     }
 
     /**
@@ -84,6 +95,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        return $category->delete();
+        $category->delete();
+        return Response([
+            "status" => 200,
+        ], 200);
     }
 }
