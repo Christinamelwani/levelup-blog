@@ -5,9 +5,10 @@ import { useAuthStore } from '@/stores/Auth.js'
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
 import HighlightedArticleCard from '../components/article/HighlightedArticleCard.vue'
+import ActionSlider from '../components/general/ActionSlider.vue'
 
 export default {
-  components: { HighlightedArticleCard },
+  components: { HighlightedArticleCard, ActionSlider },
   data() {
     return {
       articles: []
@@ -29,17 +30,15 @@ export default {
 }
 </script>
 <template>
-  <div class="profile_header">
-    <img src="@/assets/images/Ellipse4.png" />
-    <h1 class="profile_name">{{ userData.name }}</h1>
-    <p class="profile_email">
-      {{ userData.email }}
-    </p>
-    <img src="@/assets/images/goldDivider.svg" />
-    <div class="profile_link_container">
-      <RouterLink to="/" class="profile_link">Edit profile</RouterLink>
-    </div>
-  </div>
+  <ActionSlider
+    :title="userData.name"
+    :subtitle="userData.email"
+    :showImage="true"
+    :link="{
+      text: 'Edit Profile',
+      destination: { name: 'Home' }
+    }"
+  />
   <div class="profile_articles">
     <h1 class="profile_title">My articles</h1>
     <div class="userArticles_wrapper">
