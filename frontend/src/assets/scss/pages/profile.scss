@@ -28,6 +28,10 @@
   color: #495057;
 }
 
+.profile_title--center {
+  align-self: center;
+}
+
 .profile_name {
   @include reset;
   font-size: 1.7em;

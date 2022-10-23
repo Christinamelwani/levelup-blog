@@ -53,48 +53,8 @@
   }
 }
 
-.modal_form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .modal_icon {
   cursor: pointer;
-}
-.modal__inputWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.modal__inputLabel {
-  @include reset;
-  font-weight: bold;
-  color: #818181;
-  font-size: 1em;
-  font-family: Lora;
-}
-
-.modal__input {
-  border: solid #495057 1px;
-  color: #493e5a;
-  padding: 0.75rem 0.5rem;
-  width: 24rem;
-  box-shadow: 0.05rem 0.05rem #f7f7fb;
-  @include for-phone-only {
-    width: 20rem;
-  }
-}
-
-.modal__inputInner {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.modal__input--hasError {
-  border: solid red 2px;
 }
 
 .modal_title {
@@ -103,15 +63,6 @@
   color: #495057;
   font-size: 1.25em;
   font-family: Lora;
-}
-
-.modal_link {
-  align-self: center;
-  font-size: small;
-  font-weight: bold;
-  padding: 0.5rem 0;
-  color: #7c45e0;
-  cursor: pointer;
 }
 
 .modal_footer {

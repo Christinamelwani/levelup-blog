@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inputLabel {
+  @include reset;
+  font-weight: bold;
+  color: #818181;
+  font-size: 1em;
+  font-family: Lora;
+}
+
+.input {
+  border: solid #495057 1px;
+  color: #493e5a;
+  padding: 0.75rem 0.5rem;
+  width: 24rem;
+  box-shadow: 0.05rem 0.05rem #f7f7fb;
+  @include for-phone-only {
+    width: 20rem;
+  }
+}
+
+.inputInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.input--hasError {
+  border: solid red 2px;
+}

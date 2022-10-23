@@ -15,10 +15,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useAuthStore, ['userData']),
-    noArticlesForThisUser() {
-      return this.articles.length === 0
-    }
+    ...mapState(useAuthStore, ['userData'])
   },
   async created() {
     try {
@@ -36,7 +33,7 @@ export default {
     :showImage="true"
     :link="{
       text: 'Edit Profile',
-      destination: { name: 'Home' }
+      destination: { name: 'Edit Profile' }
     }"
   />
   <div class="profile_articles">

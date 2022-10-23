@@ -55,7 +55,7 @@ export default {
 }
 </script>
 <template>
-  <form class="modal_form" @submit.prevent="handleSubmit">
+  <form class="form" @submit.prevent="handleSubmit">
     <slot :isLoading="isLoading"></slot>
   </form>
 </template>
