@@ -29,6 +29,10 @@
   }
 }
 
+.input--textarea {
+  resize: none;
+}
+
 .inputInner {
   display: flex;
   flex-direction: column;

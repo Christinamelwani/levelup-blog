@@ -4,11 +4,12 @@ import { useAuthStore } from '@/stores/Auth.js'
 
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
-import HighlightedArticleCard from '../components/article/HighlightedArticleCard.vue'
-import ActionSlider from '../components/general/ActionSlider.vue'
+import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.vue'
+import ActionSlider from '@/components/general/ActionSlider.vue'
+import NewArticleCard from '@/components/article/NewArticleCard.vue'
 
 export default {
-  components: { HighlightedArticleCard, ActionSlider },
+  components: { HighlightedArticleCard, ActionSlider, NewArticleCard },
   data() {
     return {
       articles: []
@@ -39,12 +40,7 @@ export default {
   <div class="profile_articles">
     <h1 class="profile_title">My articles</h1>
     <div class="userArticles_wrapper">
-      <div class="newArticle_card">
-        <div class="newArticle_wrapper">
-          <img src="@/assets/images/plusSign.svg" />
-          <p>Add new article</p>
-        </div>
-      </div>
+      <NewArticleCard />
       <HighlightedArticleCard v-for="article in articles" :article="article" />
     </div>
   </div>

@@ -22,15 +22,15 @@ export default {
 </script>
 
 <template>
-  <div class="profile_header">
+  <div class="actionHeader">
     <img v-if="showImage" src="@/assets/images/Ellipse4.png" />
-    <h1 class="profile_name">{{ title }}</h1>
-    <p class="profile_email">
+    <h1 class="actionHeader__title">{{ title }}</h1>
+    <p v-if="subtitle" class="actionHeader__email">
       {{ subtitle }}
     </p>
     <img src="@/assets/images/goldDivider.svg" />
-    <div class="profile_link_container">
-      <RouterLink :to="link.destination" class="profile_link">{{
+    <div class="link__container">
+      <RouterLink :to="link.destination" class="link">{{
         link.text
       }}</RouterLink>
     </div>
