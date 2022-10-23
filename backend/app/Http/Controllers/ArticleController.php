@@ -23,7 +23,7 @@ class ArticleController extends Controller
     public function index()
     {
         // N+1 problem
-        $articles = Article::with(['user', 'categories', 'comments', 'comments.author', 'articleReactions.reaction', 'articleReactions.user'])->paginate(8);
+        $articles = Article::with(['user', 'categories', 'comments', 'comments.author', 'reactions'])->paginate(8);
 
         return Response([
             "status" => 200,
@@ -66,11 +66,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $article->load(['user', 'categories', 'comments', 'comments.author', 'articleReactions.reaction', 'articleReactions.user']);
-        return Response([
-            "status" => 200,
-            "article" => $article,
-        ], 200);
+        $article->load(['user', 'categories', 'comments', 'comments.author', 'reactions']);
+        return $article;
     }
 
     /**

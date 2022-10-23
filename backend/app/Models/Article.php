@@ -40,12 +40,6 @@ class Article extends Model
 
     public function reactions()
     {
-        return $this->belongsToMany(Reaction::class, 'article_reactions');
-    }
-
-
-    public function articleReactions()
-    {
         return $this->hasMany(ArticleReaction::class);
     }
 }

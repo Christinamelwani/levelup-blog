@@ -21,12 +21,8 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function reactions()
-    {
-        return $this->belongsToMany(Reaction::class, 'comment_reactions');
-    }
 
-    public function commentReactions()
+    public function reactions()
     {
         return $this->hasMany(CommentReaction::class);
     }

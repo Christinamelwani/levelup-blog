@@ -39,13 +39,10 @@ class ArticleReactionController extends Controller
         $article_id = $article->id;
         $reaction_id = $request->reaction_id;
 
-        $article_reaction = ArticleReaction::where('user_id', '=', $user_id )
-                    ->where('article_id', '=', $article_id)
-                    ->where('reaction_id', '=', $reaction_id)
-                    ->get();
+        $article_reaction =  $article->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
         if(count($article_reaction) > 0){
             $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
-            return "You cannot react '{$reaction_type}' to an article twice!";
+            return Response(['status' => 400, 'msg' => "You have already reacted {$reaction_type} to this article!"], 400);
         }
         $new_reaction = new ArticleReaction([
             'user_id' => $user_id,
@@ -70,17 +67,11 @@ class ArticleReactionController extends Controller
     {
 
         $user_id = auth()->user()->id;
-        $article_id = $article->id;
         $reaction_id = $request->reaction_id;
-
-        $article_reaction = ArticleReaction::where('user_id', '=', $user_id )
-                    ->where('article_id', '=', $article_id)
-                    ->where('reaction_id', '=', $reaction_id)
-                    ->get();
-
+        $article_reaction =  $article->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
         if(count($article_reaction) == 0){
             $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
-            return "You have not reacted '{$reaction_type}' to this article yet!";
+            return Response(['status' => 400, 'msg' => "You have not reacted {$reaction_type} to this article yet!"], 400);
         }
 
         $article_reaction[0]->delete();

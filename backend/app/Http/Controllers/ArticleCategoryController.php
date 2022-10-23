@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleCategoryRequest;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use Clockwork\Request\Request;
 
 class ArticleCategoryController extends Controller
 {
@@ -32,7 +33,7 @@ class ArticleCategoryController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store (Article $article, StoreArticleCategoryRequest $request) {
+    public function store (Article $article, Request $request) {
         $article_category = new ArticleCategory([
             'category_id' => $request->category_id,
             'article_id' => $article->id]);

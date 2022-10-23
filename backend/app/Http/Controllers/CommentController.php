@@ -20,10 +20,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Response([
-            "status" => 200,
-            "comments" => Comment::with('author', 'commentReactions.reaction','commentReactions.user')->paginate(5),
-        ], 200);
+        return Comment::with('author', 'reactions')->paginate(5);
     }
 
     /**

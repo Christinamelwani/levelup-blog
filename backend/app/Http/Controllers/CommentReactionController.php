@@ -38,13 +38,10 @@ class CommentReactionController extends Controller
         $comment_id = $comment->id;
         $reaction_id = $request->reaction_id;
 
-        $comment_reaction = CommentReaction::where('user_id', '=', $user_id )
-                    ->where('comment_id', '=', $comment_id)
-                    ->where('reaction_id', '=', $reaction_id)
-                    ->get();
+        $comment_reaction =  $comment->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
         if(count($comment_reaction) > 0){
             $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
-            return "You cannot react '{$reaction_type}' to a comment twice!";
+            return Response(['status' => 400, 'msg' => "You have already reacted {$reaction_type} to this comment!"], 400);
         }
         $new_reaction = new CommentReaction([
             'user_id' => $user_id,
@@ -68,17 +65,12 @@ class CommentReactionController extends Controller
     public function destroy (Comment $comment, Request $request) {
 
         $user_id = auth()->user()->id;
-        $comment_id = $comment->id;
         $reaction_id = $request->reaction_id;
 
-        $comment_reaction = CommentReaction::where('user_id', '=', $user_id )
-                    ->where('comment_id', '=', $comment_id)
-                    ->where('reaction_id', '=', $reaction_id)
-                    ->get();
-
+        $comment_reaction =  $comment->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
         if(count($comment_reaction) == 0){
             $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
-            return "You have not reacted '{$reaction_type}' to this comment yet!";
+            return Response(['status' => 400, 'msg' => "You have not reacted {$reaction_type} to this comment yet!"], 400);
         }
 
         $comment_reaction[0]->delete();
