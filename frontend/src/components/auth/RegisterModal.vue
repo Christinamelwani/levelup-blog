@@ -73,10 +73,6 @@ export default {
         <Btn type="submit" :isLoading="slotProps.isLoading">Register</Btn>
       </Form>
     </div>
-    <div class="modal_footer">
-      <a @click="openModal('Log In')" class="modal_link"
-        >Already have an account? Log In</a
-      >
-    </div>
+    <div class="modal_footer"></div>
   </Modal>
 </template>
