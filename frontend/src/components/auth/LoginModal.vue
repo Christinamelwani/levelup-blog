@@ -1,38 +1,30 @@
 <script>
 import { mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
-import handleError from '@/helpers/handleError.js'
 import Auth from '@/services/Auth.js'
 import Modal from '@/components/general/Modal.vue'
 import Input from '@/components/general/Input.vue'
 import Btn from '@/components/general/Btn.vue'
+import Form from '@/components/general/Form.vue'
 
 export default {
-  components: { Modal, Input, Btn },
+  components: { Modal, Input, Btn, Form },
   data() {
     return {
       credentials: {
         email: '',
         password: ''
-      },
-      isLoading: false,
-      invalidCredentials: false
+      }
     }
   },
   methods: {
     ...mapActions(useModalStore, ['openModal', 'closeModal']),
 
     async login() {
-      this.isLoading = true
-      try {
-        const accessToken = await Auth.login(this.credentials)
-        localStorage.setItem('access_token', accessToken)
-        this.$router.push({ name: 'Profile' })
-        this.closeModal()
-      } catch (err) {
-        handleError(err)
-      }
-      this.isLoading = false
+      const accessToken = await Auth.login(this.credentials)
+      localStorage.setItem('access_token', accessToken)
+      this.$router.push({ name: 'Profile' })
+      this.closeModal()
     }
   }
 }
@@ -40,11 +32,8 @@ export default {
 
 <template>
   <Modal title="Log In">
-    <div v-if="invalidCredentials" class="modal_message modal_message-error">
-      Invalid Credentials!
-    </div>
     <div class="modal_content">
-      <form class="modal_form" @submit.prevent="login">
+      <Form :submitAction="login" :data="credentials" v-slot="slotProps">
         <Input
           v-model="credentials.email"
           name="email"
@@ -61,8 +50,8 @@ export default {
           placeholder="Cartoon-Duck-14-Coffee-Glvs"
           :required="true"
         />
-        <Btn type="submit" :isLoading="isLoading">Login</Btn>
-      </form>
+        <Btn type="submit" :isLoading="slotProps.isLoading">Login</Btn>
+      </Form>
     </div>
     <div class="modal_footer">
       <a class="modal_link" @click="openModal('Register')"

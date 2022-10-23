@@ -2,14 +2,14 @@
 import { mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
 import { useErrorStore } from '@/stores/Errors.js'
-import handleError from '@/helpers/handleError.js'
 import Auth from '@/services/Auth.js'
 import Modal from '@/components/general/Modal.vue'
 import Input from '@/components/general/Input.vue'
 import Btn from '@/components/general/Btn.vue'
+import Form from '@/components/general/Form.vue'
 
 export default {
-  components: { Modal, Input, Btn },
+  components: { Modal, Input, Btn, Form },
   data() {
     return {
       userData: {
@@ -17,29 +17,7 @@ export default {
         password: '',
         name: '',
         slug: ''
-      },
-      isLoading: false
-    }
-  },
-  computed: {
-    userDataComputed() {
-      return Object.assign({}, this.userData)
-    }
-  },
-  watch: {
-    userDataComputed: {
-      handler(newValue, oldValue) {
-        if (!oldValue) {
-          return
-        }
-
-        Object.keys(newValue).forEach((key) => {
-          if (newValue[key] !== oldValue[key]) {
-            this.deleteError(key)
-          }
-        })
-      },
-      deep: true
+      }
     }
   },
   methods: {
@@ -47,17 +25,10 @@ export default {
     ...mapActions(useModalStore, ['openModal', 'closeModal']),
 
     async register() {
-      this.clearErrors()
-      this.isLoading = true
-      try {
-        const response = await Auth.register(this.userData)
-        localStorage.setItem('access_token', response.token)
-        this.$router.push({ name: 'Profile' })
-        this.closeModal()
-      } catch (err) {
-        handleError(err)
-      }
-      this.isLoading = false
+      const response = await Auth.register(this.userData)
+      localStorage.setItem('access_token', response.token)
+      this.$router.push({ name: 'Profile' })
+      this.closeModal()
     }
   }
 }
@@ -66,7 +37,7 @@ export default {
 <template>
   <Modal title="Register">
     <div class="modal_content" @submit.prevent="register">
-      <form class="modal_form">
+      <Form :submitAction="register" :data="userData" v-slot="slotProps">
         <Input
           v-model="userData.name"
           name="name"
@@ -99,8 +70,8 @@ export default {
           placeholder="We8@0123ndj"
           :required="false"
         />
-        <Btn type="submit" :isLoading="isLoading">Register</Btn>
-      </form>
+        <Btn type="submit" :isLoading="slotProps.isLoading">Register</Btn>
+      </Form>
     </div>
     <div class="modal_footer">
       <a @click="openModal('Log In')" class="modal_link"
