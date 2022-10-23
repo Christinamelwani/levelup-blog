@@ -2,12 +2,12 @@
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
 
-import ArticleCard from '@/components/article/ArticleCard.vue'
 import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
+import HighlightedArticleCard from '../components/article/HighlightedArticleCard.vue'
 
 export default {
-  components: { ArticleCard },
+  components: { HighlightedArticleCard },
   data() {
     return {
       articles: []
@@ -30,19 +30,26 @@ export default {
 </script>
 <template>
   <div class="profile_header">
-    <h1 class="profile_name">Hello {{ userData.name }}!</h1>
-    <h3 class="profile_nickname">AKA {{ userData.slug }}</h3>
+    <img src="@/assets/images/Ellipse4.png" />
+    <h1 class="profile_name">{{ userData.name }}</h1>
     <p class="profile_email">
       {{ userData.email }}
     </p>
+    <img src="@/assets/images/goldDivider.svg" />
+    <div class="profile_link_container">
+      <RouterLink to="/" class="profile_link">Edit profile</RouterLink>
+    </div>
   </div>
   <div class="profile_articles">
-    <h1>Your articles:</h1>
-    <div v-if="noArticlesForThisUser">
-      <h2>No articles yet!</h2>
-    </div>
-    <div v-if="articles.length" class="blogCards__content">
-      <ArticleCard v-for="article in articles" :article="article" />
+    <h1 class="profile_title">My articles</h1>
+    <div class="userArticles_wrapper">
+      <div class="newArticle_card">
+        <div class="newArticle_wrapper">
+          <img src="@/assets/images/plusSign.svg" />
+          <p>Add new article</p>
+        </div>
+      </div>
+      <HighlightedArticleCard v-for="article in articles" :article="article" />
     </div>
   </div>
 </template>
