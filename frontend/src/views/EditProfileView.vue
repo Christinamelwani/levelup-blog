@@ -31,6 +31,10 @@ export default {
       )
       this.setUser(await Auth.me())
       this.$router.push({ name: 'Profile' })
+      this.$notify({
+        type: 'success',
+        text: `Changes to your profile saved!`
+      })
     }
   },
   created() {
