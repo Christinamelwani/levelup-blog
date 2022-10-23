@@ -4,6 +4,7 @@ import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.
 import Article from '@/services/Article'
 import CategorySelector from '@/components/article/CategorySelector.vue'
 import ArticleCard from '@/components/article/ArticleCard.vue'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   components: {

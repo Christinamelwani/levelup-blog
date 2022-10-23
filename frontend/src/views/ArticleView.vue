@@ -4,6 +4,7 @@ import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.
 import Byline from '@/components/general/Byline.vue'
 import Article from '@/services/Article'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   components: { Slider, HighlightedArticleCard, Byline },
@@ -62,16 +63,12 @@ export default {
           <p class="article__text">
             {{ article.content }}
           </p>
-          <h2 class="article__quote">
-            “ Monotonectally seize superior mindshare rather than efficient
-            technology. ”
-          </h2>
           <div class="article__categories">
             <div class="article__category">Adventure</div>
             <div class="article__category">Photo</div>
             <div class="article__category">Design</div>
           </div>
-          <Byline :withSocialMedia="true" />
+          <Byline :author="article.user" :withSocialMedia="true" />
         </div>
       </div>
     </section>

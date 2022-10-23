@@ -1,8 +1,10 @@
 <script>
-import ArticleCard from '@/components/article/ArticleCard.vue'
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
+
+import ArticleCard from '@/components/article/ArticleCard.vue'
 import Article from '@/services/Article.js'
+import handleError from '@/helpers/handleError.js'
 
 export default {
   components: { ArticleCard },
