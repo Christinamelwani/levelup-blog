@@ -49,13 +49,15 @@ class ArticleController extends Controller
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
-            'slug' => ['prohibited'],
+            'slug' => ['required'],
             'user_id' => ['required'],
         ]);
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
 
         $article = new Article($validatedArticle);
+
+        $article->save();
 
         return $article;
     }
@@ -81,7 +83,10 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $validatedArticle = $request->validate([
+            'title' => ['required', 'max:255'],
             'content' => ['required'],
+            'slug' => ['required'],
+            'user_id' => ['required'],
         ]);
 
         $article->update($validatedArticle);

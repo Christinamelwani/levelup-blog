@@ -23,7 +23,7 @@ class UserArticleController extends Controller
      */
     public function index(User $user)
     {
-        return Article::with('author')->where('user_id', $user->id)->paginate(8);
+        return Article::with('user')->where('user_id', $user->id)->paginate(8);
     }
     /**
      * Store a newly created resource in storage.
