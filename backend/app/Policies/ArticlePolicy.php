@@ -54,10 +54,10 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article)
     {
-        if($user->name === 'admin'){
+        if($user->name == 'admin'){
             return true;
         }
-        return $user->id === $article->author->id;
+        return $user->id == $article->user->id;
     }
 
     /**
@@ -69,10 +69,10 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article)
     {
-        if($user->name === 'admin'){
+        if($user->name == 'admin'){
             return true;
         }
-        return $user->id === $article->author->id;
+        return $user->id == $article->author->id;
     }
 
     /**
@@ -84,10 +84,10 @@ class ArticlePolicy
      */
     public function restore(User $user, Article $article)
     {
-        if($user->name === 'admin'){
+        if($user->name == 'admin'){
             return true;
         }
-        return $user->id === $article->author->id;
+        return $user->id == $article->author->id;
     }
 
     /**
@@ -99,9 +99,9 @@ class ArticlePolicy
      */
     public function forceDelete(User $user, Article $article)
     {
-        if($user->name === 'admin'){
+        if($user->name == 'admin'){
             return true;
         }
-        return $user->id === $article->author->id;
+        return $user->id == $article->author->id;
     }
 }
