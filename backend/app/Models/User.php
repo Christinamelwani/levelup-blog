@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function commentReactions()
+    {
+        return $this->hasMany(Reaction::class, 'comment_reactions');
+    }
+
+    public function articleReactions()
+    {
+        return $this->hasMany(Reaction::class, 'article_reactions');
+    }
 }

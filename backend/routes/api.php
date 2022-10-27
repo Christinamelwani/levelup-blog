@@ -1,16 +1,19 @@
 <?php
 
+use App\Http\Controllers\ArticleCategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleReactionController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentReactionController;
+use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\UserArticleController;
 use App\Http\Controllers\UserCommentController;
 use App\Http\Controllers\UserController;
-use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules\Password;
 
@@ -34,17 +37,37 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
 
     Route::apiResource('articles', ArticleController::class)->except($unauthenticatedRoutes);
     Route::apiResource('comments', CommentController::class)->except($unauthenticatedRoutes);
-    Route::resource('users.articles', UserArticleController::class)->shallow()->except($unauthenticatedRoutes);;
-    Route::resource('users.comments', UserCommentController::class)->shallow()->except($unauthenticatedRoutes);;
-    Route::resource('articles.comments', ArticleCommentController::class)->shallow()->except($unauthenticatedRoutes);;
+    Route::apiResource('categories', CategoryController::class)->except($unauthenticatedRoutes);
+    Route::apiResource('reactions', ReactionController::class)->except($unauthenticatedRoutes);
+
+    Route::post('/users/{user}/article', [UserArticleController::class, 'store']);
+    Route::post('/users/{user}/comment', [UserCommentController::class, 'store']);
+    Route::post('/articles/{article}/comment', [ArticleCommentController::class, 'store']);
+
+    Route::post('/articles/{article}/categories', [ArticleCategoryController::class, 'store']);
+    Route::delete('/articles/{article}/categories', [ArticleCategoryController::class, 'destroy']);
+
+    Route::post('/articles/{article}/reactions', [ArticleReactionController::class, 'store']);
+    Route::delete('/articles/{article}/reactions', [ArticleReactionController::class, 'destroy']);
+
+    Route::post('/comments/{comment}/reactions', [CommentReactionController::class, 'store']);
+    Route::delete('/comments/{comment}/reactions', [CommentReactionController::class, 'destroy']);
 });
+
 
 Route::apiResource('articles', ArticleController::class)->only($unauthenticatedRoutes);
 Route::apiResource('comments', CommentController::class)->only($unauthenticatedRoutes);
+Route::apiResource('categories', CategoryController::class)->only($unauthenticatedRoutes);
+Route::apiResource('reactions', ReactionController::class)->only($unauthenticatedRoutes);
 Route::apiResource('users', UserController::class);
-Route::resource('users.articles', UserArticleController::class)->shallow()->only($unauthenticatedRoutes);;
-Route::resource('users.comments', UserCommentController::class)->shallow()->only($unauthenticatedRoutes);;
-Route::resource('articles.comments', ArticleCommentController::class)->shallow()->only($unauthenticatedRoutes);;
+
+Route::get('/users/{user}/articles', [UserArticleController::class, 'index']);
+Route::get('/users/{user}/comments', [UserCommentController::class, 'index']);
+Route::get('/articles/{article}/comment', [ArticleCommentController::class, 'index']);
+
+Route::get('/articles/{article}/categories', [ArticleCategoryController::class, 'index']);
+Route::get('/articles/{article}/reactions', [ArticleReactionController::class, 'index']);
+Route::get('/comments/{comment}/reactions', [CommentReactionController::class, 'index']);
 
 Route::post('/authenticate', function (Request $request) {
     $credentials = $request->validate([
@@ -53,10 +76,13 @@ Route::post('/authenticate', function (Request $request) {
     ]);
 
     if (!Auth::attempt($credentials)) {
-        return response()->json(['code' => 403, 'message' => 'invalid credentials'], 403);
+        return response()->json(['status' => 401, 'message' => 'invalid credentials'], 401);
     }
 
     $user = User::where('email', $credentials['email'])->firstOrFail();
 
-    return $user->createToken('auth_token')->plainTextToken;
+    return Response([
+        "status" => 200,
+        "token" => $user->createToken('auth_token')->plainTextToken,
+    ], 200);
 });

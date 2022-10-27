@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Article;
+use App\Models\Reaction;
 use App\Models\User;
-use Clockwork\Request\Request;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ArticlePolicy
+class ReactionPolicy
 {
     use HandlesAuthorization;
 
@@ -26,10 +25,10 @@ class ArticlePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Reaction  $reaction
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Article $article)
+    public function view(User $user, Reaction $reaction)
     {
         return true;
     }
@@ -49,59 +48,47 @@ class ArticlePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Reaction  $reaction
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Article $article)
+    public function update(User $user, Reaction $reaction)
     {
-        if($user->name == 'admin'){
-            return true;
-        }
-        return $user->id == $article->user->id;
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Reaction  $reaction
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Article $article)
+    public function delete(User $user, Reaction $reaction)
     {
-        if($user->name == 'admin'){
-            return true;
-        }
-        return $user->id == $article->author->id;
+        return true;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Reaction  $reaction
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Article $article)
+    public function restore(User $user, Reaction $reaction)
     {
-        if($user->name == 'admin'){
-            return true;
-        }
-        return $user->id == $article->author->id;
+        return true;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Reaction  $reaction
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Article $article)
+    public function forceDelete(User $user, Reaction $reaction)
     {
-        if($user->name == 'admin'){
-            return true;
-        }
-        return $user->id == $article->author->id;
+        return true;
     }
 }
