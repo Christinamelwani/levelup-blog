@@ -31,7 +31,7 @@ class ReactionTest extends TestCase
         $response->assertStatus(201);
 
         $article = Article::all()[0];
-        $createdReaction = $article->articleReactions[0];
+        $createdReaction = $article->reactions[0];
         $this->assertEquals($reaction->type, $createdReaction->reaction->type);
         $this->assertEquals($user->id, $createdReaction->user->id);
     }
@@ -52,7 +52,7 @@ class ReactionTest extends TestCase
         $response->assertStatus(201);
 
         $comment = Comment::all()[0];
-        $createdReaction = $comment->commentReactions[0];
+        $createdReaction = $comment->reactions[0];
         $this->assertEquals($reaction->type, $createdReaction->reaction->type);
         $this->assertEquals($user->id, $createdReaction->user->id);
     }

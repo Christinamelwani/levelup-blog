@@ -67,7 +67,10 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $article->load(['user', 'categories', 'comments', 'comments.author', 'reactions']);
-        return $article;
+        return Response([
+            "status" => 200,
+            "article" => $article,
+        ], 200);
     }
 
     /**
