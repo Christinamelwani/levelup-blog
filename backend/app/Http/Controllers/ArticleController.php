@@ -23,11 +23,12 @@ class ArticleController extends Controller
     public function index()
     {
         // N+1 problem
-        $articles = Article::with(['user', 'categories', 'comments', 'comments.author', 'reactions'])->paginate(8);
+        $articlesQueryBuilder = Article::with('user')->orderBy('created_at', 'asc')->paginate(8);
+        $articlesQueryBuilder = Article::with('user')->newest()->category(request('category'))->paginate(8);
 
         return Response([
             "status" => 200,
-            "articles" => $articles,
+            "articles" => $articlesQueryBuilder,
         ], 200);
     }
 
