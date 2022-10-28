@@ -22,7 +22,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        // N+1 problem
         $articlesQueryBuilder = Article::with('user')->orderBy('created_at', 'asc')->paginate(8);
         $articlesQueryBuilder = Article::with('user')->newest()->category(request('category'))->paginate(8);
 
