@@ -89,6 +89,7 @@ class ArticleController extends Controller
             'title' => ['nullable'],
             'content' => ['nullable'],
             'slug' => ['nullable'],
+            'user_id' => ['nullable'],
         ]);
 
         $article->update($validatedArticle);
