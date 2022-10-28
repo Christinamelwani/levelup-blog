@@ -83,10 +83,9 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $validatedArticle = $request->validate([
-            'title' => ['required'],
-            'content' => ['required'],
-            'slug' => ['required'],
-            'user_id' => ['required'],
+            'title' => ['nullable'],
+            'content' => ['nullable'],
+            'slug' => ['nullable'],
         ]);
 
         $article->update($validatedArticle);
