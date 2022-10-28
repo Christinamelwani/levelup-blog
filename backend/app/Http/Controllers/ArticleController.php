@@ -47,7 +47,7 @@ class ArticleController extends Controller
 
         $validatedArticle['user_id'] = auth()->user()->id;
 
-        if(!$request->slug){
+        if (!$request->slug) {
             $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
         }
 
@@ -89,7 +89,6 @@ class ArticleController extends Controller
             'title' => ['nullable'],
             'content' => ['nullable'],
             'slug' => ['nullable'],
-            'user_id' => ['nullable'],
         ]);
 
         $article->update($validatedArticle);

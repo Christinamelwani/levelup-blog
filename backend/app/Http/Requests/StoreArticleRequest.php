@@ -13,6 +13,7 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize()
     {
+        request()->user_id = auth()->user()->id;
         return true;
     }
 
