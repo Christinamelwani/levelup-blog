@@ -42,4 +42,20 @@ class Article extends Model
     {
         return $this->hasMany(ArticleReaction::class);
     }
+
+    public function scopeNewest($builder)
+    {
+        return $builder->orderBy('created_at', 'desc');
+    }
+
+    public function scopeCategory($builder, $category)
+    {
+        if (!$category) {
+            return $builder;
+        }
+
+        return $builder->with('categories')->whereHas('categories', function ($q) use ($category) {
+            $q->where('slug', $category);
+        });
+    }
 }
