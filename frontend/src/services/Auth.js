@@ -3,12 +3,12 @@ import Http from '@/services/Http'
 export default {
   async login(credentials) {
     const response = await Http.post('/authenticate', credentials)
-    return response.data
+    return response.data.token
   },
   async register(userData) {
     const registerResponse = await Http.post('/users', userData)
     const loginResponse = await Http.post('/authenticate', userData)
-    const token = loginResponse.data
+    const token = loginResponse.data.token
     return { ...registerResponse.data, token }
   },
   async editSelfData(slug, userData) {

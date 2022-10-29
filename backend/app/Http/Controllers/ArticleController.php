@@ -42,12 +42,14 @@ class ArticleController extends Controller
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
-            'slug' => ['prohibited'],
+            'slug' => ['nullable'],
         ]);
 
         $validatedArticle['user_id'] = auth()->user()->id;
 
-        $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+        if(!$request->slug){
+            $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+        }
 
         $article = new Article($validatedArticle);
 
