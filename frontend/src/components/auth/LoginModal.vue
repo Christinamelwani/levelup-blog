@@ -1,67 +1,57 @@
 <script>
 import { mapActions } from 'pinia'
 import { useModalStore } from '@/stores/Modal.js'
-import Auth from "@/services/Auth.js"
-import BaseModal from '@/components/general/BaseModal.vue'
-import customInput from "@/components/general/Input.vue"
-import customButton from '@/components/general/Btn.vue'
+import Auth from '@/services/Auth.js'
+import Modal from '@/components/general/Modal.vue'
+import Input from '@/components/general/Input.vue'
+import Btn from '@/components/general/Btn.vue'
+import Form from '@/components/general/Form.vue'
 
 export default {
-    components: { BaseModal, customInput, customButton },
-    data() {
-        return {
-            credentials: {
-                email: "",
-                password: ""
-            },
-            status: "",
-            error: ""
-        };
-    },
-    methods: {
-        ...mapActions(useModalStore, ["openModal", "closeModal"]),
+  components: { Modal, Input, Btn, Form },
+  data() {
+    return {
+      credentials: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(useModalStore, ['openModal', 'closeModal']),
 
-        async login() {
-            this.status = "Loading"
-            try {
-                const accessToken = await Auth.login(this.credentials);
-                localStorage.setItem("access_token", accessToken);
-                this.$router.push({ name: "Profile" });
-                this.closeModal()
-                this.status = "Success";
-            }
-            catch (err) {
-                this.status = "Error";
-                this.error = "An unknown error occured!"
-                if (err.response?.status === 422) {
-                    this.error = "Password needs to be at least 8 letters long!"
-                }
-                if (err.response?.status === 403) {
-                    this.error = "Invalid username or password!"
-                }
-            }
-        },
-    },
+    async login() {
+      const accessToken = await Auth.login(this.credentials)
+      localStorage.setItem('access_token', accessToken)
+      this.$router.push({ name: 'Profile' })
+      this.closeModal()
+    }
+  }
 }
 </script>
 
 <template>
-    <BaseModal title="Log In">
-        <div v-if="error" class="modal_message modal_message-error">
-            {{error}}
-        </div>
-        <div class="modal_content">
-            <form class="modal_form" @submit.prevent="login">
-                <customInput v-model="credentials.email" name="email" label="Email" type="email"
-                    placeholder="example@mail.com" :required="true" />
-                <customInput v-model="credentials.password" name="password" label="Password" type="password"
-                    placeholder="Cartoon-Duck-14-Coffee-Glvs" :required="true" />
-                <customButton type="submit" :isLoading="status === 'Loading'">Login</customButton>
-            </form>
-        </div>
-        <div class="modal_footer">
-            <a class="modal_link" @click="openModal('Register')">Don't have an account
-                yet? Sign up</a>
-        </div>
-    </BaseModal>
+  <Modal title="Log In">
+    <div class="modal_content">
+      <Form :submitAction="login" :data="credentials" v-slot="slotProps">
+        <Input
+          v-model="credentials.email"
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="example@mail.com"
+          :required="true"
+        />
+        <Input
+          v-model="credentials.password"
+          name="password"
+          label="Password"
+          type="password"
+          placeholder="Cartoon-Duck-14-Coffee-Glvs"
+          :required="true"
+        />
+        <Btn type="submit" :isLoading="slotProps.isLoading">Login</Btn>
+      </Form>
+    </div>
+  </Modal>
 </template>

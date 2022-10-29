@@ -42,7 +42,7 @@ class ArticleController extends Controller
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
-            'slug' => ['prohibited'],
+            'slug' => ['required'],
             'user_id' => ['required'],
         ]);
 
@@ -82,6 +82,8 @@ class ArticleController extends Controller
         $validatedArticle = $request->validate([
             'title' => ['required'],
             'content' => ['required'],
+            'slug' => ['required'],
+            'user_id' => ['required'],
         ]);
 
         $article->update($validatedArticle);

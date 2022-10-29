@@ -18,9 +18,33 @@ const router = createRouter({
       component: () => import('../views/ArticleView.vue')
     },
     {
+      path: '/add-article',
+      name: 'Add Article',
+      component: () => import('../views/AddArticle.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/article/:slug/edit',
+      name: 'Edit Article',
+      component: () => import('../views/EditArticle.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/my-profile',
       name: 'Profile',
       component: () => import('../views/ProfileView.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/edit-profile',
+      name: 'Edit Profile',
+      component: () => import('../views/EditProfileView.vue'),
       meta: {
         requiresAuth: true
       }
@@ -36,7 +60,7 @@ router.beforeEach(async (to) => {
   if (localStorage.getItem('access_token') !== null && authStore.isGuest) {
     try {
       authStore.setUser(await Auth.me())
-    } catch (error) {
+    } catch {
       authStore.logout()
     }
   }

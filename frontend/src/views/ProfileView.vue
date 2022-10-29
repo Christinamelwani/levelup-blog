@@ -1,52 +1,47 @@
 <script>
-import ArticleCard from '@/components/article/ArticleCard.vue'
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
-import Article from "@/services/Article.js"
+
+import Article from '@/services/Article.js'
+import handleError from '@/helpers/handleError.js'
+import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.vue'
+import ActionSlider from '@/components/general/ActionSlider.vue'
+import NewArticleCard from '@/components/article/NewArticleCard.vue'
 
 export default {
-    components: { ArticleCard },
-    data() {
-        return {
-            articles: []
-        };
-    },
-    computed: {
-        ...mapState(useAuthStore, ["userData"]),
-        noArticlesForThisUser() {
-            return this.articles.length === 0
-        }
-    },
-    async created() {
-        try {
-            this.articles = await Article.byUserSlug(this.userData.slug)
-        }
-        catch (err) {
-            console.log(err);
-        }
-    },
+  components: { HighlightedArticleCard, ActionSlider, NewArticleCard },
+  data() {
+    return {
+      articles: []
+    }
+  },
+  computed: {
+    ...mapState(useAuthStore, ['userData'])
+  },
+  async created() {
+    try {
+      this.articles = await Article.byUserSlug(this.userData.slug)
+    } catch (err) {
+      handleError(err)
+    }
+  }
 }
 </script>
 <template>
-    <div class="profile_header">
-        <h1 class="profile_name">
-            Hello {{userData.name}}!
-        </h1>
-        <h3 class="profile_nickname">
-            AKA {{userData.slug}}
-        </h3>
-        <p class="profile_email">
-            {{userData.email}}
-        </p>
+  <ActionSlider
+    :title="userData.name"
+    :subtitle="userData.email"
+    :showImage="true"
+    :link="{
+      text: 'Edit Profile',
+      destination: { name: 'Edit Profile' }
+    }"
+  />
+  <div class="profile_articles">
+    <h1 class="profile_title">My articles</h1>
+    <div class="userArticles_wrapper">
+      <NewArticleCard />
+      <HighlightedArticleCard v-for="article in articles" :article="article" />
     </div>
-    <div class="profile_articles">
-        <h1>Your articles:</h1>
-        <div v-if="noArticlesForThisUser">
-            <h2>No articles yet!</h2>
-        </div>
-        <div v-if="articles.length" class="blogCards__content">
-            <ArticleCard v-for="article in articles" :article="article" />
-        </div>
-    </div>
-
+  </div>
 </template>

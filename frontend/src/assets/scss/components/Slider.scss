@@ -76,6 +76,10 @@
   justify-self: flex-end;
 }
 
+.pagination__inactive {
+  opacity: 0.2;
+}
+
 .slider__byline {
   font-weight: 700;
 }
