@@ -39,9 +39,7 @@ export default {
   },
   created() {
     Object.keys(this.editedUserData).forEach((field) => {
-      if (field !== 'password') {
-        this.editedUserData[field] = this.userData[field]
-      }
+      this.editedUserData[field] = this.userData[field]
     })
   }
 }

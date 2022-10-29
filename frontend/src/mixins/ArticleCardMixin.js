@@ -16,14 +16,12 @@ export default {
     },
     dateCreated() {
       return new Date(this.article.created_at).toLocaleDateString('de-DE')
-    }
-  },
-  methods: {
-    goToArticle() {
-      this.$router.push({
+    },
+    articlePath() {
+      return {
         name: 'Article',
         params: { slug: this.article.slug }
-      })
+      }
     }
   }
 }

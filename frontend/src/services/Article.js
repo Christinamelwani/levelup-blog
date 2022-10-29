@@ -16,13 +16,11 @@ export default {
   },
   async addNew(articleData) {
     const authStore = useAuthStore()
-    articleData.user_id = authStore.userData.id
     const response = await Http.post(`/articles`, articleData)
     return response.data.article
   },
   async edit(slug, articleData) {
     const authStore = useAuthStore()
-    articleData.user_id = authStore.userData.id
     const response = await Http.put(`/articles/${slug}`, articleData)
     return response.data.article
   }

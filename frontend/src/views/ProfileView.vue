@@ -41,7 +41,11 @@ export default {
     <h1 class="profile_title">My articles</h1>
     <div class="userArticles_wrapper">
       <NewArticleCard />
-      <HighlightedArticleCard v-for="article in articles" :article="article" />
+      <HighlightedArticleCard
+        v-for="article in articles"
+        :article="article"
+        :showEdit="true"
+      />
     </div>
   </div>
 </template>

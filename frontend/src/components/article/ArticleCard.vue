@@ -15,15 +15,17 @@ export default {
 </script>
 
 <template>
-  <div @click="goToArticle" class="articleCard">
-    <img class="articleCard__img" src="@/assets/images/BlogImage.png" />
-    <div class="articleCard__wrapper">
-      <p class="articleCard__date">{{ dateCreated }}</p>
-      <h3 class="articleCard__header">{{ truncatedTitle }}</h3>
-      <p class="articleCard__text">{{ truncatedContent }}</p>
+  <RouterLink :to="articlePath" class="article__link">
+    <div class="articleCard">
+      <img class="articleCard__img" src="@/assets/images/BlogImage.png" />
+      <div class="articleCard__wrapper">
+        <p class="articleCard__date">{{ dateCreated }}</p>
+        <h3 class="articleCard__header">{{ truncatedTitle }}</h3>
+        <p class="articleCard__text">{{ truncatedContent }}</p>
+      </div>
+      <div class="articleCard__byline">
+        <Byline :author="article.user" />
+      </div>
     </div>
-    <div class="articleCard__byline">
-      <Byline :author="article.user" />
-    </div>
-  </div>
+  </RouterLink>
 </template>

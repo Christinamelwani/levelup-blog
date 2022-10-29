@@ -1,7 +1,7 @@
 .articleCard {
   border-radius: 5px;
   min-width: 0px;
-  max-width: 300px;
+  width: 280px;
   display: flex;
   flex-direction: column;
   background: white;
@@ -15,7 +15,8 @@
 }
 
 .articleCard__img {
-  width: 100%;
+  width: 280px;
+  height: 250px;
 }
 
 .articleCard__date {
@@ -25,6 +26,7 @@
 
 .articleCard__wrapper {
   padding: 20px 20px 5px;
+  height: 250px;
 }
 
 .articleCard__text {
@@ -43,4 +45,8 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
+}
+
+.article__link {
+  @include reset;
 }

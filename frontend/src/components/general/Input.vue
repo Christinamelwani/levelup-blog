@@ -50,17 +50,6 @@ export default {
   <div class="inputWrapper">
     <label class="inputLabel" :for="name">{{ label }}</label>
     <div class="inputInner">
-      <input
-        v-if="!textarea"
-        class="input"
-        v-model="inputValue"
-        :type="type"
-        :id="name"
-        :placeholder="placeholder"
-        :name="name"
-        :class="{ 'input--hasError': errors[name] }"
-        :required="required"
-      />
       <textarea
         v-if="textarea"
         class="input input--textarea"
@@ -72,6 +61,18 @@ export default {
         :class="{ 'input--hasError': errors[name] }"
         :required="required"
       ></textarea>
+
+      <input
+        v-else="textarea"
+        class="input"
+        v-model="inputValue"
+        :type="type"
+        :id="name"
+        :placeholder="placeholder"
+        :name="name"
+        :class="{ 'input--hasError': errors[name] }"
+        :required="required"
+      />
 
       <p class="input-message input-error" v-if="errors[name]">
         {{ errors[name][0] }}

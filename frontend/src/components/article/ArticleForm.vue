@@ -33,14 +33,6 @@ export default {
       :required="false"
     />
     <Input
-      v-model="articleData.slug"
-      name="slug"
-      label="Slug"
-      type="text"
-      placeholder="Set slug"
-      :required="false"
-    />
-    <Input
       v-model="articleData.content"
       name="content"
       label="Content"
