@@ -1,0 +1,46 @@
+.actionHeader {
+  background-color: #3e3e3e;
+  color: white;
+  padding: 5rem 3rem 0 3rem;
+  display: flex;
+  min-height: 70vh;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionHeader__title {
+  @include reset;
+  font-size: 1.7em;
+  padding: 1rem;
+  font-weight: bold;
+  font-family: Lora;
+  color: white;
+}
+
+.actionHeader__email {
+  @include reset;
+  font-size: 1em;
+  padding: 1rem;
+  font-weight: bold;
+  font-family: Lora;
+  color: white;
+}
+
+.link {
+  @include reset;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 1rem;
+  font-weight: bold;
+  font-family: Lora;
+  color: #d4a373;
+}
+
+.link_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

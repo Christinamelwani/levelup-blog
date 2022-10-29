@@ -4,17 +4,21 @@ body {
 }
 
 .btn {
+  @include reset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
   padding: 1rem 0rem;
-  border-radius: 1rem;
-  border: solid #9671db 2px;
   cursor: pointer;
-  color: white;
-  background-color: #7c45e0;
+  color: #ffffff;
+  background-color: #d4a373;
+  font-family: Lora;
 }
 
 .btn--loading {
-  border: solid #9671db55 2px;
-  background-color: #7b45e05d;
+  background-color: #d4a373;
+  opacity: 0.5;
 }
 
 .blank__slate {

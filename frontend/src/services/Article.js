@@ -1,4 +1,5 @@
 import Http from '@/services/Http'
+import { useAuthStore } from '@/stores/Auth.js'
 
 export default {
   async all() {
@@ -11,6 +12,18 @@ export default {
   },
   async byArticleSlug(slug) {
     const response = await Http.get(`/articles/${slug}`)
+    return response.data
+  },
+  async addNew(articleData) {
+    const authStore = useAuthStore()
+    articleData.user_id = authStore.userData.id
+    const response = await Http.post(`/articles`, articleData)
+    return response.data
+  },
+  async edit(slug, articleData) {
+    const authStore = useAuthStore()
+    articleData.user_id = authStore.userData.id
+    const response = await Http.put(`/articles/${slug}`, articleData)
     return response.data
   }
 }
