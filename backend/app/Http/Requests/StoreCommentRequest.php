@@ -8,12 +8,12 @@ class StoreCommentRequest extends BaseCommentRequest
 {
     public function authorize()
     {
-        if(auth()->user()->name === 'admin'){
+        if(auth()->user()->name == 'admin'){
             return true;
         }
-        if(request()->user_id != auth()->user()->id){
-            request()->user_id = auth()->user()->id;
-        }
+
+        request()->user_id = auth()->user()->id;
+
         return true;
     }
 }

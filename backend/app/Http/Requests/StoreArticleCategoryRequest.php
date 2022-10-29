@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class BaseCommentRequest extends FormRequest
+class StoreArticleCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +25,7 @@ class BaseCommentRequest extends FormRequest
     {
         return [
             'article_id' => ['required', 'exists:articles,id'],
-            'content' => ['required', 'string'],
-            'user_id' => ['exists:users,id'],
+            'category_id' => ['required', 'exists:categories,id'],
         ];
     }
 }

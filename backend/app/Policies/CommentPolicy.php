@@ -53,10 +53,10 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        if($user->name === 'admin'){
+        if($user->name == 'admin'){
             return true;
         }
-        return $user->id === $comment->author->id;
+        return $user->id == $comment->user_id;
     }
 
     /**
@@ -71,7 +71,7 @@ class CommentPolicy
         if($user->name === 'admin'){
             return true;
         }
-        return $user->id === $comment->author->id;
+        return $user->id == $comment->author->id;
     }
 
     /**

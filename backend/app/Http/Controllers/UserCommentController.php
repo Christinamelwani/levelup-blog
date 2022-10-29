@@ -22,7 +22,10 @@ class UserCommentController extends Controller
      */
     public function index(User $user)
     {
-        return Comment::with('author')->where('user_id', $user->id)->paginate(5);
+        return Response([
+            "status" => 200,
+            "comments" => Comment::with('author')->where('user_id', $user->id)->paginate(5),
+        ], 200);
     }
     /**
      * Store a newly created resource in storage.
@@ -36,40 +39,9 @@ class UserCommentController extends Controller
         $comment['user_id'] = $user->id;
         $comment->save();
 
-        return $comment;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        return $comment;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCommentRequest  $request
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCommentRequest $request, Comment $comment)
-    {
-       // We don't need this yet?
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comment $comment)
-    {
-        return $comment->delete();
+        return Response([
+            "status" => 201,
+            "comment" => $comment,
+        ], 201);
     }
 }

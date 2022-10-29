@@ -23,7 +23,10 @@ class UserArticleController extends Controller
      */
     public function index(User $user)
     {
-        return Article::with('user')->where('user_id', $user->id)->paginate(8);
+        return Response([
+            "status" => 200,
+            "articles" => Article::with('author')->where('user_id', $user->id)->paginate(8),
+        ], 200);
     }
     /**
      * Store a newly created resource in storage.
@@ -45,41 +48,9 @@ class UserArticleController extends Controller
 
         $article = new Article($validatedArticle);
 
-        return $article;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Article $article)
-    {
-        $article->load('user');
-        return $article;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCommentRequest  $request
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateArticleRequest $request, Article $article)
-    {
-       // We don't need this yet?
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Article $article)
-    {
-        return $article->delete();
+        return Response([
+            "status" => 201,
+            "article" => $article,
+        ], 201);
     }
 }
