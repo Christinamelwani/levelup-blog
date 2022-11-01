@@ -19,6 +19,22 @@
   color: white;
 }
 
+.actionHeader__image {
+  @include reset;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 999px;
+}
+
+.actionHeader__image--box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
+
 .actionHeader__email {
   @include reset;
   font-size: 1em;

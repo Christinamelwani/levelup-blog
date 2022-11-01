@@ -9,9 +9,10 @@ export default {
       type: String,
       required: false
     },
-    showImage: {
-      type: Boolean,
-      required: false
+    image: {
+      type: String,
+      required: false,
+      default: ''
     },
     link: {
       type: Object,
@@ -23,7 +24,7 @@ export default {
 
 <template>
   <div class="actionHeader">
-    <img v-if="showImage" src="@/assets/images/Ellipse4.png" />
+    <img class="actionHeader__image" v-if="image" :src="image" />
     <h1 class="actionHeader__title">{{ title }}</h1>
     <p v-if="subtitle" class="actionHeader__email">
       {{ subtitle }}

@@ -31,7 +31,7 @@ export default {
   <ActionSlider
     :title="userData.name"
     :subtitle="userData.email"
-    :showImage="true"
+    :image="userData.avatar_path"
     :link="{
       text: 'Edit Profile',
       destination: { name: 'Edit Profile' }

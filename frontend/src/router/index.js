@@ -2,25 +2,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useModalStore } from '@/stores/Modal.js'
 import { useAuthStore } from '@/stores/Auth.js'
 import Auth from '@/services/Auth.js'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: HomeView
+      component: () => import('@/views/Home.vue')
     },
     {
       path: '/article/:slug',
       name: 'Article',
-      component: () => import('../views/ArticleView.vue')
+      component: () => import('@/views/Article.vue')
     },
     {
       path: '/add-article',
       name: 'Add Article',
-      component: () => import('../views/AddArticle.vue'),
+      component: () => import('@/views/AddArticle.vue'),
       meta: {
         requiresAuth: true
       }
@@ -28,7 +26,7 @@ const router = createRouter({
     {
       path: '/article/:slug/edit',
       name: 'Edit Article',
-      component: () => import('../views/EditArticle.vue'),
+      component: () => import('@/views/EditArticle.vue'),
       meta: {
         requiresAuth: true
       }
@@ -36,7 +34,7 @@ const router = createRouter({
     {
       path: '/my-profile',
       name: 'Profile',
-      component: () => import('../views/ProfileView.vue'),
+      component: () => import('@/views/Profile.vue'),
       meta: {
         requiresAuth: true
       }
@@ -44,7 +42,7 @@ const router = createRouter({
     {
       path: '/edit-profile',
       name: 'Edit Profile',
-      component: () => import('../views/EditProfileView.vue'),
+      component: () => import('@/views/EditProfile.vue'),
       meta: {
         requiresAuth: true
       }

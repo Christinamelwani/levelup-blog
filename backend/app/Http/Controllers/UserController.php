@@ -74,7 +74,10 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $validated = $request->validated();
-        $validated['password'] = Hash::make($validated['password']);
+
+        if ($request->password) {
+            $validated['password'] = Hash::make($validated['password']);
+        }
 
         if ($request->avatar) {
             $path = $request->file('avatar')->store('public/images');

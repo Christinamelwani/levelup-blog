@@ -2,6 +2,7 @@
 import { mapState, mapActions } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
 
+import User from '@/services/User.js'
 import Auth from '@/services/Auth.js'
 import ActionSlider from '@/components/general/ActionSlider.vue'
 import UserForm from '@/components/auth/UserForm.vue'
@@ -14,7 +15,9 @@ export default {
         email: '',
         password: '',
         name: '',
-        slug: ''
+        slug: '',
+        avatar: null,
+        avatar_path: ''
       }
     }
   },
@@ -25,10 +28,7 @@ export default {
     ...mapActions(useAuthStore, ['setUser']),
 
     async editUserData() {
-      const response = await Auth.editSelfData(
-        this.userData.slug,
-        this.editedUserData
-      )
+      const response = await User.edit(this.userData.slug, this.editedUserData)
       this.setUser(await Auth.me())
       this.$router.push({ name: 'Profile' })
       this.$notify({

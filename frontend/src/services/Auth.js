@@ -11,10 +11,6 @@ export default {
     const token = loginResponse.data.token
     return { ...registerResponse.data, token }
   },
-  async editSelfData(slug, userData) {
-    const response = await Http.put(`/users/${slug}`, userData)
-    return response.data
-  },
   async me() {
     const response = await Http.get('/user')
     return response.data

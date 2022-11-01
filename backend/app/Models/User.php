@@ -68,4 +68,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reaction::class, 'article_reactions');
     }
+
+    public function getAvatarPathAttribute($value)
+    {
+        return asset($value ? asset('storage/' . explode('/',  $value, 2)[1]) : 'https://www.gravatar.com/avatar/' . md5($this->email) . '?s=60&d=mm');
+    }
+
 }

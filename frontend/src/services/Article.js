@@ -15,12 +15,10 @@ export default {
     return response.data.article
   },
   async addNew(articleData) {
-    const authStore = useAuthStore()
     const response = await Http.post(`/articles`, articleData)
     return response.data.article
   },
   async edit(slug, articleData) {
-    const authStore = useAuthStore()
     const response = await Http.put(`/articles/${slug}`, articleData)
     return response.data.article
   }
