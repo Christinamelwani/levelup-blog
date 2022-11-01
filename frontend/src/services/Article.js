@@ -1,9 +1,10 @@
 import Http from '@/services/Http'
-import { useAuthStore } from '@/stores/Auth.js'
 
 export default {
-  async all() {
-    const response = await Http.get('/articles')
+  async all(orderBy = 'created_at', sortedBy = 'desc', perPage = 10, page = 1) {
+    const response = await Http.get(
+      `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}`
+    )
     return response.data.articles.data
   },
   async byUserSlug(slug) {

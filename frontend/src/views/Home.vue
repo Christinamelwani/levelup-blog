@@ -15,7 +15,8 @@ export default {
   },
   data() {
     return {
-      articles: []
+      articles: [],
+      editorsPickArticles: []
     }
   },
   computed: {
@@ -25,7 +26,8 @@ export default {
   },
   async created() {
     try {
-      this.articles = await Article.all()
+      this.articles = await Article.all('created_at', 'desc', 8)
+      this.editorsPickArticles = await Article.all('created_at', 'desc', 3)
     } catch (err) {
       handleError(err)
     }
@@ -45,7 +47,7 @@ export default {
       <CategorySelector />
       <div class="blogCards__content">
         <ArticleCard
-          v-for="article in articles.slice(0, 8)"
+          v-for="article in articles"
           :key="article.id"
           :article="article"
         />
@@ -55,7 +57,7 @@ export default {
       <h1 class="editorsPick__header">Editor's Pick</h1>
       <div class="editorsPick__content">
         <HighlightedArticleCard
-          v-for="article in articles.slice(0, 3)"
+          v-for="article in editorsPickArticles"
           :key="article.id"
           :article="article"
         />

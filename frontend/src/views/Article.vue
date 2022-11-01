@@ -31,7 +31,7 @@ export default {
   },
   async created() {
     try {
-      this.articles = await Article.all()
+      this.articles = await Article.all('created_at', 'desc', 3)
       this.article = await Article.byArticleSlug(this.articleSlug)
     } catch (err) {
       handleError(err)
@@ -74,7 +74,7 @@ export default {
       <h1 class="relatedPosts__header">Related Posts</h1>
       <div class="editorsPick__content">
         <HighlightedArticleCard
-          v-for="article in articles.slice(0, 3)"
+          v-for="article in articles"
           :key="article.id"
           :article="article"
         />

@@ -6,7 +6,6 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Utils\StringUtils;
-use GuzzleHttp\Psr7\Response;
 
 class ArticleController extends Controller
 {
@@ -22,8 +21,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articlesQueryBuilder = Article::with('user')->orderBy('created_at', 'asc')->paginate(8);
-        $articlesQueryBuilder = Article::with('user')->newest()->category(request('category'))->paginate(8);
+        $articlesQueryBuilder = Article::with('user', 'categories')
+        ->orderBy(request('ordering'), request('direction'))
+        ->category(request('category'))
+        ->paginate(request('per_page'))
+        ->appends(request()->all());
 
         return Response([
             "status" => 200,
