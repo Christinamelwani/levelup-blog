@@ -35,6 +35,7 @@ export default {
 </script>
 <template>
   <ActionSlider
+    v-if="article.title"
     :title="article.title"
     :showImage="false"
     :link="{
@@ -46,6 +47,7 @@ export default {
     <h1 class="profile_title profile_title--center">Edit content</h1>
     <ArticleForm
       :submitAction="editArticle"
+      :prefilled="true"
       submitText="Update"
       :articleData="articleData"
     />

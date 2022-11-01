@@ -1,8 +1,13 @@
 <script>
 import { mapState } from 'pinia'
 import { useErrorStore } from '@/stores/Errors.js'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 export default {
+  components: {
+    QuillEditor
+  },
   props: {
     modelValue: {
       type: String,
@@ -24,7 +29,11 @@ export default {
       type: String,
       default: ''
     },
-    textarea: {
+    richTextSupport: {
+      type: Boolean,
+      default: false
+    },
+    prefilled: {
       type: Boolean,
       default: false
     },
@@ -42,6 +51,15 @@ export default {
       set(value) {
         this.$emit('update:modelValue', value)
       }
+    },
+    ready() {
+      if (!this.prefilled) {
+        return true
+      }
+      if (this.inputValue) {
+        return true
+      }
+      return false
     }
   }
 }
@@ -49,31 +67,30 @@ export default {
 <template>
   <div class="inputWrapper">
     <label class="inputLabel" :for="name">{{ label }}</label>
-    <div class="inputInner">
-      <textarea
-        v-if="textarea"
-        class="input input--textarea"
-        v-model="inputValue"
-        :type="type"
-        :id="name"
-        :placeholder="placeholder"
-        :name="name"
+    <div v-if="ready" class="inputInner">
+      <div
+        v-if="richTextSupport"
+        class="editor__wrapper"
         :class="{ 'input--hasError': errors[name] }"
-        :required="required"
-      ></textarea>
-
+      >
+        <QuillEditor
+          v-model:content="inputValue"
+          :id="name"
+          contentType="html"
+          theme="snow"
+        />
+      </div>
       <input
-        v-else="textarea"
+        v-else
         class="input"
+        :class="{ 'input--hasError': errors[name] }"
         v-model="inputValue"
         :type="type"
         :id="name"
         :placeholder="placeholder"
         :name="name"
-        :class="{ 'input--hasError': errors[name] }"
         :required="required"
       />
-
       <p class="input-message input-error" v-if="errors[name]">
         {{ errors[name][0] }}
       </p>

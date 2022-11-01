@@ -60,9 +60,7 @@ export default {
           </div>
         </div>
         <div class="article__wrapper">
-          <p class="article__text">
-            {{ article.content }}
-          </p>
+          <div class="article__text" v-html="article.content"></div>
           <div class="article__categories">
             <div class="article__category">Adventure</div>
             <div class="article__category">Photo</div>

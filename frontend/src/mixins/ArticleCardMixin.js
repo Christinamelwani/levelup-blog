@@ -5,7 +5,7 @@ export default {
       if (truncatedArticleContent !== this.article.content) {
         return `${this.article.content.slice(0, 200)}...`
       }
-      return truncatedArticleContent
+      return truncatedArticleContent.replace(/(<([^>]+)>)/gi, '')
     },
     truncatedTitle() {
       const truncatedArticleTitle = this.article?.title.slice(0, 40)

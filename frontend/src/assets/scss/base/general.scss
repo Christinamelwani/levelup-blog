@@ -24,3 +24,8 @@ body {
 .blank__slate {
   @include reset;
 }
+
+.ql-editor {
+  min-height: 20vh;
+  background: #fff;
+}

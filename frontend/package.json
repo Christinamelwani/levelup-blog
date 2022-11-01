@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^2.4.1",
+    "@vueup/vue-quill": "^1.0.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.21",
     "vue": "^3.2.38",

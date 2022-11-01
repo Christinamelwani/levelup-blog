@@ -43,6 +43,7 @@ export default {
     <h1 class="profile_title profile_title--center">Add content</h1>
     <ArticleForm
       :submitAction="addArticle"
+      :prefilled="false"
       submitText="Add new"
       :articleData="articleData"
     />

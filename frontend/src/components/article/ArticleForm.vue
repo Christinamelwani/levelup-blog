@@ -17,6 +17,11 @@ export default {
     articleData: {
       type: Object,
       required: true
+    },
+    prefilled: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   }
 }
@@ -34,13 +39,15 @@ export default {
     />
     <Input
       v-model="articleData.content"
+      :richTextSupport="true"
+      :prefilled="prefilled"
       name="content"
-      label="Content"
+      label="content"
       type="text"
-      :textarea="true"
       placeholder="Add content"
       :required="false"
     />
+
     <Btn type="submit" :isLoading="slotProps.isLoading">{{ submitText }}</Btn>
   </Form>
 </template>
