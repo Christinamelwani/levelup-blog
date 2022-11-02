@@ -87,7 +87,6 @@ export default {
 <template>
   <div class="page--home">
     <Slider
-      v-if="featuredArticle.content"
       class="slider-home"
       :article="featuredArticle"
       :extendedContent="true"

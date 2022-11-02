@@ -8,7 +8,8 @@ export default {
   props: {
     article: {
       type: Object,
-      required: true
+      required: false,
+      default: {}
     },
     extendedContent: {
       type: Boolean,
@@ -25,12 +26,14 @@ export default {
 
 <template>
   <section class="slider">
-    <div class="slider__inner">
-      <CategoryCard
-        :class="`categoryCard--${alignContent} categoryCard--slider`"
-        v-for="category in article.categories"
-        :category="category"
-      />
+    <div class="slider__inner" v-if="article.title">
+      <div class="slider__categories">
+        <CategoryCard
+          :class="`categoryCard--${alignContent} categoryCard--slider`"
+          v-for="category in article.categories"
+          :category="category"
+        />
+      </div>
       <div class="slider__header">
         {{ article.title }}
       </div>
@@ -62,6 +65,9 @@ export default {
       <div v-if="!extendedContent" class="slider__byline">
         By {{ article.user.name }}
       </div>
+    </div>
+    <div class="slider__inner" v-else>
+      <div class="slider__header">No articles yet!</div>
     </div>
   </section>
 </template>

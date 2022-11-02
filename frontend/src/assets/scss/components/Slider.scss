@@ -83,3 +83,9 @@
 .slider__byline {
   font-weight: 700;
 }
+
+.slider__categories {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

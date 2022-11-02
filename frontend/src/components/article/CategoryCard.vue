@@ -12,7 +12,7 @@ export default {
 <template>
   <div class="categoryCard">
     <router-link
-      class="blank__slate categoryCard"
+      class="blank__slate"
       :to="{ name: 'categoryArticles', params: { id: category.id } }"
     >
       {{ category.name }}
