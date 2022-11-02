@@ -1,11 +1,17 @@
 import Http from '@/services/Http'
 
 export default {
-  async all(orderBy = 'created_at', sortedBy = 'desc', perPage = 10, page = 1) {
+  async all(
+    orderBy = 'created_at',
+    sortedBy = 'desc',
+    perPage = 10,
+    page = 1,
+    category = ''
+  ) {
     const response = await Http.get(
-      `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}`
+      `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}&category=${category}`
     )
-    return response.data.articles.data
+    return response.data.articles
   },
   async byUserSlug(slug) {
     const response = await Http.get(`/users/${slug}/articles`)

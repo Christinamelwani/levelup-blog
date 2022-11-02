@@ -11,7 +11,7 @@ export default {
 <template>
   <Header> </Header>
   <ModalView />
-  <RouterView />
+  <RouterView :key="$route.params.id" />
   <Footer> </Footer>
   <notifications position="bottom right" />
 </template>

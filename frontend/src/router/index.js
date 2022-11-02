@@ -8,6 +8,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'Home',
       component: () => import('@/views/Home.vue')
     },
     {
@@ -46,6 +47,11 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/category/:id',
+      name: 'categoryArticles',
+      component: () => import('@/views/CategoryArticles.vue')
     }
   ]
 })

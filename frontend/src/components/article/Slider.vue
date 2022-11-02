@@ -26,7 +26,11 @@ export default {
 <template>
   <section class="slider">
     <div class="slider__inner">
-      <CategoryCard :class="`categoryCard--${alignContent}`" />
+      <CategoryCard
+        :class="`categoryCard--${alignContent} categoryCard--slider`"
+        v-for="category in article.categories"
+        :category="category"
+      />
       <div class="slider__header">
         {{ article.title }}
       </div>

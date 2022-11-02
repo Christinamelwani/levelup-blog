@@ -55,7 +55,7 @@ class Article extends Model
         }
 
         return $builder->with('categories')->whereHas('categories', function ($q) use ($category) {
-            $q->where('slug', $category);
+            $q->where('categories.id', $category);
         });
     }
 }

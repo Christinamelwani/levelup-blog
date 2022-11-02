@@ -31,7 +31,8 @@ export default {
   },
   async created() {
     try {
-      this.articles = await Article.all('created_at', 'desc', 3)
+      const response = await Article.all('created_at', 'desc', 3)
+      this.articles = response.data
       this.article = await Article.byArticleSlug(this.articleSlug)
     } catch (err) {
       handleError(err)
@@ -62,9 +63,13 @@ export default {
         <div class="article__wrapper">
           <div class="article__text" v-html="article.content"></div>
           <div class="article__categories">
-            <div class="article__category">Adventure</div>
-            <div class="article__category">Photo</div>
-            <div class="article__category">Design</div>
+            <router-link
+              v-for="category in article.categories"
+              class="article__category"
+              :to="{ name: 'categoryArticles', params: { id: category.id } }"
+            >
+              {{ category.name }}
+            </router-link>
           </div>
           <Byline :author="article.user" :withSocialMedia="true" />
         </div>

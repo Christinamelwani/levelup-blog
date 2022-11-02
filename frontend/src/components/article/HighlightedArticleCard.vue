@@ -35,7 +35,11 @@ export default {
             src="@/assets/images/editIcon.svg"
           />
         </RouterLink>
-        <CategoryCard class="categoryCard--highlighted" />
+        <CategoryCard
+          class="categoryCard--highlighted"
+          v-for="category in article.categories"
+          :category="category"
+        />
       </div>
       <RouterLink :to="articlePath" class="article__link">
         <div class="highlightedArticle__inner">

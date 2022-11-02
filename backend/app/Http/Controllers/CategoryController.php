@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         return Response([
             "status" => 200,
-            "categories" => Category::paginate(10),
+            "categories" => Category::all(),
         ], 200);
     }
 

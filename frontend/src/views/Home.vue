@@ -26,8 +26,9 @@ export default {
   },
   async created() {
     try {
-      this.articles = await Article.all('created_at', 'desc', 8)
-      this.editorsPickArticles = await Article.all('created_at', 'desc', 3)
+      const response = await Article.all('created_at', 'desc', 8)
+      this.articles = response.data
+      this.editorsPickArticles = response.data.slice(0, 3)
     } catch (err) {
       handleError(err)
     }
