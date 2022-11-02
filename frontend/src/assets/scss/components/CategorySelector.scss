@@ -23,9 +23,12 @@
   cursor: pointer;
   white-space: nowrap;
 }
+.categorySelector__item-link {
+  @include reset();
 
-.categorySelector__item-active {
-  color: #d4a373;
+  &.router-link-active {
+    color: #d4a373;
+  }
 }
 
 .categorySelector__item-viewAll {

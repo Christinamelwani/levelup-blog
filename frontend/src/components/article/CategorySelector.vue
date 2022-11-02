@@ -15,10 +15,14 @@ export default {
 <template>
   <div class="categorySelector">
     <ul class="categorySelector__list">
-      <li class="categorySelector__item-active categorySelector__item">All</li>
+      <li class="categorySelector__item">
+        <router-link class="categorySelector__item-link" :to="{ name: 'Home' }">
+          All
+        </router-link>
+      </li>
       <li class="categorySelector__item" v-for="category in categories">
         <router-link
-          class="blank__slate"
+          class="categorySelector__item-link"
           :to="{ name: 'categoryArticles', params: { id: category.id } }"
         >
           {{ category.name }}
@@ -26,7 +30,12 @@ export default {
       </li>
     </ul>
     <h3 class="categorySelector__item categorySelector__item-viewAll">
-      View All
+      <router-link
+        class="categorySelector__item-link"
+        :to="{ name: 'Articles' }"
+      >
+        View All
+      </router-link>
     </h3>
   </div>
 </template>
