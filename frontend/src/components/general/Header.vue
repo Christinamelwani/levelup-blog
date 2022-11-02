@@ -27,10 +27,9 @@ export default {
             <RouterLink class="header__nav-item-link" to="/">Home</RouterLink>
           </li>
           <li class="header__nav-item">
-            <a class="header__nav-item-link">About</a>
-          </li>
-          <li class="header__nav-item">
-            <a class="header__nav-item-link">Articles</a>
+            <RouterLink class="header__nav-item-link" :to="{ name: 'Articles' }"
+              >Articles</RouterLink
+            >
           </li>
           <li>
             <ul class="header__nav-group" v-if="isGuest">

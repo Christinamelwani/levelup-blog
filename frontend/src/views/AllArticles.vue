@@ -1,26 +1,26 @@
 <script>
-import Slider from '@/components/article/Slider.vue'
 import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.vue'
 import Article from '@/services/Article'
 import ArticleCard from '@/components/article/ArticleCard.vue'
 import CategorySelector from '@/components/article/CategorySelector.vue'
 import handleError from '@/helpers/handleError'
 import InfiniteLoading from 'v3-infinite-loading'
+import Slider from '@/components/article/Slider.vue'
 import 'v3-infinite-loading/lib/style.css' //required if you're not going to override default slots
 
 export default {
   components: {
-    Slider,
     ArticleCard,
     CategorySelector,
     InfiniteLoading,
+    Slider,
     HighlightedArticleCard
   },
   data() {
     return {
       articles: {},
-      current_page: 1,
-      last_page: 1,
+      current_page: 0,
+      last_page: 0,
       isLoading: false
     }
   },
@@ -51,8 +51,7 @@ export default {
           'created_at',
           'desc',
           8,
-          this.current_page,
-          this.$route.params.id
+          this.current_page
         )
         this.articles = this.articles.concat(response.data)
         this.current_page = response.current_page
@@ -72,8 +71,7 @@ export default {
         'created_at',
         'desc',
         8,
-        this.current_page,
-        this.$route.params.id
+        this.current_page
       )
       this.articles = response.data
       this.current_page = response.current_page
@@ -96,7 +94,7 @@ export default {
       alignContent="left"
     />
     <section class="blogCards">
-      <div class="blogCards__header">Popular topics</div>
+      <div class="blogCards__header">Browse all Articles</div>
       <CategorySelector />
       <div class="blogCards__content">
         <ArticleCard
