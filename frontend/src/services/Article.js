@@ -25,6 +25,10 @@ export default {
     const response = await Http.post(`/articles`, articleData)
     return response.data.article
   },
+  async addNewComment(newComment) {
+    const response = await Http.post(`/comments`, newComment)
+    return response.data.comment
+  },
   async edit(slug, articleData) {
     const response = await Http.put(`/articles/${slug}`, articleData)
     return response.data.article

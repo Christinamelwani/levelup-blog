@@ -1,7 +1,4 @@
 <script>
-import { mapState, mapActions } from 'pinia'
-import { useAuthStore } from '@/stores/Auth.js'
-
 import Article from '@/services/Article.js'
 import ActionSlider from '@/components/general/ActionSlider.vue'
 import ArticleForm from '@/components/article/ArticleForm.vue'

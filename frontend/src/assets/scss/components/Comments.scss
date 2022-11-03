@@ -1,0 +1,74 @@
+.comment {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+.comment__header {
+  font-size: 1.125em;
+  font-family: Lora;
+  color: #495057;
+}
+.comment__box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-family: Lora;
+  background-color: #e7e7e7;
+  padding: 1.2rem 1.5rem;
+  border-radius: 21px;
+}
+.comment__form {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 21px;
+}
+.comment__input {
+  border: none;
+  padding: 0 0.5rem;
+  height: 2rem;
+  border-radius: 21px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  width: 100%;
+  background-color: white;
+}
+.comment__btn {
+  border-radius: 21px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  height: 2.25rem;
+  padding: 0rem 1.5rem;
+}
+
+.comment__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comment__author {
+  @include reset();
+  font-size: 0.75;
+  font-family: Lora;
+  color: #343a40;
+  font-weight: bold;
+}
+.comment__date {
+  @include reset();
+  font-size: 0.75;
+  font-family: Lora;
+  color: #858585;
+}
+.comment__content {
+  @include reset();
+  font-size: 0.8;
+  font-family: Lora;
+  color: #495057;
+}

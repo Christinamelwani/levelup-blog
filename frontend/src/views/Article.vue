@@ -1,17 +1,24 @@
 <script>
+import Byline from '@/components/general/Byline.vue'
 import Slider from '@/components/article/Slider.vue'
 import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.vue'
-import Byline from '@/components/general/Byline.vue'
+import ArticleComments from '@/components/article/ArticleComments.vue'
 import Article from '@/services/Article'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 import handleError from '@/helpers/handleError.js'
 
 export default {
-  components: { Slider, HighlightedArticleCard, Byline },
+  components: {
+    Slider,
+    HighlightedArticleCard,
+    ArticleComments,
+    Byline
+  },
   data() {
     return {
       articles: [],
-      article: {}
+      article: {},
+      reloadArticle: false
     }
   },
   mixins: [ArticleCardMixin],
@@ -27,6 +34,10 @@ export default {
     // For when a highlighted article is clicked
     async articleSlug(newValue) {
       this.article = await Article.byArticleSlug(newValue)
+    },
+    async reloadArticle() {
+      this.article = await Article.byArticleSlug(this.$route.params.slug)
+      this.reloadArticle = false
     }
   },
   async created() {
@@ -72,6 +83,7 @@ export default {
             </router-link>
           </div>
           <Byline :author="article.user" :withSocialMedia="true" />
+          <ArticleComments @reload="reloadArticle = true" :article="article" />
         </div>
       </div>
     </section>
