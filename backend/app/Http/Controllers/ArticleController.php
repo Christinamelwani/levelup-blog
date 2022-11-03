@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -22,10 +23,10 @@ class ArticleController extends Controller
     public function index()
     {
         $articlesQueryBuilder = Article::with('user', 'categories')
-        ->orderBy(request('ordering'), request('direction'))
-        ->category(request('category'))
-        ->paginate(request('per_page'))
-        ->appends(request()->all());
+            ->orderBy(request('ordering'), request('direction'))
+            ->category(request('category'))
+            ->paginate(request('per_page'))
+            ->appends(request()->all());
 
         return Response([
             "status" => 200,
@@ -47,6 +48,7 @@ class ArticleController extends Controller
             'slug' => ['nullable'],
         ]);
 
+
         $validatedArticle['user_id'] = auth()->user()->id;
 
         if (!$request->slug) {
@@ -57,6 +59,9 @@ class ArticleController extends Controller
 
         $article->save();
 
+        if ($request->categories) {
+            $article->categories()->attach($request->categories);
+        }
         return Response([
             "status" => 201,
             "article" => $article,
@@ -95,6 +100,15 @@ class ArticleController extends Controller
         ]);
 
         $article->update($validatedArticle);
+
+        if ($request->categories) {
+            $article->categories()->sync($request->categories);
+        }
+
+        if (empty($request->categories)) {
+            $article->categories()->detach();
+        }
+
         return Response([
             "status" => 200,
             "article" => $article,

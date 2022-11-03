@@ -1,5 +1,6 @@
 <script>
 import Article from '@/services/Article.js'
+import Category from '@/services/Category.js'
 import ActionSlider from '@/components/general/ActionSlider.vue'
 import ArticleForm from '@/components/article/ArticleForm.vue'
 
@@ -11,8 +12,10 @@ export default {
       articleData: {
         title: '',
         slug: '',
-        content: ''
-      }
+        content: '',
+        categories: []
+      },
+      categoryOptions: []
     }
   },
   methods: {
@@ -23,13 +26,23 @@ export default {
         type: 'success',
         text: `Changes to ${this.articleData.title} saved!`
       })
+    },
+    async populateArticleData() {
+      this.article = await Article.byArticleSlug(this.$route.params.slug)
+      this.categoryOptions = await Category.all()
+
+      Object.keys(this.articleData).forEach((articleField) => {
+        this.articleData[articleField] = this.article[articleField]
+      })
+
+      // This is because we need to submit categories as an array of ids
+      this.articleData.categories = this.articleData.categories.map(
+        (category) => category.id
+      )
     }
   },
-  async created() {
-    this.article = await Article.byArticleSlug(this.$route.params.slug)
-    this.articleData.title = this.article.title
-    this.articleData.slug = this.article.slug
-    this.articleData.content = this.article.content
+  created() {
+    this.populateArticleData()
   }
 }
 </script>
@@ -49,6 +62,7 @@ export default {
       :submitAction="editArticle"
       :prefilled="true"
       submitText="Update"
+      :categoryOptions="categoryOptions"
       :articleData="articleData"
     />
   </div>

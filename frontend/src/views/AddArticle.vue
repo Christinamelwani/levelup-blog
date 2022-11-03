@@ -1,5 +1,6 @@
 <script>
 import Article from '@/services/Article.js'
+import Category from '@/services/Category.js'
 import ActionSlider from '@/components/general/ActionSlider.vue'
 import ArticleForm from '@/components/article/ArticleForm.vue'
 
@@ -10,8 +11,10 @@ export default {
       articleData: {
         title: '',
         slug: '',
-        content: ''
-      }
+        content: '',
+        categories: []
+      },
+      categoryOptions: []
     }
   },
 
@@ -24,6 +27,9 @@ export default {
         text: `${this.articleData.title} successfully added!`
       })
     }
+  },
+  async created() {
+    this.categoryOptions = await Category.all()
   }
 }
 </script>
@@ -41,6 +47,7 @@ export default {
     <ArticleForm
       :submitAction="addArticle"
       :prefilled="false"
+      :categoryOptions="categoryOptions"
       submitText="Add new"
       :articleData="articleData"
     />
