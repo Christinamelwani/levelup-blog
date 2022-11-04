@@ -82,7 +82,11 @@ export default {
               {{ category.name }}
             </router-link>
           </div>
-          <Byline :author="article.user" :withSocialMedia="true" />
+          <Byline
+            :article="article"
+            :author="article.user"
+            :withSocialMedia="true"
+          />
           <ArticleComments @reload="reloadArticle = true" :article="article" />
         </div>
       </div>

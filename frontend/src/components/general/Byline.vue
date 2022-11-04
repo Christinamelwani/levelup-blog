@@ -1,6 +1,13 @@
 <script>
+import ReactionToolbar from '@/components/general/ReactionToolbar.vue'
+
 export default {
+  components: { ReactionToolbar },
   props: {
+    article: {
+      type: Object,
+      required: true
+    },
     withImage: {
       type: Boolean,
       required: false,
@@ -15,7 +22,8 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
+  components: { ReactionToolbar }
 }
 </script>
 
@@ -28,8 +36,6 @@ export default {
         <h4 class="byline__subheader">Thinker and designer</h4>
       </div>
     </div>
-    <div v-if="withSocialMedia">
-      <img v-for="index in 4" src="@/assets/images/socialMediaIcon.svg" />
-    </div>
+    <ReactionToolbar :article="article" v-if="withSocialMedia" />
   </div>
 </template>

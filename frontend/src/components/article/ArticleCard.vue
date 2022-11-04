@@ -24,7 +24,7 @@ export default {
         <p class="articleCard__text">{{ truncatedContent }}</p>
       </div>
       <div class="articleCard__byline">
-        <Byline :author="article.user" />
+        <Byline :article="article" :author="article.user" />
       </div>
     </div>
   </RouterLink>

@@ -1,0 +1,30 @@
+.reaction__container {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.reaction__count {
+  @include reset;
+  color: blue;
+  cursor: pointer;
+}
+
+.has-reacted {
+  color: green;
+}
+
+.reaction__inner {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+
+.reaction__image {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
