@@ -9,7 +9,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'slug', 'user_id'];
+    protected $fillable = ['title', 'content', 'slug', 'user_id', 'image_path'];
 
     public function getRouteKeyName()
     {
@@ -57,5 +57,10 @@ class Article extends Model
         return $builder->with('categories')->whereHas('categories', function ($q) use ($category) {
             $q->where('categories.id', $category);
         });
+    }
+
+    public function getImagePathAttribute($value)
+    {
+        return asset($value ? asset('storage/' . explode('/',  $value, 2)[1]) : 'https://fujifilm-x.com/wp-content/uploads/2019/08/xc16-50mmf35-56-ois-2_sample-images03.jpg');
     }
 }

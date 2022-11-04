@@ -46,6 +46,7 @@ class ArticleController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'slug' => ['nullable'],
+            'image' => ['nullable', 'image'],
         ]);
 
 
@@ -53,6 +54,14 @@ class ArticleController extends Controller
 
         if (!$request->slug) {
             $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+        }
+
+        if ($request->image) {
+            $path = $request->file('image')->store('public/images');
+            if (!$path) {
+                return response()->json(['msg' => 'image could not be saved'], 500);
+            }
+            $validatedArticle['image_path'] = $path;
         }
 
         $article = new Article($validatedArticle);
@@ -97,9 +106,20 @@ class ArticleController extends Controller
             'content' => ['nullable'],
             'slug' => ['nullable'],
             'user_id' => ['nullable'],
+            'image' => ['nullable', 'image'],
         ]);
 
+        if ($request->image) {
+            $path = $request->file('image')->store('public/images');
+            if (!$path) {
+                return response()->json(['msg' => 'image could not be saved'], 500);
+            }
+            $validatedArticle['image_path'] = $path;
+        }
+
+
         $article->update($validatedArticle);
+
 
         if ($request->categories) {
             $article->categories()->sync($request->categories);
