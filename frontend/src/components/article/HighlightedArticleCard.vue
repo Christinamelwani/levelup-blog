@@ -20,7 +20,7 @@ export default {
 
 <template>
   <div class="highlightedArticle">
-    <img class="highlightedArticle__img" src="@/assets/images/BlogImage2.png" />
+    <img class="highlightedArticle__img" :src="article.image_path" />
     <div class="highlightedArticle__wrapper">
       <div class="highlightedArticle__top">
         <RouterLink

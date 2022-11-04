@@ -12,7 +12,9 @@ export default {
         title: '',
         slug: '',
         content: '',
-        categories: []
+        categories: [],
+        image: null,
+        image_path: ''
       },
       categoryOptions: []
     }
@@ -20,6 +22,9 @@ export default {
 
   methods: {
     async addArticle() {
+      if (!this.articleData.image) {
+        delete this.articleData.image
+      }
       const response = await Article.addNew(this.articleData)
       this.$router.push({ name: 'Profile' })
       this.$notify({

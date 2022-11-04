@@ -1,4 +1,5 @@
 import Http from '@/services/Http'
+import dataToFormData from '@/helpers/dataToFormData'
 
 export default {
   async all(
@@ -22,7 +23,8 @@ export default {
     return response.data.article
   },
   async addNew(articleData) {
-    const response = await Http.post(`/articles`, articleData)
+    const formData = dataToFormData(articleData)
+    const response = await Http.post(`/articles`, formData)
     return response.data.article
   },
   async addNewComment(newComment) {
@@ -30,7 +32,13 @@ export default {
     return response.data.comment
   },
   async edit(slug, articleData) {
-    const response = await Http.put(`/articles/${slug}`, articleData)
+    const formData = dataToFormData(articleData)
+    formData.append('_method', 'PATCH')
+    const response = await Http.post(`/articles/${slug}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     return response.data.article
   }
 }

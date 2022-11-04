@@ -1,0 +1,9 @@
+.articleEditor {
+  padding: 1rem 10rem;
+  @include for-tablet-down {
+    padding: 0.5rem;
+  }
+  @include for-phone-only {
+    padding: 0.5rem;
+  }
+}

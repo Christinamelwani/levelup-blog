@@ -3,9 +3,16 @@ import Form from '@/components/general/Form.vue'
 import Input from '@/components/general/Input.vue'
 import Btn from '@/components/general/Btn.vue'
 import Multiselect from '@vueform/multiselect'
+import myUpload from 'vue-image-crop-upload'
 
 export default {
-  components: { Input, Btn, Form, Multiselect },
+  components: { Input, Btn, Form, Multiselect, myUpload },
+  data() {
+    return {
+      showImageUpload: false,
+      uploadedImage: ''
+    }
+  },
   computed: {
     ready() {
       if (!this.prefilled) {
@@ -15,6 +22,30 @@ export default {
         return true
       }
       return false
+    },
+    imagePreview() {
+      return (
+        this.uploadedImage ||
+        this.articleData.image_path ||
+        'https://fujifilm-x.com/wp-content/uploads/2019/08/xc16-50mmf35-56-ois-2_sample-images03.jpg'
+      )
+    }
+  },
+  methods: {
+    async cropSuccess(imgDataUrl, field) {
+      this.uploadedImage = imgDataUrl
+      this.articleData.image = this.dataUrlToFile(imgDataUrl, field)
+    },
+    dataUrlToFile(dataurl, filename) {
+      let arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n)
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+      }
+      return new File([u8arr], filename, { type: mime })
     }
   },
   props: {
@@ -45,6 +76,23 @@ export default {
 
 <template>
   <Form v-slot="slotProps" :submitAction="submitAction" :data="articleData">
+    <div class="coverImage--box">
+      <img
+        @click="showImageUpload = !showImageUpload"
+        class="coverImage"
+        :src="imagePreview"
+        alt=""
+      />
+      <my-upload
+        field="image"
+        @crop-success="cropSuccess"
+        v-model="showImageUpload"
+        :width="300"
+        :height="300"
+        img-format="png"
+        langType="en"
+      />
+    </div>
     <div class="multicolumn__wrapper">
       <div class="form__column">
         <Input

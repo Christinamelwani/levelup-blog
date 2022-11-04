@@ -13,6 +13,8 @@ export default {
         title: '',
         slug: '',
         content: '',
+        image: null,
+        image_path: '',
         categories: []
       },
       categoryOptions: []
@@ -20,6 +22,9 @@ export default {
   },
   methods: {
     async editArticle() {
+      if (!this.articleData.image) {
+        delete this.articleData.image
+      }
       const response = await Article.edit(this.article.slug, this.articleData)
       this.$router.push({ name: 'Profile' })
       this.$notify({
@@ -56,7 +61,7 @@ export default {
       destination: { name: 'Profile' }
     }"
   />
-  <div class="profile_articles">
+  <div class="articleEditor">
     <h1 class="profile_title profile_title--center">Edit content</h1>
     <ArticleForm
       :submitAction="editArticle"
