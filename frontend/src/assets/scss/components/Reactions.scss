@@ -8,12 +8,12 @@
 
 .reaction__count {
   @include reset;
-  color: blue;
+  color: black;
   cursor: pointer;
 }
 
 .has-reacted {
-  color: green;
+  color: blue;
 }
 
 .reaction__inner {

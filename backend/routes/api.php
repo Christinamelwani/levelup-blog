@@ -48,10 +48,10 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
     Route::delete('/articles/{article}/categories', [ArticleCategoryController::class, 'destroy']);
 
     Route::post('/articles/{article}/reactions', [ArticleReactionController::class, 'store']);
-    Route::delete('/articles/{article}/reactions', [ArticleReactionController::class, 'destroy']);
+    Route::delete('/articles/{article}/reactions/{reaction}', [ArticleReactionController::class, 'destroy']);
 
     Route::post('/comments/{comment}/reactions', [CommentReactionController::class, 'store']);
-    Route::delete('/comments/{comment}/reactions', [CommentReactionController::class, 'destroy']);
+    Route::delete('/comments/{comment}/reactions/{reaction}', [CommentReactionController::class, 'destroy']);
 });
 
 

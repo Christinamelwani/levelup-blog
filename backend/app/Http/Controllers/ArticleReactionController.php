@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreArticleCategoryRequest;
 use App\Http\Requests\StoreArticleReactionRequest;
 use App\Models\Article;
 use App\Models\ArticleReaction;
@@ -12,7 +11,7 @@ class ArticleReactionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(ArticleReaction::class, options: ['except' => ['index']]);
+        $this->authorizeResource(Article::class, options: ['except' => ['index']]);
     }
 
     /**
@@ -34,14 +33,15 @@ class ArticleReactionController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Article $article, StoreArticleReactionRequest $request) {
+    public function store(Article $article, StoreArticleReactionRequest $request)
+    {
         $user_id = auth()->user()->id;
         $article_id = $article->id;
         $reaction_id = $request->reaction_id;
 
         $article_reaction =  $article->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
-        if(count($article_reaction) > 0){
-            $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
+        if (count($article_reaction) > 0) {
+            $reaction_type = Reaction::where('id', '=', $reaction_id)->get()[0]->type;
             return Response(['status' => 400, 'msg' => "You have already reacted {$reaction_type} to this article!"], 400);
         }
         $new_reaction = new ArticleReaction([
@@ -63,18 +63,18 @@ class ArticleReactionController extends Controller
      * @param  \App\Models\Ca  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article, StoreArticleCategoryRequest $request)
+    public function destroy(Article $article, Reaction $reaction)
     {
-
         $user_id = auth()->user()->id;
-        $reaction_id = $request->reaction_id;
+        $reaction_id = $reaction->id;
+
         $article_reaction =  $article->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
-        if(count($article_reaction) == 0){
-            $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
+        if (count($article_reaction) == 0) {
+            $reaction_type = Reaction::where('id', '=', $reaction_id)->get()[0]->type;
             return Response(['status' => 400, 'msg' => "You have not reacted {$reaction_type} to this article yet!"], 400);
         }
 
-        $article_reaction[0]->delete();
+        $article_reaction->firstOrFail()->delete();
 
         return Response([
             "status" => 200,
