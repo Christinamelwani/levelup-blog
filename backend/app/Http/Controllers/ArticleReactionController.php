@@ -11,7 +11,7 @@ class ArticleReactionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Article::class, options: ['except' => ['index']]);
+        $this->authorizeResource(Article::class, options: ['except' => ['index', 'destroy']]);
     }
 
     /**

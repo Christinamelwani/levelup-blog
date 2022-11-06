@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use App\Models\ArticleCategory;
+use App\Models\Reaction;
 use App\Utils\StringUtils;
 
 class ArticleController extends Controller
@@ -85,7 +85,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $article->load(['user', 'categories', 'comments', 'comments.author', 'reactions']);
+        $article->load(['user', 'categories', 'comments', 'comments.author']);
+        $article->grouped_reactions =  $article->reactions->groupBy('reaction.type');
+        $article->reaction_types = Reaction::All();
         return Response([
             "status" => 200,
             "article" => $article,
