@@ -4,7 +4,7 @@ import { notify } from '@kyvg/vue3-notification'
 
 export default (errorResponse) => {
   const errorStore = useErrorStore()
-  if (errorResponse.response?.status == 403) {
+  if (errorResponse.response?.status == 401) {
     return notify({
       title: 'Incorrect credentials',
       type: 'error',
