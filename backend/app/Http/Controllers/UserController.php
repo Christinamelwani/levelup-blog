@@ -30,14 +30,16 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'slug' => 'required',
-            'password' => 'required'
-        ]);
-
+        $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
+
+        if ($request->avatar) {
+            $path = $request->file('avatar')->store('public/images');
+            if (!$path) {
+                return response()->json(['msg' => 'avatar could not be saved'], 500);
+            }
+            $validated['avatar_path'] = $path;
+        }
 
         $user = new User($validated);
         $user->save();
@@ -71,7 +73,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $validated = $request->validated();
+        if( $request->password){
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        if ($request->avatar) {
+            $path = $request->file('avatar')->store('public/images');
+            if (!$path) {
+                return response()->json(['msg' => 'avatar could not be saved'], 500);
+            }
+            $validated['avatar_path'] = $path;;
+        }
+
+        $user->update($validated);
         return Response([
             "status" => 200,
             "user" => $user,

@@ -16,6 +16,13 @@ class ArticleReactionPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
+    public function before(User $user, $ability)
+    {
+        if ($user->name == 'admin') {
+        return true;
+        }
+    }
+
     public function viewAny(User $user)
     {
         return true;

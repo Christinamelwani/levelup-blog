@@ -13,10 +13,6 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        if(auth()->user()->name == 'admin'){
-            return true;
-        }
-        request()->user_id = auth()->user()->id;
         return true;
     }
 

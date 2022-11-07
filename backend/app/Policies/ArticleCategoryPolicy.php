@@ -10,6 +10,12 @@ class ArticleCategoryPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability)
+    {
+        if ($user->name == 'admin') {
+        return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      *

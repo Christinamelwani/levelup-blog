@@ -20,7 +20,11 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Comment::with('author', 'reactions')->paginate(5);
+        return Response([
+            "status" => 200,
+            "comments" => Comment::with('author', 'reactions')->paginate(5),
+        ], 200);
+
     }
 
     /**
@@ -32,6 +36,8 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $comment = new Comment($request->validated());
+        $comment['user_id'] = auth()->user()->id;
+
         $comment->save();
 
         return Response([
@@ -66,7 +72,7 @@ class CommentController extends Controller
         $updated_comment = $comment->update($request->validated());
         return Response([
             "status" => 200,
-            "article" => $updated_comment,
+            "comment" => $updated_comment,
         ], 200);
 
     }

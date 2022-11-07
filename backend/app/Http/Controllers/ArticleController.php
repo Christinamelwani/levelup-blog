@@ -22,12 +22,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        // N+1 problem
-        $articles = Article::with(['user', 'categories', 'comments', 'comments.author', 'reactions'])->paginate(8);
+        $articlesQueryBuilder = Article::with('user')->orderBy('created_at', 'asc')->paginate(8);
+        $articlesQueryBuilder = Article::with('user')->newest()->category(request('category'))->paginate(8);
 
         return Response([
             "status" => 200,
-            "articles" => $articles,
+            "articles" => $articlesQueryBuilder,
         ], 200);
     }
 
@@ -42,9 +42,10 @@ class ArticleController extends Controller
         $validatedArticle = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
-            'slug' => ['required'],
-            'user_id' => ['required'],
+            'slug' => ['prohibited'],
         ]);
+
+        $validatedArticle['user_id'] = auth()->user()->id;
 
         $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
 
@@ -67,7 +68,10 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $article->load(['user', 'categories', 'comments', 'comments.author', 'reactions']);
-        return $article;
+        return Response([
+            "status" => 200,
+            "article" => $article,
+        ], 200);
     }
 
     /**
@@ -80,10 +84,10 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         $validatedArticle = $request->validate([
-            'title' => ['required'],
-            'content' => ['required'],
-            'slug' => ['required'],
-            'user_id' => ['required'],
+            'title' => ['nullable'],
+            'content' => ['nullable'],
+            'slug' => ['nullable'],
+            'user_id' => ['nullable'],
         ]);
 
         $article->update($validatedArticle);
