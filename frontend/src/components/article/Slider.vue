@@ -16,6 +16,11 @@ export default {
       required: false,
       default: false
     },
+    editable: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     extendedContent: {
       type: Boolean,
       required: true,
@@ -44,6 +49,22 @@ export default {
           {{ article.title }}
         </div>
       </RouterLink>
+      <div v-else-if="editable">
+        <div class="slider__iconContainer">
+          <RouterLink
+            :to="{
+              name: 'Edit Article',
+              params: { slug: article.slug }
+            }"
+          >
+            <img class="slider__icon" src="@/assets/images/editIcon.svg" />
+          </RouterLink>
+          <img class="slider__icon" src="@/assets/images/deleteIcon.svg" />
+        </div>
+        <div class="slider__header">
+          {{ article.title }}
+        </div>
+      </div>
       <div v-else>
         <div class="slider__header">
           {{ article.title }}

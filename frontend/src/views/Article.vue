@@ -6,6 +6,8 @@ import ArticleComments from '@/components/article/ArticleComments.vue'
 import Article from '@/services/Article'
 import ArticleCardMixin from '@/mixins/ArticleCardMixin'
 import handleError from '@/helpers/handleError.js'
+import { mapState } from 'pinia'
+import { useAuthStore } from '@/stores/Auth.js'
 
 export default {
   components: {
@@ -23,6 +25,7 @@ export default {
   },
   mixins: [ArticleCardMixin],
   computed: {
+    ...mapState(useAuthStore, ['userData']),
     articleSlug() {
       return this.$route.params.slug
     },
@@ -58,6 +61,7 @@ export default {
       class="slider-article"
       :article="article"
       :extendedContent="false"
+      :editable="this.userData.id === this.article.user.id"
       alignContent="center"
     />
     <section class="article">
