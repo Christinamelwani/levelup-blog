@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <div class="categorySelector">
+  <div v-if="this.categories.length" class="categorySelector">
     <ul class="categorySelector__list">
       <li class="categorySelector__item">
         <router-link class="categorySelector__item-link" :to="{ name: 'Home' }">

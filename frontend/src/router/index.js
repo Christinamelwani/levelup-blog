@@ -14,7 +14,10 @@ const router = createRouter({
     {
       path: '/articles',
       name: 'Articles',
-      component: () => import('@/views/AllArticles.vue')
+      component: () => import('@/views/AllArticles.vue'),
+      meta: {
+        preserveScrollCoordinates: true
+      }
     },
     {
       path: '/article/:slug',
@@ -56,13 +59,18 @@ const router = createRouter({
     {
       path: '/category/:id',
       name: 'categoryArticles',
-      component: () => import('@/views/CategoryArticles.vue')
+      component: () => import('@/views/CategoryArticles.vue'),
+      meta: {
+        preserveScrollCoordinates: true
+      }
     }
   ]
 })
 
 router.beforeEach(async (to) => {
-  window.scrollTo(0, 0)
+  if (!to.meta.preserveScrollCoordinates) {
+    window.scrollTo(0, 0)
+  }
   const authStore = useAuthStore()
   const modalStore = useModalStore()
 
