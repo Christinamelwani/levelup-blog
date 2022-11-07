@@ -4,6 +4,7 @@ import Input from '@/components/general/Input.vue'
 import Btn from '@/components/general/Btn.vue'
 import Multiselect from '@vueform/multiselect'
 import myUpload from 'vue-image-crop-upload'
+import dataUrlToFile from '@/helpers/dataUrlToFile'
 
 export default {
   components: { Input, Btn, Form, Multiselect, myUpload },
@@ -34,18 +35,7 @@ export default {
   methods: {
     async cropSuccess(imgDataUrl, field) {
       this.uploadedImage = imgDataUrl
-      this.articleData.image = this.dataUrlToFile(imgDataUrl, field)
-    },
-    dataUrlToFile(dataurl, filename) {
-      let arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n)
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n)
-      }
-      return new File([u8arr], filename, { type: mime })
+      this.articleData.image = dataUrlToFile(imgDataUrl, field)
     }
   },
   props: {

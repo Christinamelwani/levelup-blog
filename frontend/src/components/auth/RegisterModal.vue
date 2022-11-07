@@ -13,7 +13,9 @@ export default {
         email: '',
         password: '',
         name: '',
-        slug: ''
+        slug: '',
+        avatar: null,
+        avatar_path: ''
       }
     }
   },

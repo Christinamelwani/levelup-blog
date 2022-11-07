@@ -4,6 +4,10 @@ export default (data) => {
   Object.keys(data).forEach((key) => {
     const value = data[key]
 
+    if (!value) {
+      return
+    }
+
     if (!Array.isArray(value)) {
       formData.append(key, value)
       return

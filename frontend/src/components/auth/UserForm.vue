@@ -1,19 +1,19 @@
 <script>
-import { mapState, mapActions } from 'pinia'
+import { mapActions } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
 
-import User from '@/services/User.js'
-import Auth from '@/services/Auth.js'
 import Form from '@/components/general/Form.vue'
 import Input from '@/components/general/Input.vue'
 import Btn from '@/components/general/Btn.vue'
 import myUpload from 'vue-image-crop-upload'
+import dataUrlToFile from '@/helpers/dataUrlToFile'
 
 export default {
   components: { Input, Btn, Form, myUpload },
   data() {
     return {
-      showAvatarUpload: false
+      showAvatarUpload: false,
+      uploadedAvatar: ''
     }
   },
   props: {
@@ -30,29 +30,20 @@ export default {
       required: true
     }
   },
-  computed: {},
+  computed: {
+    imagePreview() {
+      return (
+        this.uploadedAvatar ||
+        this.userData.avatar_path ||
+        'https://www.gravatar.com/avatar/?s=60&d=mm'
+      )
+    }
+  },
   methods: {
     ...mapActions(useAuthStore, ['setUser']),
     async cropSuccess(imgDataUrl, field) {
-      this.userData.avatar = this.dataUrlToFile(imgDataUrl, field)
-      const response = await User.editWithAvatar(
-        this.userData.slug,
-        this.userData
-      )
-      this.userData.avatar_path = (await Auth.me()).avatar_path
-      this.userData.avatar = null
-      this.$notify({ type: 'success', text: 'Profile successfully updated' })
-    },
-    dataUrlToFile(dataurl, filename) {
-      let arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n)
-      while (n--) {
-        u8arr[n] = bstr.charCodeAt(n)
-      }
-      return new File([u8arr], filename, { type: mime })
+      this.uploadedAvatar = imgDataUrl
+      this.userData.avatar = dataUrlToFile(imgDataUrl, field)
     }
   }
 }
@@ -64,7 +55,7 @@ export default {
       <img
         @click="showAvatarUpload = !showAvatarUpload"
         class="actionHeader__image"
-        :src="userData.avatar_path"
+        :src="imagePreview"
         alt=""
       />
     </div>
