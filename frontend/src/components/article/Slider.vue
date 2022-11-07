@@ -59,7 +59,11 @@ export default {
           >
             <img class="slider__icon" src="@/assets/images/editIcon.svg" />
           </RouterLink>
-          <img class="slider__icon" src="@/assets/images/deleteIcon.svg" />
+          <img
+            @click="$emit('delete')"
+            class="slider__icon"
+            src="@/assets/images/deleteIcon.svg"
+          />
         </div>
         <div class="slider__header">
           {{ article.title }}

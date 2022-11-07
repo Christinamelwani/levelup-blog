@@ -37,5 +37,9 @@ export default {
       }
     })
     return response.data.article
+  },
+  async delete(slug) {
+    const response = await Http.delete(`/articles/${slug}`)
+    return response
   }
 }

@@ -43,6 +43,31 @@ export default {
       this.reloadArticle = false
     }
   },
+  methods: {
+    async deleteArticle() {
+      const result = await this.$swal.fire({
+        title: `Are you sure that you want to delete ${this.article.title}?`,
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      })
+
+      if (!result.isConfirmed) {
+        return
+      }
+
+      const response = await Article.delete(this.article.slug)
+      this.$router.push({ name: 'Profile' })
+
+      this.$notify({
+        type: 'success',
+        text: `${this.articleData.title} has been deleted!`
+      })
+    }
+  },
   async created() {
     try {
       const response = await Article.all(3)
@@ -59,6 +84,7 @@ export default {
   <main v-if="doneLoading">
     <Slider
       class="slider-article"
+      @delete="deleteArticle()"
       :article="article"
       :extendedContent="false"
       :editable="this.userData.id === this.article.user.id"
