@@ -42,7 +42,7 @@ export default {
   },
   async created() {
     try {
-      const response = await Article.all('created_at', 'desc', 3)
+      const response = await Article.all(3)
       this.articles = response.data
       this.article = await Article.byArticleSlug(this.articleSlug)
     } catch (err) {

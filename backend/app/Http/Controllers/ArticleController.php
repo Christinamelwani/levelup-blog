@@ -23,7 +23,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articlesQueryBuilder = Article::with('user', 'categories')
-            ->orderBy(request('ordering'), request('direction'))
+            ->orderBy('created_at', 'desc')
             ->category(request('category'))
             ->paginate(request('per_page'))
             ->appends(request()->all());

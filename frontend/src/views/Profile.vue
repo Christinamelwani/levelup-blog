@@ -2,25 +2,29 @@
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/Auth.js'
 
-import Article from '@/services/Article.js'
 import handleError from '@/helpers/handleError.js'
 import HighlightedArticleCard from '@/components/article/HighlightedArticleCard.vue'
 import ActionSlider from '@/components/general/ActionSlider.vue'
 import NewArticleCard from '@/components/article/NewArticleCard.vue'
+import InfiniteArticles from '@/mixins/InfiniteArticles'
 
 export default {
   components: { HighlightedArticleCard, ActionSlider, NewArticleCard },
   data() {
     return {
-      articles: []
+      articles: [],
+      current_page: 0,
+      last_page: 9999,
+      isLoading: false
     }
   },
+  mixins: [InfiniteArticles],
   computed: {
     ...mapState(useAuthStore, ['userData'])
   },
   async created() {
     try {
-      this.articles = await Article.byUserSlug(this.userData.slug)
+      this.loadArticles()
     } catch (err) {
       handleError(err)
     }
@@ -45,6 +49,10 @@ export default {
         v-for="article in articles"
         :article="article"
         :showEdit="true"
+      />
+      <InfiniteLoading
+        v-if="this.isLastPage === false"
+        @infinite="loadArticles"
       />
     </div>
   </div>

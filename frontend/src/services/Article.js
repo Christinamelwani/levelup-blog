@@ -2,21 +2,18 @@ import Http from '@/services/Http'
 import dataToFormData from '@/helpers/dataToFormData'
 
 export default {
-  async all(
-    orderBy = 'created_at',
-    sortedBy = 'desc',
-    perPage = 10,
-    page = 1,
-    category = ''
-  ) {
+  async all(perPage = 10, page = 1, category = '') {
     const response = await Http.get(
-      `/articles?direction=${sortedBy}&ordering=${orderBy}&per_page=${perPage}&page=${page}&category=${category}`
+      `/articles?per_page=${perPage}&page=${page}&category=${category}`
     )
     return response.data.articles
   },
-  async byUserSlug(slug) {
-    const response = await Http.get(`/users/${slug}/articles`)
-    return response.data.articles.data
+  async byUserSlug(perPage = 10, page = 1, slug) {
+    const response = await Http.get(
+      `/users/${slug}/articles?per_page=${perPage}&page=${page}`
+    )
+
+    return response.data.articles
   },
   async byArticleSlug(slug) {
     const response = await Http.get(`/articles/${slug}`)

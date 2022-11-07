@@ -23,10 +23,16 @@ class UserArticleController extends Controller
      */
     public function index(User $user)
     {
-        return Response([
+        $articlesQueryBuilder = Article::with('author')
+            ->orderBy('created_at', 'desc')
+            ->where('user_id', $user->id)
+            ->paginate(request('per_page'))
+            ->appends(request()->all());
+
+        return [
             "status" => 200,
-            "articles" => Article::with('author')->where('user_id', $user->id)->paginate(8),
-        ], 200);
+            "articles" => $articlesQueryBuilder,
+        ];
     }
     /**
      * Store a newly created resource in storage.
