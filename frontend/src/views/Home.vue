@@ -41,6 +41,7 @@ export default {
       class="slider-home"
       :article="articles[0]"
       :extendedContent="true"
+      :clickable="true"
       alignContent="left"
     />
     <section class="blogCards">

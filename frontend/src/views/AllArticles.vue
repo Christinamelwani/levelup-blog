@@ -91,6 +91,7 @@ export default {
       class="slider-home"
       :article="featuredArticle"
       :extendedContent="true"
+      :clickable="true"
       alignContent="left"
     />
     <section class="blogCards">

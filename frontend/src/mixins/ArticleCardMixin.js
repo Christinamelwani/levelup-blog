@@ -3,7 +3,9 @@ export default {
     truncatedContent() {
       const truncatedArticleContent = this.article.content.slice(0, 200)
       if (truncatedArticleContent !== this.article.content) {
-        return `${this.article.content.slice(0, 200)}...`
+        return `${this.article.content
+          .slice(0, 200)
+          .replace(/(<([^>]+)>)/gi, '')}...`
       }
       return truncatedArticleContent.replace(/(<([^>]+)>)/gi, '')
     },

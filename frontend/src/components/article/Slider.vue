@@ -11,6 +11,11 @@ export default {
       required: false,
       default: {}
     },
+    clickable: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     extendedContent: {
       type: Boolean,
       required: true,
@@ -27,15 +32,22 @@ export default {
 <template>
   <section class="slider">
     <div class="slider__inner" v-if="article.title">
-      <div class="slider__categories">
+      <div v-if="extendedContent" class="slider__categories">
         <CategoryCard
           :class="`categoryCard--${alignContent} categoryCard--slider`"
           v-for="category in article.categories"
           :category="category"
         />
       </div>
-      <div class="slider__header">
-        {{ article.title }}
+      <RouterLink v-if="clickable" :to="articlePath" class="article__link">
+        <div class="slider__header">
+          {{ article.title }}
+        </div>
+      </RouterLink>
+      <div v-else>
+        <div class="slider__header">
+          {{ article.title }}
+        </div>
       </div>
       <div class="slider__text">
         <div v-if="extendedContent" class="slider__text">
