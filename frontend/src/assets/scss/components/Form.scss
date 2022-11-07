@@ -71,8 +71,17 @@
 }
 
 .coverImage {
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 200px;
   object-fit: cover;
   cursor: pointer;
+}
+
+.coverImage__upload {
+  height: 200px;
+  width: 200px;
+}
+
+.multiselect {
+  background-color: green;
 }

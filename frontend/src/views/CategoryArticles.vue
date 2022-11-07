@@ -30,6 +30,18 @@ export default {
 <template>
   <div class="page--home">
     <Slider
+      v-if="featuredArticle"
+      :style="{
+        'background-image': `url('${this.featuredArticle.image_path}')`
+      }"
+      class="slider-home"
+      :article="featuredArticle"
+      :extendedContent="true"
+      :clickable="true"
+      alignContent="left"
+    />
+    <Slider
+      v-else
       class="slider-home"
       :article="featuredArticle"
       :extendedContent="true"

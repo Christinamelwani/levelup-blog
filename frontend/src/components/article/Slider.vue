@@ -104,7 +104,7 @@ export default {
       </div>
     </div>
     <div class="slider__inner" v-else>
-      <div class="slider__header">No articles yet!</div>
+      <div class="slider__header slider__header--black">No articles yet!</div>
     </div>
   </section>
 </template>

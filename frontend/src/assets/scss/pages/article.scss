@@ -73,6 +73,7 @@
 .article__categories {
   display: flex;
   padding: 20px 0;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -91,7 +92,3 @@
 .article__line {
   margin: auto;
 }
-// .blogCards__content__card__socialMediaIcons {
-//     display: flex;
-//     cursor: pointer;
-// }

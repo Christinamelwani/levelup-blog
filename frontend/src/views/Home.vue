@@ -38,6 +38,9 @@ export default {
 <template>
   <main v-if="doneLoading">
     <Slider
+      :style="{
+        'background-image': `url('${this.articles[0].image_path}')`
+      }"
       class="slider-home"
       :article="articles[0]"
       :extendedContent="true"

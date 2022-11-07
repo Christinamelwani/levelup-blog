@@ -77,8 +77,7 @@ export default {
         field="image"
         @crop-success="cropSuccess"
         v-model="showImageUpload"
-        :width="300"
-        :height="300"
+        class="coverImage__upload"
         img-format="png"
         langType="en"
       />
@@ -121,3 +120,39 @@ export default {
 </template>
 
 <style src="@vueform/multiselect/themes/default.css"></style>
+<style>
+.multiselect {
+  background-color: #e5e5e5;
+  width: 200px;
+  flex-direction: column;
+  height: fit-content;
+  border: none;
+}
+.multiselect.is-open {
+  border: none;
+}
+.multiselect-tags {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+.multiselect-tag {
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  font-size: 12px;
+  border-radius: 5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+.multiselect-clear {
+  align-self: flex-end;
+}
+.multiselect-caret {
+  align-self: flex-end;
+}
+</style>

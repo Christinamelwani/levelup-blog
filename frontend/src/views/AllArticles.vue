@@ -31,6 +31,9 @@ export default {
 <template>
   <div class="page--home">
     <Slider
+      :style="{
+        'background-image': `url('${this.featuredArticle.image_path}')`
+      }"
       class="slider-home"
       :article="featuredArticle"
       :extendedContent="true"

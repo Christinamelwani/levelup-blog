@@ -7,12 +7,15 @@
   height: 312px;
   object-fit: cover;
   border-radius: 5px;
+  @include for-phone-only {
+    width: 100%;
+  }
 }
 
 .highlightedArticle__wrapper {
   position: absolute;
   top: 0;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   color: white;
   display: flex;
   flex-direction: column;
@@ -20,7 +23,7 @@
   align-items: start;
   height: 100%;
   @include for-phone-only {
-    padding: 1rem;
+    padding: 0;
   }
 }
 
@@ -31,6 +34,13 @@
   margin-top: 15%;
   padding: 2rem 1rem;
   flex-direction: column;
+}
+
+.highlightedArticle__categories {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .highlightedArticle__title {

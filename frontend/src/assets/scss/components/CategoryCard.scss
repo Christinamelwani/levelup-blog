@@ -6,7 +6,7 @@
   text-align: center;
   font: Lora;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 5px 10px;
   font-weight: 700;
   cursor: pointer;
@@ -14,7 +14,7 @@
 
 .categoryCard {
   @include reset;
-  padding: 1.2% 1.5%;
+  padding: 5px 10px;
   text-transform: uppercase;
   width: fit-content;
   font-family: 'roboto';
@@ -34,5 +34,5 @@
 }
 
 .categoryCard--highlighted {
-  align-self: flex-end;
+  margin-left: auto;
 }

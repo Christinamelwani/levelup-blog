@@ -84,6 +84,9 @@ export default {
   <main v-if="doneLoading">
     <Slider
       class="slider-article"
+      :style="{
+        'background-image': `url('${this.article.image_path}')`
+      }"
       @delete="deleteArticle()"
       :article="article"
       :extendedContent="false"

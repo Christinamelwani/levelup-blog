@@ -1,10 +1,10 @@
 export default {
   computed: {
     truncatedContent() {
-      const truncatedArticleContent = this.article.content.slice(0, 200)
+      const truncatedArticleContent = this.article.content.slice(0, 110)
       if (truncatedArticleContent !== this.article.content) {
         return `${this.article.content
-          .slice(0, 200)
+          .slice(0, 110)
           .replace(/(<([^>]+)>)/gi, '')}...`
       }
       return truncatedArticleContent.replace(/(<([^>]+)>)/gi, '')
