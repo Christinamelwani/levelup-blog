@@ -16,10 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Response([
+        return [
             "status" => 200,
             "users" => User::paginate(5),
-        ], 200);
+        ];
     }
 
     /**
@@ -58,10 +58,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return Response([
+        return [
             "status" => 200,
             "user" => $user,
-        ], 200);
+        ];
     }
 
     /**
@@ -88,10 +88,10 @@ class UserController extends Controller
         }
 
         $user->update($validated);
-        return Response([
+        return [
             "status" => 200,
             "user" => $user,
-        ], 200);
+        ];
     }
 
     /**
@@ -103,8 +103,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return Response([
+        return [
             "status" => 200,
-        ], 200);
+        ];
     }
 }

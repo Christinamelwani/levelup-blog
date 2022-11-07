@@ -22,10 +22,10 @@ class UserCommentController extends Controller
      */
     public function index(User $user)
     {
-        return Response([
+        return [
             "status" => 200,
             "comments" => Comment::with('author')->where('user_id', $user->id)->paginate(5),
-        ], 200);
+        ];
     }
     /**
      * Store a newly created resource in storage.

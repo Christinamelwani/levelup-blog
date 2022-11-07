@@ -28,10 +28,10 @@ class ArticleController extends Controller
             ->paginate(request('per_page'))
             ->appends(request()->all());
 
-        return Response([
+        return [
             "status" => 200,
             "articles" => $articlesQueryBuilder,
-        ], 200);
+        ];
     }
 
     /**
@@ -42,18 +42,11 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $validatedArticle = $request->validate([
-            'title' => ['required', 'max:255'],
-            'content' => ['required'],
-            'slug' => ['nullable'],
-            'image' => ['nullable', 'image'],
-        ]);
-
-
-        $validatedArticle['user_id'] = auth()->user()->id;
+        $article = $request->validated();
+        $article['user_id'] = auth()->user()->id;
 
         if (!$request->slug) {
-            $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
+            $article['slug'] = StringUtils::slugify($article['title']);
         }
 
         if ($request->image) {
@@ -61,19 +54,19 @@ class ArticleController extends Controller
             if (!$path) {
                 return response()->json(['msg' => 'image could not be saved'], 500);
             }
-            $validatedArticle['image_path'] = $path;
+            $article['image_path'] = $path;
         }
 
-        $article = new Article($validatedArticle);
-
-        $article->save();
+        $new_article = new Article($article);
+        $new_article->save();
 
         if ($request->categories) {
-            $article->categories()->attach($request->categories);
+            $new_article->categories()->attach($request->categories);
         }
+
         return Response([
             "status" => 201,
-            "article" => $article,
+            "article" => $new_article,
         ], 201);
     }
 
@@ -103,13 +96,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        $validatedArticle = $request->validate([
-            'title' => ['nullable'],
-            'content' => ['nullable'],
-            'slug' => ['nullable'],
-            'user_id' => ['nullable'],
-            'image' => ['nullable', 'image'],
-        ]);
+        $validatedArticle = $request->validated();
 
         if ($request->image) {
             $path = $request->file('image')->store('public/images');
@@ -131,10 +118,10 @@ class ArticleController extends Controller
             $article->categories()->detach();
         }
 
-        return Response([
+        return [
             "status" => 200,
             "article" => $article,
-        ], 200);
+        ];
     }
 
     /**
@@ -146,8 +133,8 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return Response([
+        return [
             "status" => 200,
-        ], 200);
+        ];
     }
 }

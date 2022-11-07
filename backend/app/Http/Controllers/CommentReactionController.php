@@ -17,30 +17,21 @@ class CommentReactionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Comment $comment)
-    {
-        $comment->load('comment_reactions');
-        return $comment->comment_reactions;
-    }
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Comment $comment, StoreCommentReactionRequest $request) {
+    public function store(Comment $comment, StoreCommentReactionRequest $request)
+    {
 
         $user_id = auth()->user()->id;
         $comment_id = $comment->id;
         $reaction_id = $request->reaction_id;
 
         $comment_reaction =  $comment->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
-        if(count($comment_reaction) > 0){
-            $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
+        if (count($comment_reaction) > 0) {
+            $reaction_type = Reaction::where('id', '=', $reaction_id)->get()[0]->type;
             return Response(['status' => 400, 'msg' => "You have already reacted {$reaction_type} to this comment!"], 400);
         }
         $new_reaction = new CommentReaction([
@@ -62,21 +53,22 @@ class CommentReactionController extends Controller
      * @param  \App\Models\Ca  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy (Comment $comment, Request $request) {
+    public function destroy(Comment $comment, Request $request)
+    {
 
         $user_id = auth()->user()->id;
         $reaction_id = $request->reaction_id;
 
         $comment_reaction =  $comment->reactions->where('user_id', $user_id)->where('reaction_id', $reaction_id);
-        if(count($comment_reaction) == 0){
-            $reaction_type = Reaction::where('id','=', $reaction_id)->get()[0]->type;
+        if (count($comment_reaction) == 0) {
+            $reaction_type = Reaction::where('id', '=', $reaction_id)->get()[0]->type;
             return Response(['status' => 400, 'msg' => "You have not reacted {$reaction_type} to this comment yet!"], 400);
         }
 
         $comment_reaction[0]->delete();
 
-        return Response([
+        return [
             "status" => 200,
-        ], 200);
+        ];
     }
 }

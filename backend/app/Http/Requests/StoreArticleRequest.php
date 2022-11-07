@@ -24,7 +24,10 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+            'slug' => ['nullable'],
+            'image' => ['nullable', 'image'],
         ];
     }
 }

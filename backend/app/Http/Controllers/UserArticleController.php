@@ -34,29 +34,4 @@ class UserArticleController extends Controller
             "articles" => $articlesQueryBuilder,
         ];
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCommentRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUserArticleRequest $request, User $user)
-    {
-        $validatedArticle = $request->validate([
-            'title' => ['required', 'max:255'],
-            'content' => ['required'],
-            'slug' => ['prohibited'],
-        ]);
-
-        $validatedArticle['slug'] = StringUtils::slugify($validatedArticle['title']);
-
-        $validatedArticle['user_id'] = $user->id;
-
-        $article = new Article($validatedArticle);
-
-        return Response([
-            "status" => 201,
-            "article" => $article,
-        ], 201);
-    }
 }

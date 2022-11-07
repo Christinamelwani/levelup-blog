@@ -21,10 +21,10 @@ class ArticleCommentController extends Controller
     public function index(Article $article)
     {
         $comments = Comment::with('reactions')->where('article_id', $article->id)->paginate(5);
-        return Response([
+        return [
             "status" => 200,
             "comments" => $comments,
-        ], 200);
+        ];
     }
     /**
      * Store a newly created resource in storage.

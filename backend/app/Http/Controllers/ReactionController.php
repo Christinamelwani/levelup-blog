@@ -21,10 +21,10 @@ class ReactionController extends Controller
      */
     public function index()
     {
-        return Response([
+        return [
             "status" => 200,
             "reactions" => Reaction::all(),
-        ], 200);
+        ];
     }
 
     /**
@@ -35,8 +35,10 @@ class ReactionController extends Controller
      */
     public function store(StoreReactionRequest $request)
     {
-        $reaction = new Reaction([ 'type' => $request->type,
-        'img_url' => $request->img_url]);
+        $reaction = new Reaction([
+            'type' => $request->type,
+            'img_url' => $request->img_url
+        ]);
         $reaction->save();
         return Response([
             "status" => 201,

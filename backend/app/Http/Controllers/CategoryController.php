@@ -21,17 +21,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Response([
+        return [
             "status" => 200,
             "categories" => Category::all(),
-        ], 200);
+        ];
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     /**
      * Store a newly created resource in storage.
@@ -49,55 +43,11 @@ class CategoryController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        $category->load('articles');
-        return Response([
-            "status" => 200,
-            "category" => $category,
-        ], 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        $category->update($request->validated());
-        return Response([
-            "status" => 200,
-            "category" => $category,
-        ], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Category $category)
     {
         $category->delete();
-        return Response([
+        return [
             "status" => 200,
-        ], 200);
+        ];
     }
 }

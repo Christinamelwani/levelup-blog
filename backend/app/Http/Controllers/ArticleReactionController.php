@@ -22,10 +22,10 @@ class ArticleReactionController extends Controller
     public function index(Article $article)
     {
         $article->load('article_reactions');
-        return Response([
+        return [
             "status" => 200,
             "article" => $article->article_reactions,
-        ], 200);
+        ];
     }
     /**
      * Store a newly created resource in storage.
@@ -76,8 +76,8 @@ class ArticleReactionController extends Controller
 
         $article_reaction->firstOrFail()->delete();
 
-        return Response([
+        return [
             "status" => 200,
-        ], 200);
+        ];
     }
 }

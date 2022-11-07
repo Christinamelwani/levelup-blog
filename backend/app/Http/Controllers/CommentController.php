@@ -20,11 +20,10 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return Response([
+        return [
             "status" => 200,
             "comments" => Comment::with('author', 'reactions')->paginate(5),
-        ], 200);
-
+        ];
     }
 
     /**
@@ -54,10 +53,10 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        return Response([
+        return [
             "status" => 200,
             "comment" => $comment,
-        ], 200);
+        ];
     }
 
     /**
@@ -70,11 +69,10 @@ class CommentController extends Controller
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
         $updated_comment = $comment->update($request->validated());
-        return Response([
+        return [
             "status" => 200,
             "comment" => $updated_comment,
-        ], 200);
-
+        ];
     }
 
     /**
@@ -86,8 +84,8 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return Response([
+        return [
             "status" => 200,
-        ], 200);
+        ];
     }
 }

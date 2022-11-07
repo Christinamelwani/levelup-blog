@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ArticleCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleCommentController;
 use App\Http\Controllers\ArticleController;
@@ -44,9 +43,6 @@ Route::middleware('auth:sanctum')->group(function () use ($unauthenticatedRoutes
     Route::post('/users/{user}/comment', [UserCommentController::class, 'store']);
     Route::post('/articles/{article}/comment', [ArticleCommentController::class, 'store']);
 
-    Route::post('/articles/{article}/categories', [ArticleCategoryController::class, 'store']);
-    Route::delete('/articles/{article}/categories', [ArticleCategoryController::class, 'destroy']);
-
     Route::post('/articles/{article}/reactions', [ArticleReactionController::class, 'store']);
     Route::delete('/articles/{article}/reactions/{reaction}', [ArticleReactionController::class, 'destroy']);
 
@@ -65,7 +61,6 @@ Route::get('/users/{user}/articles', [UserArticleController::class, 'index']);
 Route::get('/users/{user}/comments', [UserCommentController::class, 'index']);
 Route::get('/articles/{article}/comment', [ArticleCommentController::class, 'index']);
 
-Route::get('/articles/{article}/categories', [ArticleCategoryController::class, 'index']);
 Route::get('/articles/{article}/reactions', [ArticleReactionController::class, 'index']);
 Route::get('/comments/{comment}/reactions', [CommentReactionController::class, 'index']);
 
